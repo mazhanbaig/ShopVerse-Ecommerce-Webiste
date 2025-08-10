@@ -167,3 +167,42 @@ menuBtn?.addEventListener("click", () => {
   showProduct(currentIndex);
 
 });
+window.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("localStorageProducts");
+  if (!container) return;
+
+  // Get products from localStorage (same key as myshop.ts)
+  const productsJSON = localStorage.getItem("products");
+  if (!productsJSON) {
+    container.innerHTML = `<p class="text-gray-500">No products found. Add some products in MyShop page.</p>`;
+    return;
+  }
+
+  const productsFromStorage = JSON.parse(productsJSON);
+
+  if (productsFromStorage.length === 0) {
+    container.innerHTML = `<p class="text-gray-500">No products found. Add some products in MyShop page.</p>`;
+    return;
+  }
+
+  // Clear container
+  container.innerHTML = "";
+
+  // Create product cards
+  productsFromStorage.forEach((productFromStorage: any) => {
+    const card = document.createElement("div");
+    card.className = "bg-white rounded-xl shadow-md overflow-hidden hover:shadow-pink-400 transition-shadow";
+
+    card.innerHTML = `
+      <img src="${productFromStorage.imageUrl}" alt="${productFromStorage.name}" class="w-full h-48 object-contain rounded-t-xl" />
+      <div class="p-4">
+        <h3 class="text-xl font-bold text-pink-600 mb-2">${productFromStorage.name}</h3>
+        <p class="text-gray-700 mb-1">${productFromStorage.description}</p>
+        <p class="text-pink-600 font-semibold mb-1">$${productFromStorage.price.toFixed(2)}</p>
+        <p class="text-gray-500 text-sm capitalize">Category: ${productFromStorage.category}</p>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+});
