@@ -1,83 +1,49 @@
+// window.addEventListener("DOMContentLoaded", () => {
+//   const container = document.getElementById("localStorageProducts");
+//   if (!container) return;
+//   // Get products from localStorage (same key as myshop.ts)
+//   const productsJSON = localStorage.getItem("products");
+//   if (!productsJSON) {
+//     container.innerHTML = `<p class="text-gray-500">No products found. Add some products in MyShop page.</p>`;
+//     return;
+//   }
+//   const productsFromStorage = JSON.parse(productsJSON);
+//   if (productsFromStorage.length === 0) {
+//     container.innerHTML = `<p class="text-gray-500">No products found. Add some products in MyShop page.</p>`;
+//     return;
+//   }
+//   // Clear container
+//   container.innerHTML = "";
+//   // Create product cards
+//   productsFromStorage.forEach((productFromStorage: any) => {
+//     const card = document.createElement("div");
+//     card.className = "bg-white rounded-xl shadow-md overflow-hidden hover:shadow-pink-400 transition-shadow";
+//     card.innerHTML = `
+//       <img src="${productFromStorage.imageUrl}" alt="${productFromStorage.name}" class="w-full h-48 object-contain rounded-t-xl" />
+//       <div class="p-4">
+//         <h3 class="text-xl font-bold text-pink-600 mb-2">${productFromStorage.name}</h3>
+//         <p class="text-gray-700 mb-1">${productFromStorage.description}</p>
+//         <p class="text-pink-600 font-semibold mb-1">$${productFromStorage.price.toFixed(2)}</p>
+//         <p class="text-gray-500 text-sm capitalize">Category: ${productFromStorage.category}</p>
+//       </div>
+//     `;
+//     container.appendChild(card);
+//   });
+// });
 window.addEventListener("DOMContentLoaded", () => {
-    // ===== Navbar toggle (optional) =====
+    // Navbar toggle for mobile menu
     const menuBtn = document.getElementById("menuBtn");
     const mobileMenuDropdown = document.getElementById("mobileMenuDropdown");
     menuBtn?.addEventListener("click", () => {
         mobileMenuDropdown?.classList.toggle("hidden");
     });
+    // Sample products array (for product slider)
     const products = [
-        {
-            id: 1,
-            name: "Apple iPhone 16 Pro Max",
-            price: 1199,
-            image: "https://www.apple.com/newsroom/images/2024/09/apple-debuts-iphone-16-pro-and-iphone-16-pro-max/article/Apple-iPhone-16-Pro-hero-geo-240909_inline.jpg.large.jpg",
-            description: "Apple iPhone 16 Pro Max with A17 Pro chip and titanium frame.",
-        },
-        {
-            id: 2,
-            name: "Samsung Galaxy S24 Ultra",
-            price: 1399,
-            image: "https://images.samsung.com/is/image/samsung/p6pim/pk/feature/165525818/pk-feature-galaxy-s24-ultra-543035573?$FB_TYPE_A_MO_JPG$",
-            description: "Samsung Galaxy S24 Ultra with 200MP camera and Snapdragon 8 Gen 3.",
-        },
-        {
-            id: 3,
-            name: "Sony WH-1000XM5 Headphones",
-            price: 399,
-            image: "https://static.webx.pk/files/19643/Images/sony-wh-1000xm5-silver-headphones-price-in-pakistan-19643-2088078-220524100332877.jpg",
-            description: "Noise-canceling wireless over-ear headphones.",
-        },
-        {
-            id: 4,
-            name: "MacBook Air M3",
-            price: 1299,
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcV-O4L41bDnWCnCla_F5LKNTZszogLcWgHA&s",
-            description: "Apple MacBook Air with M3 chip, 13-inch Liquid Retina display.",
-        },
-        {
-            id: 5,
-            name: "Dual Time Sports Watch",
-            price: 499,
-            image: "https://voguealaska.pk/cdn/shop/files/Silver2_960a4e45-d5d4-47e1-acbc-1fbc6053c71f.jpg?v=1742643151&width=1024",
-            description: "Best For Dialy Use.Makes You Feel Better.",
-        },
-        {
-            id: 6,
-            name: "Dell XPS 13 Laptop",
-            price: 999,
-            image: "https://www.notebookcheck.net/fileadmin/Notebooks/Dell/XPS_13_9340_Core_Ultra_7/IMG_4090.JPG",
-            description: "Dell XPS 13 with 11th Gen Intel i7 processor and InfinityEdge display.",
-        },
-        {
-            id: 7,
-            name: "Apple Watch Series 9",
-            price: 399,
-            image: "https://modernwears.pk/wp-content/uploads/2023/10/Untitled-design-2024-11-11T143955.085.jpg",
-            description: "Apple Watch Series 9 with new S9 chip and enhanced health sensors.",
-        },
-        {
-            id: 8,
-            name: "Google Pixel 8 Pro",
-            price: 899,
-            image: "https://estorepakistan.com/cdn/shop/files/WhatsAppImage2025-03-07at5.52.01PM_1024x1024.webp?v=1741549859",
-            description: "Google Pixel 8 Pro with Tensor G3 chip and advanced camera system.",
-        },
-        {
-            id: 9,
-            name: "Bose QuietComfort Earbuds",
-            price: 279,
-            image: "https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/25636997/DSC_0080.jpg?quality=90&strip=all&crop=16.666666666667,0,66.666666666667,100",
-            description: "True wireless noise-cancelling earbuds with deep bass.",
-        },
-        {
-            id: 10,
-            name: "Nintendo Switch OLED",
-            price: 349,
-            image: "https://images.immediate.co.uk/production/volatile/sites/3/2021/10/Nintendo-Switch-OLED-review-ff1b02c.jpg?quality=90&resize=620,414",
-            description: "Nintendo Switch OLED model with vibrant 7-inch display and enhanced audio.",
-        },
+        { id: 1, name: "Apple iPhone 16 Pro Max", price: 1199, image: "https://www.apple.com/newsroom/images/2024/09/apple-debuts-iphone-16-pro-and-iphone-16-pro-max/article/Apple-iPhone-16-Pro-hero-geo-240909_inline.jpg.large.jpg", description: "Apple iPhone 16 Pro Max with A17 Pro chip and titanium frame." },
+        { id: 2, name: "Samsung Galaxy S24 Ultra", price: 1399, image: "https://images.samsung.com/is/image/samsung/p6pim/pk/feature/165525818/pk-feature-galaxy-s24-ultra-543035573?$FB_TYPE_A_MO_JPG$", description: "Samsung Galaxy S24 Ultra with 200MP camera and Snapdragon 8 Gen 3." },
+        // Add more products as needed...
     ];
-    // Get DOM elements by ID with null checks
+    // Get slider DOM elements
     const productImage = document.getElementById("product-image");
     const productName = document.getElementById("product-name");
     const productDesc = document.getElementById("product-desc");
@@ -85,33 +51,26 @@ window.addEventListener("DOMContentLoaded", () => {
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
     if (!productImage || !productName || !productDesc || !productPrice || !prevBtn || !nextBtn) {
-        console.error("Some DOM elements are missing. Cannot initialize product slider.");
+        console.error("Some required elements are missing. Slider won't work.");
         return;
     }
-    // Current product index
     let currentIndex = 0;
-    // Function to show product details based on index
+    // Show product info by index
     function showProduct(index) {
-        // Handle wrap around (looping)
-        if (index < 0) {
-            currentIndex = products.length - 1; // go to last product
-        }
-        else if (index >= products.length) {
-            currentIndex = 0; // go to first product
-        }
-        else {
+        if (index < 0)
+            currentIndex = products.length - 1;
+        else if (index >= products.length)
+            currentIndex = 0;
+        else
             currentIndex = index;
-        }
-        // Get current product
         const product = products[currentIndex];
-        // Update DOM elements with product data
         productImage.src = product.image;
         productImage.alt = product.name;
         productName.textContent = product.name;
         productDesc.textContent = product.description;
         productPrice.textContent = "$" + product.price.toFixed(2);
     }
-    // Event listeners for buttons
+    // Button click handlers for slider
     prevBtn.addEventListener("click", () => {
         showProduct(currentIndex - 1);
         resetAutoSlide();
@@ -124,47 +83,120 @@ window.addEventListener("DOMContentLoaded", () => {
     let slideInterval = setInterval(() => {
         showProduct(currentIndex + 1);
     }, 3000);
-    // Reset auto slide interval when user clicks buttons
+    // Reset timer when user manually changes slide
     function resetAutoSlide() {
         clearInterval(slideInterval);
         slideInterval = setInterval(() => {
             showProduct(currentIndex + 1);
         }, 3000);
     }
-    // Show first product when page loads
     showProduct(currentIndex);
 });
 window.addEventListener("DOMContentLoaded", () => {
-    const container = document.getElementById("localStorageProducts");
-    if (!container)
-        return;
-    // Get products from localStorage (same key as myshop.ts)
+    // Navbar toggle for mobile menu
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenuDropdown = document.getElementById("mobileMenuDropdown");
+    if (menuBtn && mobileMenuDropdown) {
+        menuBtn.addEventListener("click", () => {
+            mobileMenuDropdown.classList.toggle("hidden");
+        });
+    }
+    // Get products from localStorage
     const productsJSON = localStorage.getItem("products");
     if (!productsJSON) {
-        container.innerHTML = `<p class="text-gray-500">No products found. Add some products in MyShop page.</p>`;
+        console.warn("No products found in localStorage.");
         return;
     }
-    const productsFromStorage = JSON.parse(productsJSON);
-    if (productsFromStorage.length === 0) {
-        container.innerHTML = `<p class="text-gray-500">No products found. Add some products in MyShop page.</p>`;
+    let storedProducts;
+    try {
+        storedProducts = JSON.parse(productsJSON);
+    }
+    catch {
+        console.error("Invalid products data in localStorage.");
         return;
     }
-    // Clear container
-    container.innerHTML = "";
-    // Create product cards
-    productsFromStorage.forEach((productFromStorage) => {
+    if (!Array.isArray(storedProducts) || storedProducts.length === 0) {
+        console.warn("No valid products found.");
+        return;
+    }
+    // Map categories to container IDs in your HTML
+    const categoryToContainerId = {
+        Personal: "watchesProducts",
+        Electronics: "electronicsProducts",
+        Grocery: "groceryProducts",
+        Clothing: "clothingProducts",
+        Games: "gamesProducts",
+        Other: "otherProducts",
+    };
+    // Find containers in the DOM
+    const containers = {};
+    Object.values(categoryToContainerId).forEach((id) => {
+        containers[id] = document.getElementById(id);
+    });
+    // Clear previous content from all containers
+    Object.values(containers).forEach((container) => {
+        if (container)
+            container.innerHTML = "";
+    });
+    // Group products by category (capitalize first letter)
+    const productsByCategory = {};
+    storedProducts.forEach((product) => {
+        const cat = product.category.charAt(0).toUpperCase() + product.category.slice(1).toLowerCase();
+        if (!productsByCategory[cat])
+            productsByCategory[cat] = [];
+        productsByCategory[cat].push(product);
+    });
+    // Create horizontal scroll container for slider effect
+    function createSliderContainer() {
+        const container = document.createElement("div");
+        container.className = "flex gap-6 overflow-x-auto scrollbar-hide py-2 scroll-smooth";
+        container.style.scrollPadding = "1rem";
+        return container;
+    }
+    // Create product card HTML element
+    function createProductCard(product) {
         const card = document.createElement("div");
-        card.className = "bg-white rounded-xl shadow-md overflow-hidden hover:shadow-pink-400 transition-shadow";
-        card.innerHTML = `
-      <img src="${productFromStorage.imageUrl}" alt="${productFromStorage.name}" class="w-full h-48 object-contain rounded-t-xl" />
-      <div class="p-4">
-        <h3 class="text-xl font-bold text-pink-600 mb-2">${productFromStorage.name}</h3>
-        <p class="text-gray-700 mb-1">${productFromStorage.description}</p>
-        <p class="text-pink-600 font-semibold mb-1">$${productFromStorage.price.toFixed(2)}</p>
-        <p class="text-gray-500 text-sm capitalize">Category: ${productFromStorage.category}</p>
-      </div>
+        card.className = `
+      inline-block
+      bg-gray-50
+      rounded-lg
+      shadow-sm
+      mr-4
+      w-56
+      flex-shrink-0
+      cursor-pointer
+      transition-transform
+      duration-300
+      hover:scale-105
+      hover:shadow-md
     `;
-        container.appendChild(card);
+        card.innerHTML = `
+      <div style="width: 100%; height: 160px; overflow: hidden;">
+      <img src="${product.image || product.imageUrl}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: contain; padding: 1rem;" />
+    </div>
+    <div class="p-3 flex flex-col flex-grow">
+      <h3 class="text-md font-semibold mb-1 text-gray-900">${product.name}</h3>
+      <p class="text-gray-700 font-semibold text-lg mb-2">$${product.price.toFixed(2)}</p>
+      <p class="text-gray-600 text-sm flex-grow">${product.description.length > 60 ? product.description.slice(0, 60) + "..." : product.description}</p>
+    </div>
+    `;
+        return card;
+    }
+    // Render all products grouped by category in their containers
+    Object.entries(productsByCategory).forEach(([category, products]) => {
+        const containerId = categoryToContainerId[category];
+        if (!containerId)
+            return;
+        const parentContainer = containers[containerId];
+        if (!parentContainer)
+            return;
+        parentContainer.innerHTML = ""; // Clear container
+        const sliderContainer = createSliderContainer();
+        // Add all products for this category
+        products.forEach((product) => {
+            sliderContainer.appendChild(createProductCard(product));
+        });
+        parentContainer.appendChild(sliderContainer);
     });
 });
 export {};
