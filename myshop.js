@@ -79,4 +79,4 @@ productForm?.addEventListener("submit", (e) => {
     // Clear form
     productForm.reset();
 });
-// export {};
+export {};
