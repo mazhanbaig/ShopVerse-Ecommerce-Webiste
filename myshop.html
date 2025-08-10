@@ -1,31 +1,29 @@
 <!doctype html>
-<html>
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My Shop - Add Products | ShopVerse</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
 
+    <!-- Navbar -->
     <nav class="bg-white shadow-lg border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4">
-            <!-- Top Row -->
             <div class="flex items-center justify-between h-16">
-                <!-- Left: Logo -->
                 <div class="flex items-center space-x-3">
                     <span
                         class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500">ShopVerse</span>
                 </div>
 
-                <!-- Center: Search (desktop) -->
                 <div class="hidden md:flex flex-1 mx-6">
                     <input type="text" placeholder="Search products..."
                         class="w-full px-4 py-2 rounded-full bg-gray-100 border border-gray-300 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-400" />
                 </div>
 
-                <!-- Right: Icons + Mobile Toggle -->
                 <div class="flex items-center space-x-4">
                     <!-- Wishlist -->
                     <button class="relative p-2 hover:text-pink-500 transition" aria-label="Wishlist">
@@ -57,7 +55,7 @@
                         </svg>
                     </button>
 
-                    <!-- Mobile Menu Toggle Button -->
+                    <!-- Mobile Menu Toggle -->
                     <button id="menuBtn" class="md:hidden p-2 hover:text-yellow-500 transition"
                         aria-label="Toggle Mobile Menu">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor"
@@ -68,8 +66,8 @@
                 </div>
             </div>
 
-            <!-- Bottom Row: Categories (Desktop Only) -->
-            <div id="mobileMenu"
+            <!-- Desktop Categories -->
+            <div id="desktopMenu"
                 class="hidden md:flex items-center justify-center space-x-8 py-3 border-t border-gray-200">
                 <a href="index.html" class="hover:text-pink-500 transition">Home</a>
                 <a href="myshop.html" class="hover:text-pink-500 transition">My Shop</a>
@@ -78,7 +76,7 @@
                 <a href="#" class="hover:text-pink-500 transition">Contact</a>
             </div>
 
-            <!-- Mobile Menu (Hidden by default) -->
+            <!-- Mobile Dropdown Menu -->
             <div id="mobileMenuDropdown" class="md:hidden hidden bg-white border-t border-gray-200 shadow-lg">
                 <a href="index.html" class="block px-6 py-3 hover:bg-pink-100 border-b border-gray-200">Home</a>
                 <a href="myshop.html" class="block px-6 py-3 hover:bg-pink-100 border-b border-gray-200">My Shop</a>
@@ -89,66 +87,66 @@
         </div>
     </nav>
 
-    <section class="max-w-full mx-auto  p-6 bg-white shadow-lg">
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 py-12 flex-grow">
 
-        <h1 class="text-center text-pink-700 text-3xl font-bold mb-5">Glance of Products at our Store</h1>
-        <!-- Image + Info Container -->
-        <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
+        <h1 class="text-4xl font-extrabold text-pink-600 mb-12 text-center tracking-wide">
+            Add Your Product
+        </h1>
 
-            <!-- Image Container -->
-            <div class="relative w-full md:w-1/2 rounded-xl overflow-hidden shadow-xl">
-                <img id="product-image" src="" alt="Product Image"
-                    class="w-full h-96 object-fill object-center transition-transform duration-700 rounded-xl" />
-
-                <!-- Navigation Buttons -->
-                <button id="prevBtn" aria-label="Previous"
-                    class="absolute top-1/2 left-4 -translate-y-1/2 bg-pink-500 text-white p-3 rounded-full shadow-lg hover:bg-pink-600 transition">
-                    &#10094;
+        <section
+            class="bg-white rounded-3xl shadow-lg max-w-6xl mx-auto p-5 border border-pink-300 hover:shadow-pink-400 transition-shadow duration-300">
+            <form id="productForm" class="flex flex-wrap items-center gap-4 justify-center">
+                <input id="name" name="name" type="text" required placeholder="Product Name"
+                    class="flex-grow min-w-[180px] rounded-full border border-gray-300 px-5 py-3 text-gray-700 placeholder-gray-400 focus:border-pink-500 focus:ring-2 focus:ring-pink-300 outline-none transition" />
+                <input id="price" name="price" type="number" min="0" step="0.01" required placeholder="Price (USD)"
+                    class="w-28 rounded-full border border-gray-300 px-5 py-3 text-gray-700 placeholder-gray-400 focus:border-pink-500 focus:ring-2 focus:ring-pink-300 outline-none transition" />
+                <input id="imageUrl" name="imageUrl" type="url" required placeholder="Image URL"
+                    class="flex-grow min-w-[220px] rounded-full border border-gray-300 px-5 py-3 text-gray-700 placeholder-gray-400 focus:border-pink-500 focus:ring-2 focus:ring-pink-300 outline-none transition" />
+                <input id="description" name="description" type="text" required placeholder="Description"
+                    class="flex-grow min-w-[220px] rounded-full border border-gray-300 px-5 py-3 text-gray-700 placeholder-gray-400 focus:border-pink-500 focus:ring-2 focus:ring-pink-300 outline-none transition" />
+                <select id="category" name="category" required
+                    class="w-36 rounded-full border border-gray-300 px-5 py-3 text-gray-700 focus:border-pink-500 focus:ring-2 focus:ring-pink-300 outline-none transition">
+                    <option value="" disabled selected>Select category</option>
+                    <option value="personal">Personal</option>
+                    <option value="electronic">Electronic</option>
+                    <option value="grocery">Grocery</option>
+                    <option value="clothing">Clothing</option>
+                    <option value="others">Others</option>
+                </select>
+                <button type="submit"
+                    class="bg-pink-600 hover:bg-pink-700 text-white font-extrabold py-3 px-8 rounded-full shadow-lg transition duration-300 whitespace-nowrap">
+                    Add Product
                 </button>
-                <button id="nextBtn" aria-label="Next"
-                    class="absolute top-1/2 right-4 -translate-y-1/2 bg-pink-500 text-white p-3 rounded-full shadow-lg hover:bg-pink-600 transition">
-                    &#10095;
-                </button>
+            </form>
+        </section>
+
+        <section class="mt-16 max-w-5xl mx-auto">
+            <h2 class="text-3xl font-extrabold text-pink-600 mb-8 text-center tracking-wide">
+                Your Products
+            </h2>
+            <!-- Container -->
+            <div id="productList" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
+            <!-- Products show here -->
             </div>
+        </section>
+    </main>
 
-            <!-- Product Info -->
-            <div class="w-full md:w-1/2 flex flex-col justify-center">
-                <h2 id="product-name" class="text-4xl font-extrabold text-gray-900 mb-4 tracking-wide">
-                    <!-- Product Name Here -->
-                </h2>
-                <p id="product-desc" class="text-gray-700 text-lg leading-relaxed mb-6">
-                    <!-- Product Description Here -->
-                </p>
-                <p id="product-price" class="text-pink-600 font-extrabold text-3xl tracking-tight">
-                    <!-- Price Here -->
-                </p>
-                <button type="button"
-                    class="mt-8 bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition">
-                    Add to Cart
-                </button>
-            </div>
-        </div>
-    </section>
-
-
-
-    <footer class="bg-white border-t border-gray-200">
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-16">
         <div class="max-w-7xl mx-auto px-6 py-10 md:flex md:justify-between md:space-x-10">
-
-            <!-- About / Brand -->
             <div class="mb-8 md:mb-0 md:w-1/3">
                 <h3 class="text-2xl font-bold text-pink-500 mb-4">ShopVerse</h3>
                 <p class="text-gray-600 leading-relaxed">
-                    Your one-stop shop for the latest and greatest products. Quality, value, and service all in one
-                    place.
+                    Your one-stop shop for the latest and greatest products. Quality,
+                    value, and service all in one place.
                 </p>
             </div>
 
-            <!-- Quick Links -->
             <div class="mb-8 md:mb-0 md:w-1/5">
                 <h4 class="text-lg font-semibold mb-4 text-gray-900">Quick Links</h4>
                 <ul class="space-y-2 text-gray-600">
-                    <li><a href="#" class="hover:text-pink-500 transition text-pink-600">Home</a></li>
+                    <li><a href="#" class="hover:text-pink-500 transition">Home</a></li>
                     <li><a href="#" class="hover:text-pink-500 transition">Shop</a></li>
                     <li><a href="#" class="hover:text-pink-500 transition">Deals</a></li>
                     <li><a href="#" class="hover:text-pink-500 transition">Categories</a></li>
@@ -156,7 +154,6 @@
                 </ul>
             </div>
 
-            <!-- Customer Service -->
             <div class="mb-8 md:mb-0 md:w-1/5">
                 <h4 class="text-lg font-semibold mb-4 text-gray-900">Customer Service</h4>
                 <ul class="space-y-2 text-gray-600">
@@ -167,11 +164,12 @@
                 </ul>
             </div>
 
-            <!-- Newsletter & Social -->
             <div class="md:w-1/4">
-                <h4 class="text-lg font-semibold mb-4 text-gray-900">Subscribe to our Newsletter</h4>
-                <form class="flex mb-6">
-                    <input type="email" placeholder="Your email"
+                <h4 class="text-lg font-semibold mb-4 text-gray-900">
+                    Subscribe to our Newsletter
+                </h4>
+                <form class="flex mb-6" id="newsletterForm">
+                    <input type="email" placeholder="Your email" required
                         class="w-full px-4 py-2 rounded-l-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-400" />
                     <button type="submit"
                         class="bg-pink-500 hover:bg-pink-600 text-white px-5 rounded-r-full font-semibold transition">
@@ -202,18 +200,9 @@
                     </a>
                 </div>
             </div>
-        </div>
-
-        <!-- Bottom Copyright -->
-        <div class="border-t border-gray-200 py-4 text-center text-gray-500 text-sm">
-            &copy; 2025 ShopVerse. All rights reserved.
-        </div>
     </footer>
 
-
-
-
-    <script type="module" src="app.js"></script>
+    <script type="module" src="myshop.js"></script>
 </body>
 
 </html>

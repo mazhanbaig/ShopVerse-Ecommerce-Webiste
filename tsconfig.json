@@ -41,8 +41,7 @@
 //     "moduleDetection": "force",
 //     "skipLibCheck": true,
 //   }
-// }
-{
+// }{
   "compilerOptions": {
     "module": "es6",
     "target": "esnext",
@@ -55,7 +54,6 @@
     "verbatimModuleSyntax": true,
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
-
     "declaration": false,
     "declarationMap": false,
     "sourceMap": false,
