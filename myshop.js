@@ -22,7 +22,7 @@ function renderProduct(product) {
     productCard.className = "bg-white rounded-xl shadow-md overflow-hidden hover:shadow-pink-400 transition-shadow";
     // card content stays same
     productCard.innerHTML = `
-  <img src="${product.imageUrl}" alt="${product.name}" class="w-full h-48 object-contain rounded-t-xl" />
+  <img src="${product.imageUrl}" alt="${product.name}" class="w-full h-48 object-cover rounded-t-xl" />
   <div class="p-4">
     <h3 class="text-xl font-bold text-pink-600 mb-2">${product.name}</h3>
     <p class="text-gray-700 mb-1">${product.description}</p>

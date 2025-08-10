@@ -167,3 +167,79 @@ menuBtn?.addEventListener("click", () => {
   showProduct(currentIndex);
 
 });
+interface Category {
+    id: number;
+    name: string;
+    image: string;
+  }
+
+  const categories: Category[] = [
+    { id: 1, name: "Electronics", image: "https://images.unsplash.com/photo-1510552776732-41a6e8329a36?auto=format&fit=crop&w=80&q=80" },
+    { id: 2, name: "Clothing", image: "https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=80&q=80" },
+    { id: 3, name: "Books", image: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=80&q=80" },
+    { id: 4, name: "Gaming", image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=80&q=80" },
+    { id: 5, name: "Accessories", image: "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=80&q=80" },
+    { id: 6, name: "Furniture", image: "https://images.unsplash.com/photo-1493666438817-866a91353ca9?auto=format&fit=crop&w=80&q=80" },
+    { id: 7, name: "Toys", image: "https://images.unsplash.com/photo-1508610048659-a06a39de1c91?auto=format&fit=crop&w=80&q=80" },
+    { id: 8, name: "Sports", image: "https://images.unsplash.com/photo-1509099836639-18ba0c5224f1?auto=format&fit=crop&w=80&q=80" },
+    { id: 9, name: "Beauty", image: "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=80&q=80" },
+    { id: 10, name: "Automotive", image: "https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=80&q=80" },
+    { id: 11, name: "Women", image: "https://images.unsplash.com/photo-1520975698514-7e0c55794ca9?auto=format&fit=crop&w=80&q=80" },
+    { id: 12, name: "Perfume", image: "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=80&q=80" },
+    { id: 13, name: "All Things", image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=80&q=80" },
+    { id: 14, name: "Kitchen", image: "https://images.unsplash.com/photo-1523983305007-754934f5d43d?auto=format&fit=crop&w=80&q=80" },
+    { id: 15, name: "Health", image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=80&q=80" },
+    { id: 16, name: "Jewelry", image: "https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&w=80&q=80" }
+  ];
+
+  const categoryContainer = document.getElementById("categoryContainer") as HTMLElement;
+  const prevPageBtn = document.getElementById("prevPage") as HTMLButtonElement;
+  const nextPageBtn = document.getElementById("nextPage") as HTMLButtonElement;
+
+  const itemsPerPage = 8; // 4 cards per row * 2 rows
+  let currentPage = 1;
+  const totalPages = Math.ceil(categories.length / itemsPerPage);
+
+  function renderCategories(): void {
+    categoryContainer.innerHTML = "";
+
+    const start = (currentPage - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    const pageItems = categories.slice(start, end);
+
+    pageItems.forEach(cat => {
+      const card = document.createElement("div");
+      card.className = `
+        flex items-center bg-white rounded-2xl shadow-md hover:shadow-xl transition 
+        cursor-pointer p-5 space-x-5 transform hover:scale-105
+      `;
+
+      card.innerHTML = `
+        <img src="${cat.image}" alt="${cat.name}" class="w-20 h-20 rounded-xl object-cover flex-shrink-0 shadow-sm" />
+        <h3 class="text-xl font-semibold text-gray-900">${cat.name}</h3>
+      `;
+
+      card.onclick = () => alert('You selected: ' + cat.name);
+
+      categoryContainer.appendChild(card);
+    });
+
+    prevPageBtn.disabled = currentPage === 1;
+    nextPageBtn.disabled = currentPage === totalPages;
+  }
+
+  prevPageBtn.addEventListener("click", () => {
+    if (currentPage > 1) {
+      currentPage--;
+      renderCategories();
+    }
+  });
+
+  nextPageBtn.addEventListener("click", () => {
+    if (currentPage < totalPages) {
+      currentPage++;
+      renderCategories();
+    }
+  });
+
+  renderCategories();
