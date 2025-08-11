@@ -17,35 +17,53 @@ function getProductsFromStorage() {
 function saveProductsToStorage(products) {
     localStorage.setItem("products", JSON.stringify(products));
 }
-// Render product card with Tailwind classes
 function renderProduct(product) {
     if (!productList)
         return;
     const productCard = document.createElement("div");
-    productCard.className = "bg-white rounded-lg shadow-md overflow-hidden mb-4";
+    productCard.className = "bg-white rounded-lg shadow-md overflow-hidden mb-4 transition-all duration-300 hover:shadow-lg group";
     productCard.innerHTML = `
-    <div class="relative">
+    <!-- Image Container with Hover Effects -->
+    <div class="relative overflow-hidden">
       <img src="${product.imageUrl}" alt="${product.name}" 
-           class="w-full h-48 object-cover">
+           class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+      
+      <!-- Category Badge -->
       <span class="absolute top-2 left-2 bg-pink-500 text-white text-xs font-bold px-2 py-1 rounded-full">
         ${product.category}
       </span>
+      
+      <!-- Hover Buttons -->
+      <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100">
+        <!-- Quick View Button -->
+        <button class="quick-view-btn bg-white rounded-full p-3 shadow-md hover:bg-pink-100 transition">
+          👁️ Quick View
+        </button>
+        
+        <!-- Favorite Button -->
+        <button class="favorite-btn bg-white rounded-full p-3 shadow-md hover:bg-pink-100 transition">
+          ❤️ Favorite
+        </button>
+      </div>
     </div>
     
+    <!-- Product Info -->
     <div class="p-4">
       <div class="flex justify-between items-start mb-2">
-        <h3 class="text-lg font-bold text-gray-800">${product.name}</h3>
+        <h3 class="text-lg font-bold text-gray-800 truncate">${product.name}</h3>
         <span class="text-pink-600 font-bold">$${product.price.toFixed(2)}</span>
       </div>
       
-      <p class="text-gray-600 text-sm mb-3">${product.description}</p>
+      <p class="text-gray-600 text-sm mb-3 line-clamp-2">${product.description}</p>
       
       <div class="flex justify-between items-center">
+        <!-- Rating -->
         <div class="flex items-center">
           <span class="text-yellow-400">★★★★★</span>
           <span class="text-gray-500 text-xs ml-1">(24)</span>
         </div>
         
+        <!-- Delete Button -->
         <button class="delete-btn bg-red-500 hover:bg-red-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
           Delete
         </button>
@@ -58,6 +76,21 @@ function renderProduct(product) {
         productCard.remove();
         const products = getProductsFromStorage().filter(p => p.id !== product.id);
         saveProductsToStorage(products);
+    });
+    // Favorite button functionality
+    const favoriteBtn = productCard.querySelector(".favorite-btn");
+    favoriteBtn?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        favoriteBtn.textContent = "❤️ Added!";
+        setTimeout(() => {
+            favoriteBtn.textContent = "❤️ Favorite";
+        }, 1000);
+    });
+    // Quick view button functionality
+    const quickViewBtn = productCard.querySelector(".quick-view-btn");
+    quickViewBtn?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        alert(`Quick view of ${product.name}`);
     });
     productList.appendChild(productCard);
 }
