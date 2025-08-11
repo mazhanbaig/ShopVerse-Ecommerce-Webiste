@@ -193,34 +193,4 @@ nextPageBtn.addEventListener("click", () => {
     }
 });
 renderCategories();
-// new sections 
-// Example product data
-const deals = [
-    { name: "Wireless Earbuds", price: "$25", img: "https://via.placeholder.com/150" },
-    { name: "Smart Watch", price: "$40", img: "https://via.placeholder.com/150" },
-    { name: "Bluetooth Speaker", price: "$15", img: "https://via.placeholder.com/150" }
-];
-const bestSellers = [
-    { name: "Gaming Mouse", price: "$20", img: "https://via.placeholder.com/150" },
-    { name: "Mechanical Keyboard", price: "$35", img: "https://via.placeholder.com/150" }
-];
-const trending = [
-    { name: "4K TV", price: "$499", img: "https://via.placeholder.com/150" },
-    { name: "VR Headset", price: "$299", img: "https://via.placeholder.com/150" }
-];
-// Function to create product cards
-function createProductCard(product) {
-    return `
-    <div class="bg-white shadow rounded-lg p-3 w-40 flex-shrink-0">
-      <img src="${product.img}" alt="${product.name}" class="w-full h-28 object-cover rounded">
-      <h3 class="text-sm font-bold mt-2">${product.name}</h3>
-      <p class="text-red-500 font-semibold">${product.price}</p>
-      <button class="mt-2 bg-blue-500 text-white px-3 py-1 rounded text-sm">Buy Now</button>
-    </div>
-  `;
-}
-// Render sections dynamically
-document.getElementById("dealsContainer").innerHTML = deals.map(createProductCard).join("");
-document.getElementById("bestSellersContainer").innerHTML = bestSellers.map(createProductCard).join("");
-document.getElementById("trendingContainer").innerHTML = trending.map(createProductCard).join("");
 export {};
