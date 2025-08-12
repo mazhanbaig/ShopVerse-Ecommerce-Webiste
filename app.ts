@@ -210,21 +210,31 @@ interface Category {
     const pageItems = categories.slice(start, end);
 
     pageItems.forEach(cat => {
-      const card = document.createElement("div");
-      card.className = `
-      flex items-center bg-white rounded-2xl shadow-md hover:shadow-lg transition 
-      cursor-pointer py-2 pl-2 space-x-5 transform hover:scale-105 hover:shadow-pink-500
-      min-w-[200px]  /* width for mobile scrolling */
-      `;
-      card.innerHTML = `
-        <img src="${cat.image}" alt="${cat.name}" class="w-20 h-20 rounded-xl object-cover flex-shrink-0 shadow-sm" />
-        <h3 class="text-xl font-semibold text-gray-900">${cat.name}</h3>
-      `;
+  const card = document.createElement("div");
+  card.className = `
+    flex items-center justify-center 
+    bg-white rounded-2xl shadow-md hover:shadow-lg transition 
+    cursor-pointer py-2 pl-2 transform hover:scale-105 hover:shadow-pink-500
+    min-w-[200px] h-22 sm:h-23 md:h-25 relative overflow-hidden
+    bg-cover bg-center
+  `;
+  
+  // Set the background image using inline style
+  card.style.backgroundImage = `url('${cat.image}')`;
+  
+  // Add the text
+  const text = document.createElement("h3");
+  text.className = `
+    text-xl font-bold text-white z-10 px-4 text-center
+  `;
+  text.textContent = cat.name;
+  
+  // Build the structure
+  card.appendChild(text);
+  card.onclick = () => alert('You selected: ' + cat.name);
 
-      card.onclick = () => alert('You selected: ' + cat.name);
-
-      categoryContainer.appendChild(card);
-    });
+  categoryContainer.appendChild(card);
+});
 
     prevPageBtn.disabled = currentPage === 1;
     nextPageBtn.disabled = currentPage === totalPages;

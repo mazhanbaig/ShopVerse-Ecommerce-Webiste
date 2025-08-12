@@ -50,14 +50,14 @@ function renderProduct(product: Product): void {
       <!-- Hover Buttons -->
       <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100">
         <!-- Quick View Button -->
-        <button class="quick-view-btn bg-white rounded-full p-3 shadow-md hover:bg-pink-100 transition">
-          👁️ Quick View
-        </button>
+        <button class="quick-view-btn bg-white/80 hover:bg-white text-gray-900 rounded-full p-3 shadow-lg transition-all duration-300 hover:scale-110">
+        <i class="fas fa-eye text-lg"></i>
+      </button>
         
-        <!-- Favorite Button -->
-        <button class="favorite-btn bg-white rounded-full p-3 shadow-md hover:bg-pink-100 transition">
-          ❤️ Favorite
-        </button>
+      <!-- Favorite Button -->
+      <button class="favorite-btn bg-white/80 hover:bg-white text-pink-500 rounded-full p-3 shadow-lg transition-all duration-300 hover:scale-110">
+      <i class="far fa-heart text-lg "></i>
+</button>
       </div>
     </div>
     
