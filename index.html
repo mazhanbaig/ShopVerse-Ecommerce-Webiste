@@ -46,17 +46,18 @@
                 <!-- Icons + mobile menu toggle -->
                 <div class="flex items-center space-x-4">
                     <!-- Wishlist (Favourite) -->
-                    <a href="favourite.html" id="favourite" class="relative p-2 hover:text-pink-500 transition" aria-label="Wishlist">
+                    <a href="favourite.html" id="favourite" class="relative p-2 hover:text-pink-500 transition"
+                        aria-label="Wishlist">
                         <i class="far fa-heart text-xl"></i>
                         <span
-                            class="absolute -top-1 -right-1 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                            class="absolute -top-1 -right-1 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
                     </a>
-                    
+
                     <!-- Cart -->
                     <a href="cart.html" id="cart" class="relative p-2 hover:text-blue-500 transition" aria-label="Cart">
                         <i class="fas fa-shopping-bag text-xl"></i>
                         <span
-                            class="absolute -top-1 -right-1 bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
+                            class="absolute -top-1 -right-1 bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
                     </a>
 
                     <!-- User Account -->
@@ -123,10 +124,17 @@
                 <h2 id="product-name" class="text-4xl font-extrabold text-gray-900 mb-4 tracking-wide"></h2>
                 <p id="product-desc" class="text-gray-700 text-lg leading-relaxed mb-6"></p>
                 <p id="product-price" class="text-pink-600 font-extrabold text-3xl tracking-tight"></p>
-                <button id="addtocart" type="button"
-                    class="mt-8 bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition">
-                    Add to Cart
-                </button>
+                <div id="btnsConatainer" class="flex gap-2">
+                    <button id="addtocart" type="button"
+                        class="mt-8 w-4/5 bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition">
+                        Add to Cart
+                    </button>
+                    <button id="more" type="button"
+                        class="mt-8 w-1/5 bg-black hover:bg-gray-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition">
+                        More
+                    </button>
+                    
+                </div>
             </div>
         </div>
     </section>

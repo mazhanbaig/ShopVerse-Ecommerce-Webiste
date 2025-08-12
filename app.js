@@ -9,70 +9,70 @@ window.addEventListener("DOMContentLoaded", () => {
         {
             id: 1,
             name: "Apple iPhone 16 Pro Max",
-            price: 1199,
+            price: 11990,
             image: "https://www.apple.com/newsroom/images/2024/09/apple-debuts-iphone-16-pro-and-iphone-16-pro-max/article/Apple-iPhone-16-Pro-hero-geo-240909_inline.jpg.large.jpg",
             description: "Apple iPhone 16 Pro Max with A17 Pro chip and titanium frame.",
         },
         {
             id: 2,
             name: "Samsung Galaxy S24 Ultra",
-            price: 1399,
+            price: 13990,
             image: "https://images.samsung.com/is/image/samsung/p6pim/pk/feature/165525818/pk-feature-galaxy-s24-ultra-543035573?$FB_TYPE_A_MO_JPG$",
             description: "Samsung Galaxy S24 Ultra with 200MP camera and Snapdragon 8 Gen 3.",
         },
         {
             id: 3,
             name: "Sony WH-1000XM5 Headphones",
-            price: 399,
+            price: 3989,
             image: "https://static.webx.pk/files/19643/Images/sony-wh-1000xm5-silver-headphones-price-in-pakistan-19643-2088078-220524100332877.jpg",
             description: "Noise-canceling wireless over-ear headphones.",
         },
         {
             id: 4,
             name: "MacBook Air M3",
-            price: 1299,
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcV-O4L41bDnWCnCla_F5LKNTZszogLcWgHA&s",
+            price: 129669,
+            image: "https://static.webx.pk/files/4012/Images/11-4012-2280650-181224095605041.jpeg",
             description: "Apple MacBook Air with M3 chip, 13-inch Liquid Retina display.",
         },
         {
             id: 5,
             name: "Dual Time Sports Watch",
-            price: 499,
+            price: 4969,
             image: "https://voguealaska.pk/cdn/shop/files/Silver2_960a4e45-d5d4-47e1-acbc-1fbc6053c71f.jpg?v=1742643151&width=1024",
             description: "Best For Dialy Use.Makes You Feel Better.",
         },
         {
             id: 6,
             name: "Dell XPS 13 Laptop",
-            price: 999,
+            price: 99549,
             image: "https://www.notebookcheck.net/fileadmin/Notebooks/Dell/XPS_13_9340_Core_Ultra_7/IMG_4090.JPG",
             description: "Dell XPS 13 with 11th Gen Intel i7 processor and InfinityEdge display.",
         },
         {
             id: 7,
             name: "Apple Watch Series 9",
-            price: 399,
+            price: 3994,
             image: "https://modernwears.pk/wp-content/uploads/2023/10/Untitled-design-2024-11-11T143955.085.jpg",
             description: "Apple Watch Series 9 with new S9 chip and enhanced health sensors.",
         },
         {
             id: 8,
             name: "Google Pixel 8 Pro",
-            price: 899,
+            price: 32899,
             image: "https://estorepakistan.com/cdn/shop/files/WhatsAppImage2025-03-07at5.52.01PM_1024x1024.webp?v=1741549859",
             description: "Google Pixel 8 Pro with Tensor G3 chip and advanced camera system.",
         },
         {
             id: 9,
             name: "Bose QuietComfort Earbuds",
-            price: 279,
+            price: 23279,
             image: "https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/25636997/DSC_0080.jpg?quality=90&strip=all&crop=16.666666666667,0,66.666666666667,100",
             description: "True wireless noise-cancelling earbuds with deep bass.",
         },
         {
             id: 10,
             name: "Nintendo Switch OLED",
-            price: 349,
+            price: 34329,
             image: "https://images.immediate.co.uk/production/volatile/sites/3/2021/10/Nintendo-Switch-OLED-review-ff1b02c.jpg?quality=90&resize=620,414",
             description: "Nintendo Switch OLED model with vibrant 7-inch display and enhanced audio.",
         },
@@ -84,7 +84,8 @@ window.addEventListener("DOMContentLoaded", () => {
     const productPrice = document.getElementById("product-price");
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
-    let addToCart = document.getElementById("addtocart");
+    let addToCart = document.querySelector("#btnsConatainer addtocart");
+    let moreOptions = document.getElementById("#btnsConatainer more");
     if (!productImage || !productName || !productDesc || !productPrice || !prevBtn || !nextBtn || !addToCart) {
         console.error("Some DOM elements are missing. Cannot initialize product slider.");
         return;
@@ -102,6 +103,12 @@ window.addEventListener("DOMContentLoaded", () => {
         else {
             alert(`${product.name} is already in your cart.`);
         }
+        const cartCount = document.querySelector("#cart span");
+        if (cartCount) {
+            cartCount.textContent = cartItems.length.toString();
+        }
+    });
+    moreOptions?.addEventListener('click', () => {
     });
     function showProduct() {
         // Get current product
@@ -110,7 +117,7 @@ window.addEventListener("DOMContentLoaded", () => {
         productName.textContent = product.name;
         productImage.src = product.image;
         productDesc.textContent = product.description;
-        productPrice.textContent = `$${product.price.toFixed(2)}`;
+        productPrice.textContent = `Rs ${product.price.toFixed(2)}`;
     }
     function goToNext() {
         currentIndex++;
@@ -177,7 +184,7 @@ function renderCategories() {
         card.className = `
     flex items-center justify-center 
     bg-white rounded-2xl shadow-md hover:shadow-lg transition 
-    cursor-pointer py-2 pl-2 transform hover:scale-105 hover:shadow-pink-500
+    cursor-pointer py-2 pl-2 transform hover:scale-105 hover:shadow-pink-200
     min-w-[200px] h-22 sm:h-23 md:h-25 relative overflow-hidden
     bg-cover bg-center
   `;
