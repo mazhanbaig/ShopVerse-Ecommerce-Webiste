@@ -57,7 +57,7 @@
                     <a href="cart.html" id="cart" class="relative p-2 hover:text-blue-500 transition" aria-label="Cart">
                         <i class="fas fa-shopping-bag text-xl"></i>
                         <span
-                            class="absolute -top-1 -right-1 bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                            class="absolute -top-1 -right-1 bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
                     </a>
 
                     <!-- User Account -->
@@ -120,21 +120,21 @@
             </div>
 
             <!-- Product info -->
-            <div class="w-full md:w-1/2 flex flex-col justify-center">
-                <h2 id="product-name" class="text-4xl font-extrabold text-gray-900 mb-4 tracking-wide"></h2>
+            <div class="w-full md:w-1/2 flex flex-col justify-center relative"> <!-- Added relative positioning -->
+                <div class="flex justify-between items-start"> <!-- New wrapper for title and favorite button -->
+                    <h2 id="product-name" class="text-4xl font-extrabold text-gray-900 mb-4 tracking-wide"></h2>
+                    <!-- Favorite button moved here -->
+                    <button id="favoriteBtn"
+                        class="p-2 text-gray-400 hover:text-pink-500 transition absolute top-0 right-0">
+                        <i class="far fa-heart text-2xl"></i>
+                    </button>
+                </div>
                 <p id="product-desc" class="text-gray-700 text-lg leading-relaxed mb-6"></p>
                 <p id="product-price" class="text-pink-600 font-extrabold text-3xl tracking-tight"></p>
-                <div id="btnsConatainer" class="flex gap-2">
                     <button id="addtocart" type="button"
                         class="mt-8 w-4/5 bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition">
                         Add to Cart
                     </button>
-                    <button id="more" type="button"
-                        class="mt-8 w-1/5 bg-black hover:bg-gray-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition">
-                        More
-                    </button>
-                    
-                </div>
             </div>
         </div>
     </section>

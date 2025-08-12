@@ -5,6 +5,7 @@ const menuBtn = document.getElementById("menuBtn") as HTMLButtonElement | null;
 
 menuBtn?.addEventListener("click", () => {
   mobileMenuDropdown?.classList.toggle("hidden");
+
 });
 
 // Glance section working
@@ -108,8 +109,8 @@ menuBtn?.addEventListener("click", () => {
 
   const prevBtn = document.getElementById("prevBtn") as HTMLButtonElement | null;
   const nextBtn = document.getElementById("nextBtn") as HTMLButtonElement | null;
-  let addToCart=document.querySelector("#btnsConatainer addtocart") as HTMLButtonElement | null;
-  let moreOptions=document.getElementById("#btnsConatainer more") as HTMLButtonElement | null;
+  let addToCart=document.querySelector("#addtocart") as HTMLButtonElement | null;
+  const favoriteBtn = document.getElementById('favoriteBtn');
 
 if (!productImage || !productName || !productDesc || !productPrice || !prevBtn || !nextBtn || !addToCart) {
     console.error("Some DOM elements are missing. Cannot initialize product slider.");
@@ -134,9 +135,14 @@ if (!productImage || !productName || !productDesc || !productPrice || !prevBtn |
     cartCount.textContent = cartItems.length.toString();
     }
   });
-  moreOptions?.addEventListener('click',()=>{
-    
-  })
+  if (favoriteBtn) {
+    favoriteBtn.addEventListener('click', function() {
+        const icon = this.querySelector('i');
+        icon.classList.toggle('far');
+        icon.classList.toggle('fas');
+        icon.classList.toggle('text-pink-500');
+    });
+}
 
 
 function showProduct(): void {

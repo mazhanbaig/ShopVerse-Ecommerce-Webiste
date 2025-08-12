@@ -84,8 +84,8 @@ window.addEventListener("DOMContentLoaded", () => {
     const productPrice = document.getElementById("product-price");
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
-    let addToCart = document.querySelector("#btnsConatainer addtocart");
-    let moreOptions = document.getElementById("#btnsConatainer more");
+    let addToCart = document.querySelector("#addtocart");
+    const favoriteBtn = document.getElementById('favoriteBtn');
     if (!productImage || !productName || !productDesc || !productPrice || !prevBtn || !nextBtn || !addToCart) {
         console.error("Some DOM elements are missing. Cannot initialize product slider.");
         return;
@@ -108,8 +108,14 @@ window.addEventListener("DOMContentLoaded", () => {
             cartCount.textContent = cartItems.length.toString();
         }
     });
-    moreOptions?.addEventListener('click', () => {
-    });
+    if (favoriteBtn) {
+        favoriteBtn.addEventListener('click', function () {
+            const icon = this.querySelector('i');
+            icon.classList.toggle('far');
+            icon.classList.toggle('fas');
+            icon.classList.toggle('text-pink-500');
+        });
+    }
     function showProduct() {
         // Get current product
         const product = products[currentIndex];
