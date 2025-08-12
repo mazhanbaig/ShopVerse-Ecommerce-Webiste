@@ -255,3 +255,14 @@ interface Category {
   });
 
   renderCategories();
+
+  // Add to chart and Favourite button functionality
+  let cartbtn=document.getElementById("cart") as HTMLButtonElement;
+  let favouritebtn=document.getElementById("favourite") as HTMLButtonElement;
+  cartbtn.addEventListener("click",():void=>{
+    window.location.href = "cart.html";
+  });
+   
+  favouritebtn.addEventListener("click",():void=>{
+    window.location.href = "favourite.html";
+  });

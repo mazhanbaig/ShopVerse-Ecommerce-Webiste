@@ -201,4 +201,13 @@ nextPageBtn.addEventListener("click", () => {
     }
 });
 renderCategories();
+// Add to chart and Favourite button functionality
+let cartbtn = document.getElementById("cart");
+let favouritebtn = document.getElementById("favourite");
+cartbtn.addEventListener("click", () => {
+    window.location.href = "cart.html";
+});
+favouritebtn.addEventListener("click", () => {
+    window.location.href = "favourite.html";
+});
 export {};
