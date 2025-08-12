@@ -7,7 +7,7 @@ menuBtn?.addEventListener("click", () => {
   mobileMenuDropdown?.classList.toggle("hidden");
 });
 
-
+// Glance section working
   type Product = {
     id: number;
     name: string;
@@ -108,63 +108,77 @@ menuBtn?.addEventListener("click", () => {
 
   const prevBtn = document.getElementById("prevBtn") as HTMLButtonElement | null;
   const nextBtn = document.getElementById("nextBtn") as HTMLButtonElement | null;
+  let addToCart=document.getElementById("addtocart") as HTMLButtonElement | null;
 
-  if (!productImage || !productName || !productDesc || !productPrice || !prevBtn || !nextBtn) {
+if (!productImage || !productName || !productDesc || !productPrice || !prevBtn || !nextBtn || !addToCart) {
     console.error("Some DOM elements are missing. Cannot initialize product slider.");
     return;
   }
 
-  // Current product index
   let currentIndex = 0;
 
-  // Function to show product details based on index
-  function showProduct(index: number) {
-    // Handle wrap around (looping)
-    if (index < 0) {
-      currentIndex = products.length - 1; // go to last product
-    } else if (index >= products.length) {
-      currentIndex = 0; // go to first product
+  addToCart.addEventListener('click',()=>{
+    let product=products[currentIndex];
+    let cartItems:Product[]=JSON.parse(localStorage.getItem("cartItems") || "[]");
+    let isexist=cartItems.some(cartItem => cartItem.id===product?.id)
+    if(!isexist){
+      cartItems.push(product);
+      localStorage.setItem("cartItems",JSON.stringify(cartItems));
+      alert(`${product.name} added to cart!`);
     } else {
-      currentIndex = index;
+      alert(`${product.name} is already in your cart.`);
     }
-
-    // Get current product
-    const product = products[currentIndex];
-
-    // Update DOM elements with product data
-    productImage.src = product.image;
-    productImage.alt = product.name;
-    productName.textContent = product.name;
-    productDesc.textContent = product.description;
-    productPrice.textContent = "$" + product.price.toFixed(2);
-  }
-
-  // Event listeners for buttons
-  prevBtn.addEventListener("click", () => {
-    showProduct(currentIndex - 1);
-    resetAutoSlide();
   });
 
-  nextBtn.addEventListener("click", () => {
-    showProduct(currentIndex + 1);
-    resetAutoSlide();
-  });
 
-  // Auto slide every 3 seconds
-  let slideInterval = setInterval(() => {
-    showProduct(currentIndex + 1);
-  }, 3000);
+function showProduct(): void {
+  // Get current product
+  const product = products[currentIndex];
+  
+  // Update display
+  productName.textContent = product.name;
+  productImage.src = product.image;
+  productDesc.textContent = product.description;
+  productPrice.textContent = `$${product.price.toFixed(2)}`;
+}
 
-  // Reset auto slide interval when user clicks buttons
-  function resetAutoSlide() {
-    clearInterval(slideInterval);
-    slideInterval = setInterval(() => {
-      showProduct(currentIndex + 1);
-    }, 3000);
+function goToNext(): void {
+  currentIndex++;
+  if (currentIndex >= products.length) {
+    currentIndex = 0; // Wrap to first product
   }
+  showProduct();
+}
 
-  // Show first product when page loads
-  showProduct(currentIndex);
+function goToPrev(): void {
+  currentIndex--;
+  if (currentIndex < 0) {
+    currentIndex = products.length - 1; // Wrap to last product
+  }
+  showProduct();
+}
+
+// Button clicks
+nextBtn.addEventListener("click", () => {
+  goToNext();
+  resetAutoSlide();
+});
+
+prevBtn.addEventListener("click", () => {
+  goToPrev();
+  resetAutoSlide();
+});
+
+// Auto-slide
+let slideInterval = setInterval(goToNext, 3000);
+
+function resetAutoSlide(): void {
+  clearInterval(slideInterval);
+  slideInterval = setInterval(goToNext, 3000);
+}
+
+// Start with first product
+showProduct();
 
 });
 
@@ -180,17 +194,16 @@ interface Category {
     { id: 2, name: "Clothing", image: "https://as1.ftcdn.net/v2/jpg/03/34/79/68/1000_F_334796865_VVTjg49nbLgQPG6rgKDjVqSb5XUhBVsW.jpg" },
     { id: 3, name: "Books", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Books.by.women.photographers.jpeg/1200px-Books.by.women.photographers.jpeg" },
     { id: 4, name: "Gaming", image: "https://images.pexels.com/photos/275033/pexels-photo-275033.jpeg?cs=srgb&dl=pexels-pixabay-275033.jpg&fm=jpg" },
-    { id: 5, name: "Accessories", image: "https://media.istockphoto.com/id/478107962/photo/auto-parts.jpg?s=612x612&w=0&k=20&c=C31mE-cVYFlLqJp9smDKUczPoBEtoYl5gaGxdvH0lmM=" },
     { id: 6, name: "Furniture", image: "https://arysahulatbazar.pk/wp-content/uploads/2024/01/Amb-4.jpg" },
     { id: 7, name: "Toys", image: "https://thumbs.dreamstime.com/b/heap-toys-eps-vector-illustration-48098461.jpg" },
     { id: 8, name: "Sports", image: "https://kinnaird.edu.pk/wp-content/uploads/2024/07/1.png" },
     { id: 9, name: "Beauty", image: "https://halanoor.pk/wp-content/uploads/2024/04/Rotating-Makeup-Organizer-500x500.jpg" },
     { id: 10, name: "Automotive", image: "https://media.istockphoto.com/id/478107962/photo/auto-parts.jpg?s=612x612&w=0&k=20&c=C31mE-cVYFlLqJp9smDKUczPoBEtoYl5gaGxdvH0lmM=" },
     { id: 11, name: "Women", image: "https://c8.alamy.com/comp/HW6MJM/variety-of-woman-accessories-fashion-objects-modern-lifetyle-HW6MJM.jpg" },
-    { id: 12, name: "Perfume", image: "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=80&q=80" },
-    { id: 13, name: "All Things", image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=80&q=80" },
+    { id: 12, name: "Men", image: "https://nextluxury.com/wp-content/uploads/Top-15-Fashion-Accessories-For-Men-1.jpg" },   
+    { id: 13, name: "Perfume", image: "https://www.logoofficial.com/cdn/shop/collections/PF_f29896ec-064b-40a6-b2f6-6a41d9a21fa1.jpg?v=1737319636" },
     { id: 14, name: "Kitchen", image: "https://ahmadsfinekitchen.com/wp-content/uploads/2014/09/1.jpg" },
-    { id: 15, name: "Health", image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=80&q=80" },
+    { id: 15, name: "Health", image: "https://www.nwths.com/sites/nwths.com/files/protein-sources-800x600.png" },
     { id: 16, name: "Jewelry", image: "https://www.lalueur.pk/cdn/shop/files/Secondary24.jpg?v=1749582909" }
   ];
 

@@ -29,38 +29,27 @@
                         class="w-full px-4 py-2 rounded-full bg-gray-100 border border-gray-300 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-400" />
                 </div>
 
+                <!-- Icons + mobile menu toggle -->
                 <div class="flex items-center space-x-4">
-                    <!-- Wishlist -->
-                    <button class="relative p-2 hover:text-pink-500 transition" aria-label="Wishlist">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor"
-                            stroke-width="2" viewBox="0 0 24 24">
-                            <path d="M12 21c-4.97-4.34-8-7.5-8-11a5 5 0 0110 0 5 5 0 0110 0c0 3.5-3.03 6.66-8 11z" />
-                        </svg>
+                    <!-- Wishlist (Favourite) -->
+                    <a href="favourite.html" id="favourite" class="relative p-2 hover:text-pink-500 transition" aria-label="Wishlist">
+                        <i class="far fa-heart text-xl"></i>
                         <span
                             class="absolute -top-1 -right-1 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
-                    </button>
-
+                    </a>
+                    
                     <!-- Cart -->
-                    <button class="relative p-2 hover:text-blue-500 transition" aria-label="Cart">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor"
-                            stroke-width="2" viewBox="0 0 24 24">
-                            <path
-                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9h14l-2-9M10 21a2 2 0 11-4 0 2 2 0 014 0zM18 21a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
+                    <a href="cart.html" id="cart" class="relative p-2 hover:text-blue-500 transition" aria-label="Cart">
+                        <i class="fas fa-shopping-bag text-xl"></i>
                         <span
                             class="absolute -top-1 -right-1 bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
-                    </button>
+                    </a>
+                    <!-- User Account -->
+                    <a id="user" class="p-2 hover:text-green-500 transition" aria-label="User Account">
+                        <i class="far fa-user text-xl"></i>
+                    </a>
 
-                    <!-- User -->
-                    <button class="p-2 hover:text-green-500 transition" aria-label="User Account">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor"
-                            stroke-width="2" viewBox="0 0 24 24">
-                            <path
-                                d="M12 14c4.418 0 8 1.79 8 4v2H4v-2c0-2.21 3.582-4 8-4zm0-10a4 4 0 110 8 4 4 0 010-8z" />
-                        </svg>
-                    </button>
-
-                    <!-- Mobile Menu Toggle -->
+                    <!-- Mobile menu button -->
                     <button id="menuBtn" class="md:hidden p-2 hover:text-yellow-500 transition"
                         aria-label="Toggle Mobile Menu">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor"
@@ -71,17 +60,17 @@
                 </div>
             </div>
 
-            <!-- Desktop Categories -->
-            <div id="desktopMenu"
+            <!-- Desktop categories -->
+            <div id="mobileMenu"
                 class="hidden md:flex items-center justify-center space-x-8 py-3 border-t border-gray-200">
                 <a href="index.html" class="hover:text-pink-500 transition">Home</a>
                 <a href="myshop.html" class="hover:text-pink-500 transition">Add Product</a>
-                <a href="#" class="hover:text-pink-500 transition">Deals</a>
+                <a href="contact.html" class="hover:text-pink-500 transition">Deals</a>
                 <!-- <a href="#" class="hover:text-pink-500 transition">Categories</a> -->
                 <a href="#" class="hover:text-pink-500 transition">Contact</a>
             </div>
 
-            <!-- Mobile Dropdown Menu -->
+            <!-- Mobile dropdown menu -->
             <div id="mobileMenuDropdown" class="md:hidden hidden bg-white border-t border-gray-200 shadow-lg">
                 <a href="index.html" class="block px-6 py-3 hover:bg-pink-100 border-b border-gray-200">Home</a>
                 <a href="myshop.html" class="block px-6 py-3 hover:bg-pink-100 border-b border-gray-200">My Shop</a>
