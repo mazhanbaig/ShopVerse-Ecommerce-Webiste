@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="text-center py-12">
           <i class="fas fa-shopping-cart text-5xl text-gray-300 mb-4"></i>
           <p class="text-gray-500">Your cart is empty</p>
-          <a href="index.html" class="mt-4 inline-block bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-medium transition">
+          <a href="index.html" class="mt-4 inline-block bg-pink-600 hover:bg-pink-500 text-white py-2 px-4 rounded-lg font-medium transition">
             Continue Shopping
           </a>
         </div>

@@ -180,7 +180,10 @@ window.addEventListener("DOMContentLoaded", () => {
             localStorage.setItem('favorites', JSON.stringify(favorites));
             alert(`${product.name} added to favorites!`);
             const favoriteCount = document.querySelector('#favourite span');
-            if (favoriteCount) favoriteCount.textContent = favorites.length.toString();
+            if (favoriteCount) {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            favoriteCount.textContent = favorites.length.toString();
+            }
           } else {
             alert(`${product.name} is already in favorites!`);
           }
@@ -204,16 +207,6 @@ window.addEventListener("DOMContentLoaded", () => {
         
         moreDropdown.classList.add('hidden'); // Close dropdown after selection
       });
-    });
-  }
-
-  // Toggle favorite button state
-  if (favoriteBtn) {
-    favoriteBtn.addEventListener('click', function() {
-      const icon = this.querySelector('i');
-      icon.classList.toggle('far');
-      icon.classList.toggle('fas');
-      icon.classList.toggle('text-pink-500');
     });
   }
 
@@ -258,7 +251,10 @@ window.addEventListener("DOMContentLoaded", () => {
     resetAutoSlide();
   });
 
+  
   // ===== CATEGORY SECTION =====
+  // ===== CATEGORY SECTION =====
+
   interface Category {
     id: number;
     name: string;

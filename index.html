@@ -22,24 +22,28 @@
             scrollbar-width: none;
             /* Firefox */
         }
+
         /* Dropdown styles */
-.dropdown-option {
-  display: block;
-  padding: 10px 15px;
-  color: #4a5568; /* gray-700 */
-  text-decoration: none;
-  transition: all 0.2s;
-}
+        .dropdown-option {
+            display: block;
+            padding: 10px 15px;
+            color: #4a5568;
+            /* gray-700 */
+            text-decoration: none;
+            transition: all 0.2s;
+        }
 
-.dropdown-option:hover {
-  background-color: #fce7f3; /* pink-100 */
-  color: #831843; /* pink-800 */
-}
+        .dropdown-option:hover {
+            background-color: #fce7f3;
+            /* pink-100 */
+            color: #831843;
+            /* pink-800 */
+        }
 
-.dropdown-option i {
-  width: 20px;
-  text-align: center;
-}
+        .dropdown-option i {
+            width: 20px;
+            text-align: center;
+        }
     </style>
 
 </head>
@@ -67,8 +71,10 @@
                     <a href="favourite.html" id="favourite" class="relative p-2 hover:text-pink-500 transition"
                         aria-label="Wishlist">
                         <i class="far fa-heart text-xl"></i>
-                        <span
-                            class="absolute -top-1 -right-1 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                        <span id="favoriteCount"
+                            class="absolute -top-1 -right-1 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                            0
+                        </span>
                     </a>
 
                     <!-- Cart -->
@@ -98,7 +104,7 @@
             <div id="mobileMenu"
                 class="hidden md:flex items-center justify-center space-x-8 py-3 border-t border-gray-200">
                 <a href="index.html" class="hover:text-pink-500 transition">Home</a>
-                <a href="myshop.html" class="hover:text-pink-500 transition">Add Product</a>
+                <a href="addproduct.html" class="hover:text-pink-500 transition">Add Product</a>
                 <a href="contact.html" class="hover:text-pink-500 transition">Deals</a>
                 <!-- <a href="#" class="hover:text-pink-500 transition">Categories</a> -->
                 <a href="#" class="hover:text-pink-500 transition">Contact</a>
@@ -107,7 +113,8 @@
             <!-- Mobile dropdown menu -->
             <div id="mobileMenuDropdown" class="md:hidden hidden bg-white border-t border-gray-200 shadow-lg">
                 <a href="index.html" class="block px-6 py-3 hover:bg-pink-100 border-b border-gray-200">Home</a>
-                <a href="myshop.html" class="block px-6 py-3 hover:bg-pink-100 border-b border-gray-200">My Shop</a>
+                <a href="addproduct.html" class="block px-6 py-3 hover:bg-pink-100 border-b border-gray-200">Add
+                    Product</a>
                 <a href="#" class="block px-6 py-3 hover:bg-pink-100 border-b border-gray-200">Deals</a>
                 <a href="#" class="block px-6 py-3 hover:bg-pink-100 border-b border-gray-200">Categories</a>
                 <a href="#" class="block px-6 py-3 hover:bg-pink-100">Contact</a>
@@ -115,6 +122,8 @@
         </div>
     </nav>
 
+
+    <!-- Featured product section -->
     <!-- Featured product section -->
     <section class="max-w-full mx-auto p-6 bg-white shadow-lg">
 
@@ -158,7 +167,8 @@
                     <!-- More Button with Dropdown -->
                     <div class="relative inline-block">
                         <!-- Dropdown Content -->
-                        <div id="moreDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
+                        <div id="moreDropdown"
+                            class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
                             <div class="py-1">
                                 <a href="#" class="dropdown-option">
                                     <i class="fas fa-shopping-cart mr-2"></i> Buy Now
@@ -178,19 +188,23 @@
                             class="mt-8 bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-4 rounded-full shadow-lg transition">
                             More
                         </button>
-                    
+
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </section>
+
+
+    <!-- Categories Buttons  -->
+    <!-- Categories Buttons  -->
     <section class="max-w-7xl mx-auto p-8 bg-white rounded-xl shadow-lg">
 
         <h2 class="text-3xl font-extrabold text-pink-600 mb-8 text-center tracking-wide">Search by Category</h2>
 
         <!-- Categories grid -->
-        <div id="categoryContainer"
+        <div  id="categoryContainer"
             class="flex overflow-x-auto py-5 no-scrollbar space-x-4 md:grid md:grid-cols-4 md:gap-3 mb-8">
             <!-- Categories will be dynamically inserted here -->
         </div>
@@ -225,8 +239,8 @@
             <div class="mb-8 md:mb-0 md:w-1/5">
                 <h4 class="text-lg font-semibold mb-4 text-gray-900">Quick Links</h4>
                 <ul class="space-y-2 text-gray-600">
-                    <li><a href="#" class="hover:text-pink-500 transition text-pink-600">Home</a></li>
-                    <li><a href="#" class="hover:text-pink-500 transition">Shop</a></li>
+                    <li><a href="index.html" class="hover:text-pink-500 transition text-pink-600">Home</a></li>
+                    <li><a href="addproduct.html" class="hover:text-pink-500 transition">My Shop</a></li>
                     <li><a href="#" class="hover:text-pink-500 transition">Deals</a></li>
                     <li><a href="#" class="hover:text-pink-500 transition">Categories</a></li>
                     <li><a href="#" class="hover:text-pink-500 transition">Contact</a></li>

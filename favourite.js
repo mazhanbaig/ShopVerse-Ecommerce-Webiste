@@ -1,11 +1,3 @@
-// // types.ts (create this file for shared types)
-// export interface Product {
-//     id: number;
-//     name: string;
-//     price: number;
-//     image: string;
-//     description: string;
-// }
 document.addEventListener("DOMContentLoaded", () => {
     // Mobile menu toggle
     const menuBtn = document.getElementById("menuBtn");
