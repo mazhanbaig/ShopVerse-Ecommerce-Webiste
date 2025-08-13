@@ -1,4 +1,27 @@
+// ========== GLOBAL COUNT FUNCTIONS ==========
+// Update cart count globally
+window.updateCartCount = () => {
+    const cartCountElements = document.querySelectorAll("#cart span, #mobileCart span");
+    const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
+    cartCountElements.forEach(element => {
+        element.textContent = cartItems.length.toString();
+    });
+};
+// Update favorite count globally
+window.updateFavoriteCount = () => {
+    const favoriteCountElements = document.querySelectorAll("#favourite span, #mobileFavourite span");
+    const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+    favoriteCountElements.forEach(element => {
+        element.textContent = favorites.length.toString();
+    });
+};
 document.addEventListener("DOMContentLoaded", () => {
+    // ========== INITIALIZE COUNTS ON LOAD ==========
+    if (typeof window.updateCartCount === 'function')
+        window.updateCartCount();
+    if (typeof window.updateFavoriteCount === 'function')
+        window.updateFavoriteCount();
+    // ========== CART PAGE FUNCTIONALITY ==========
     // Load cart items from localStorage with proper type assertion
     const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
     // Get DOM elements with type assertions
@@ -6,11 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const subtotalElement = document.getElementById("subtotal");
     const totalElement = document.getElementById("total");
     const checkoutBtn = document.getElementById("checkoutBtn");
-    // Update cart count in navbar
-    const cartCount = document.querySelector("#cart span");
-    if (cartCount) {
-        cartCount.textContent = cartItems.length.toString();
-    }
     // Render cart items function
     const renderCartItems = () => {
         if (!cartItemsContainer || !subtotalElement || !totalElement || !checkoutBtn) {
@@ -68,11 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
         cartItems.splice(index, 1);
         localStorage.setItem("cartItems", JSON.stringify(cartItems));
         renderCartItems();
-        // Update cart count in navbar
-        const cartCount = document.querySelector("#cart span");
-        if (cartCount) {
-            cartCount.textContent = cartItems.length.toString();
-        }
+        window.updateCartCount(); // Update count globally
     };
     // Checkout button event listener
     if (checkoutBtn) {

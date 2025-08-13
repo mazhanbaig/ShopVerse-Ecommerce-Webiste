@@ -1,4 +1,24 @@
 window.addEventListener("DOMContentLoaded", () => {
+  // Function to update cart and favorite counts
+  function updateCartAndFavoriteCounts() {
+    // Update cart count in navbar
+    const cartCount = document.querySelector("#cart span") as HTMLSpanElement | null;
+    if (cartCount) {
+      const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+      cartCount.textContent = cartItems.length.toString();
+    }  
+
+    // Update favourite count in navbar
+    const favoriteCount = document.querySelector('#favourite span');
+    if (favoriteCount) {
+      const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+      favoriteCount.textContent = favorites.length.toString();
+    }
+  }
+
+  // Initialize counts on page load
+  updateCartAndFavoriteCounts();
+
   // ===== NAVBAR TOGGLE =====
   const menuBtn = document.getElementById("menuBtn") as HTMLButtonElement | null;
   const mobileMenuDropdown = document.getElementById("mobileMenuDropdown") as HTMLDivElement | null;
@@ -17,7 +37,7 @@ window.addEventListener("DOMContentLoaded", () => {
     description: string;
   };
 
-  // Sample product data
+//  Sample product data
   const products: Product[] = [
     {
       id: 1,
@@ -134,9 +154,8 @@ window.addEventListener("DOMContentLoaded", () => {
       alert(`${product.name} is already in your cart.`);
     }
     
-    // Update cart count in navbar
-    const cartCount = document.querySelector("#cart span") as HTMLSpanElement | null;
-    if (cartCount) cartCount.textContent = cartItems.length.toString();
+    // Update cart count
+    updateCartAndFavoriteCounts();
   });
 
   // ===== MORE BUTTON DROPDOWN =====
@@ -179,11 +198,7 @@ window.addEventListener("DOMContentLoaded", () => {
             favorites.push(product);
             localStorage.setItem('favorites', JSON.stringify(favorites));
             alert(`${product.name} added to favorites!`);
-            const favoriteCount = document.querySelector('#favourite span');
-            if (favoriteCount) {
-            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-            favoriteCount.textContent = favorites.length.toString();
-            }
+            updateCartAndFavoriteCounts();
           } else {
             alert(`${product.name} is already in favorites!`);
           }
@@ -250,7 +265,6 @@ window.addEventListener("DOMContentLoaded", () => {
     goToPrev();
     resetAutoSlide();
   });
-
   
   // ===== CATEGORY SECTION =====
   // ===== CATEGORY SECTION =====
