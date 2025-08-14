@@ -30,15 +30,15 @@ declare global {
 
 // ========== GLOBAL COUNT FUNCTIONS ==========
 // Update cart count globally
-window.updateCartCount = () => {
-  const cartCountElements = document.querySelectorAll("#cart span, #mobileCart span");
-  const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
+document.addEventListener("DOMContentLoaded",()=>{
+   const updateCartCount = () => {
+    const cartCountElements = document.querySelectorAll("#cart span, #mobileCart span");
+    const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
+    if (cart) cart.textContent = cartItems.length.toString();
+  };
+  updateCartCount();
+})
   
-  cartCountElements.forEach(element => {
-    element.textContent = cartItems.length.toString();
-  });
-};
-
 // Update favorite count globally
 window.updateFavoriteCount = () => {
   const favoriteCountElements = document.querySelectorAll("#favourite span, #mobileFavourite span");
