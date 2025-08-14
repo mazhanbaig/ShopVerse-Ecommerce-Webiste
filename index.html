@@ -95,7 +95,7 @@
             <div class="flex items-center justify-between h-16">
                 <!-- Logo with gradient text -->
                 <div class="flex items-center">
-                    <a href="#" class="text-2xl font-bold text-pink-700">
+                    <a href="#" class="text-2xl font-bold text-pink-600">
                         BazarioVerse
                     </a>
                 </div>
@@ -211,6 +211,16 @@
     </div>
     <!-- Main Content Area -->
     <div class="content-area">
+
+        <!-- Categories Buttons -->
+        <section class="max-w-7xl mx-auto bg-white rounded-xl shadow-lg">
+            <!-- <h2 class="text-3xl font-extrabold text-pink-600 mb-8 text-center tracking-wide">Search by Category</h2> -->
+            <!-- Categories grid -->
+            <div id="categoryContainer" class="flex gap-4 overflow-x-auto no-scrollbar py-4 px-2">
+                <!-- Categories will be injected here -->
+            </div>
+        </section>
+
         <!-- Featured product section -->
         <section class="max-w-full mx-auto p-6 bg-white shadow-lg">
             <h1 class="text-center text-pink-600 text-3xl font-extrabold mb-5">Glance of Products at our Store</h1>
@@ -270,14 +280,24 @@
             </div>
         </section>
 
-        <!-- Categories Buttons -->
+        <!-- Big Saving Products Section -->
         <section class="max-w-7xl mx-auto p-8 bg-white rounded-xl shadow-lg">
-            <h2 class="text-3xl font-extrabold text-pink-600 mb-8 text-center tracking-wide">Search by Category</h2>
-            <!-- Categories grid -->
-            <div id="categoryContainer" class="flex gap-4 overflow-x-auto no-scrollbar py-4 px-2">
-                <!-- Categories will be injected here -->
+            <h2 class="text-3xl font-extrabold text-pink-600 tracking-wide mb-8">Big Saving</h2>
+
+            <!-- Products Grid -->
+            <div id="bigSavingProducts" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Products will be dynamically inserted here -->
+            </div>
+
+            <!-- View All Button -->
+            <div class="text-center mt-10">
+                <button id="viewAllProducts"
+                    class="px-8 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-full shadow-lg hover:shadow-xl hover:from-pink-600 hover:to-purple-700 transition-all transform hover:-translate-y-1">
+                    View All Products
+                </button>
             </div>
         </section>
+
     </div>
 
     <!-- Footer -->
@@ -345,7 +365,9 @@
             &copy; 2025 ShopVerse. All rights reserved.
         </div>
     </footer>
-    <script type="module" src="app.js"></script>
+
+    <script type="module" src="app.js" defer></script>
+
 </body>
 
 </html>
