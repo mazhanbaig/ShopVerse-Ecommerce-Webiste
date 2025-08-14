@@ -10,87 +10,87 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
         integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <style>
-            /* Hide scrollbar for WebKit browsers */
-            .no-scrollbar::-webkit-scrollbar {
-                display: none;
-            }
-        
-            /* Hide scrollbar for IE, Edge and Firefox */
-            .no-scrollbar {
-                -ms-overflow-style: none;
-                scrollbar-width: none;
-            }
-        
-            /* Dropdown styles */
-            .dropdown-option {
-                display: block;
-                padding: 10px 15px;
-                color: #4a5568;
-                text-decoration: none;
-                transition: all 0.2s;
-            }
-        
-            .dropdown-option:hover {
-                background-color: #fce7f3;
-                color: #831843;
-            }
-        
-            .dropdown-option i {
-                width: 20px;
-                text-align: center;
-            }
-        
-            /* Bottom nav transition */
-            .bottom-nav-transition {
-                transition: all 0.3s ease;
-            }
-        
-            /* Ensure content isn't hidden behind bottom nav */
+    <style>
+        /* Hide scrollbar for WebKit browsers */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Dropdown styles */
+        .dropdown-option {
+            display: block;
+            padding: 10px 15px;
+            color: #4a5568;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .dropdown-option:hover {
+            background-color: #fce7f3;
+            color: #831843;
+        }
+
+        .dropdown-option i {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Bottom nav transition */
+        .bottom-nav-transition {
+            transition: all 0.3s ease;
+        }
+
+        /* Ensure content isn't hidden behind bottom nav */
+        .content-area {
+            padding-bottom: 120px;
+        }
+
+        @media (min-width: 768px) {
             .content-area {
-                padding-bottom: 120px;
+                padding-bottom: 0;
             }
-        
-            @media (min-width: 768px) {
-                .content-area {
-                    padding-bottom: 0;
-                }
-            }
-        
-            /* Smooth transitions */
-            .transition-smooth {
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            }
-        
-            /* Glass morphism effect */
-            .navbar-glass {
-                backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px);
-                background-color: rgba(255, 255, 255, 0.85);
-            }
-        
-            /* Modern hamburger animation */
-            .hamburger-line {
-                transition: all 0.3s;
-            }
-        
-            .hamburger-active .hamburger-line:nth-child(1) {
-                transform: translateY(8px) rotate(45deg);
-            }
-        
-            .hamburger-active .hamburger-line:nth-child(2) {
-                opacity: 0;
-            }
-        
-            .hamburger-active .hamburger-line:nth-child(3) {
-                transform: translateY(-8px) rotate(-45deg);
-            }
-        
-            /* Floating dropdown */
-            .dropdown-floating {
-                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-            }
-        </style>
+        }
+
+        /* Smooth transitions */
+        .transition-smooth {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Glass morphism effect */
+        .navbar-glass {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.85);
+        }
+
+        /* Modern hamburger animation */
+        .hamburger-line {
+            transition: all 0.3s;
+        }
+
+        .hamburger-active .hamburger-line:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger-active .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-active .hamburger-line:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        /* Floating dropdown */
+        .dropdown-floating {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 
 <body>
@@ -104,7 +104,7 @@
                         BazarioVerse
                     </a>
                 </div>
-    
+
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-8">
                     <!-- Search with modern icon -->
@@ -113,7 +113,7 @@
                             class="w-full pl-10 pr-4 py-2 rounded-full bg-gray-100 border-none focus:ring-2 focus:ring-pink-400 transition-smooth">
                         <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
                     </div>
-    
+
                     <!-- Navigation Links -->
                     <div class="flex items-center space-x-6">
                         <a href="#"
@@ -121,7 +121,7 @@
                             <i class="fas fa-store text-lg"></i>
                             <span class="text-sm font-medium">Sell</span>
                         </a>
-    
+
                         <!-- Cart with badge -->
                         <a href="cart.html"
                             class="relative group flex items-center space-x-1 text-gray-600 hover:text-pink-500 transition-smooth">
@@ -130,7 +130,7 @@
                             <span id="cart"
                                 class="absolute -top-2 -right-2 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center group-hover:bg-pink-600 transition-smooth"></span>
                         </a>
-    
+
                         <a href="#"
                             class="group flex items-center space-x-1 text-gray-600 hover:text-pink-500 transition-smooth">
                             <i class="fas fa-user text-lg"></i>
@@ -138,7 +138,7 @@
                         </a>
                     </div>
                 </div>
-    
+
                 <!-- Mobile menu button - animated hamburger -->
                 <div class="md:hidden flex items-center">
                     <button id="mobileMenuButton" class="p-2 rounded-md focus:outline-none" aria-label="Toggle menu">
@@ -157,18 +157,18 @@
                 <a class="font-semibold hover:text-pink-600 " href="#">Contact</a>
             </div>
         </div>
-    
+
         <!-- Mobile Search -->
         <div class="relative md:hidden mb-4 px-4">
             <input type="text" placeholder="Search products..."
                 class="w-full pl-10 pr-4 py-2 rounded-full bg-gray-100 border-none focus:ring-2 focus:ring-pink-400">
             <i class="fas fa-search absolute left-6 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
         </div>
-    
+
         <!-- Mobile Menu (hidden by default) -->
         <div id="mobileMenu" class="hidden md:hidden bg-white shadow-lg">
             <div class="px-4 pt-2 pb-4 space-y-3">
-    
+
                 <!-- Mobile Links -->
                 <a href="#"
                     class="block px-4 py-3 rounded-lg hover:bg-pink-50 text-gray-700 hover:text-pink-600 transition-smooth">
@@ -181,7 +181,38 @@
             </div>
         </div>
     </nav>
+    <!-- Mobile Bottom Navigation Bar -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-200 z-50">
+        <!-- Main Navigation Icons -->
+        <div class="flex justify-around items-center py-2">
+            <!-- Home -->
+            <a href="index.html" class="flex flex-col items-center p-2 text-gray-700 hover:text-pink-500 transition">
+                <i class="fas fa-home text-xl"></i>
+                <span class="text-xs mt-1">Home</span>
+            </a>
 
+            <!-- Products -->
+            <a href="addproduct.html" class="flex flex-col items-center p-2 text-gray-700 hover:text-pink-500 transition">
+                <i class="fas fa-box-open text-xl"></i>
+                <span class="text-xs mt-1">Products</span>
+            </a>
+
+            <!-- Cart -->
+            <a href="cart.html"
+                class="relative flex flex-col items-center p-2 text-gray-700 hover:text-blue-500 transition">
+                <i class="fas fa-shopping-cart text-xl"></i>
+                <span class="text-xs mt-1">Cart</span>
+                <span id="cart"
+                    class="absolute top-0 right-2 bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"></span>
+            </a>
+
+            <!-- Profile -->
+            <a href="profile.html" class="flex flex-col items-center p-2 text-gray-700 hover:text-green-500 transition">
+                <i class="fas fa-user text-xl"></i>
+                <span class="text-xs mt-1">Profile</span>
+            </a>
+        </div>
+    </div>
     <!-- Cart Section -->
     <div class="max-w-7xl mx-auto px-4 py-8">
         <h1 class="text-3xl font-bold text-gray-800 mb-8">Your Shopping Cart</h1>
@@ -233,7 +264,7 @@
             </div>
         </div>
     </div>
-<script type="module" src="cart.js"></script>
+    <script type="module" src="cart.js"></script>
 </body>
 
 </html>

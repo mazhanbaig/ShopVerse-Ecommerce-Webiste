@@ -1,3 +1,12 @@
+// Mobile menu toggle
+const mobileMenuButton = document.getElementById('mobileMenuButton');
+const mobileMenu = document.getElementById('mobileMenu');
+const cart = document.getElementById("cart");
+// Mobile menu toggle
+mobileMenuButton?.addEventListener('click', () => {
+    mobileMenuButton.classList.toggle('hamburger-active');
+    mobileMenu?.classList.toggle('hidden');
+});
 // ========== GLOBAL COUNT FUNCTIONS ==========
 // Update cart count globally
 window.updateCartCount = () => {
@@ -64,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="ml-4 flex-1">
           <div class="flex justify-between">
             <h3 class="text-lg font-medium text-gray-800">${item.name}</h3>
-            <p class="text-lg font-medium">Rs ${item.price.toFixed(2)}</p>
+            <p class="text-lg font-medium">Rs ${item.price}</p>
           </div>
           <p class="text-sm text-gray-500 mt-1">${item.description}</p>
           <div class="flex items-center mt-3">
@@ -76,8 +85,8 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
             cartItemsContainer.appendChild(cartItem);
         });
-        subtotalElement.textContent = `Rs ${subtotal.toFixed(2)}`;
-        totalElement.textContent = `Rs ${subtotal.toFixed(2)}`;
+        subtotalElement.textContent = `Rs ${subtotal}`;
+        totalElement.textContent = `Rs ${subtotal}`;
         checkoutBtn.disabled = false;
         checkoutBtn.classList.remove("opacity-50", "cursor-not-allowed");
     };

@@ -1,11 +1,21 @@
 // Mobile menu toggle
-const menuBtn = document.getElementById("menuBtn");
-const mobileMenuDropdown = document.getElementById("mobileMenuDropdown");
-if (menuBtn && mobileMenuDropdown) {
-    menuBtn.addEventListener("click", () => {
-        mobileMenuDropdown.classList.toggle("hidden");
-    });
-}
+const mobileMenuButton = document.getElementById('mobileMenuButton');
+const mobileMenu = document.getElementById('mobileMenu');
+const cart = document.getElementById("cart");
+// Mobile menu toggle
+mobileMenuButton?.addEventListener('click', () => {
+    mobileMenuButton.classList.toggle('hamburger-active');
+    mobileMenu?.classList.toggle('hidden');
+});
+document.addEventListener("DOMContentLoaded", () => {
+    // add to cart count 
+    function updateCartCounts() {
+        const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
+        if (cart)
+            cart.textContent = cartItems.length.toString();
+    }
+    updateCartCounts();
+});
 // Get DOM elements
 const productForm = document.getElementById("productForm");
 const productList = document.getElementById("productList");
@@ -32,19 +42,6 @@ function renderProduct(product) {
       <span class="absolute top-2 left-2 bg-pink-500 text-white text-xs font-bold px-2 py-1 rounded-full">
         ${product.category}
       </span>
-      
-      <!-- Hover Buttons -->
-      <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100">
-        <!-- Quick View Button -->
-        <button class="quick-view-btn bg-white/80 hover:bg-white text-gray-900 rounded-full p-3 shadow-lg transition-all duration-300 hover:scale-110">
-        <i class="fas fa-eye text-lg"></i>
-      </button>
-        
-      <!-- Favorite Button -->
-      <button class="favorite-btn bg-white/80 hover:bg-white text-pink-500 rounded-full p-3 shadow-lg transition-all duration-300 hover:scale-110">
-      <i class="far fa-heart text-lg "></i>
-</button>
-      </div>
     </div>
     
     <!-- Product Info -->
