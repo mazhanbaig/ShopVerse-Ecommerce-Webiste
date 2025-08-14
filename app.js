@@ -3,11 +3,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const mobileMenuButton = document.getElementById('mobileMenuButton');
     const mobileMenu = document.getElementById('mobileMenu');
     const cart = document.getElementById("cart");
+    let cartMobile = document.getElementById("cartMobile");
     // Mobile menu toggle
     mobileMenuButton?.addEventListener('click', () => {
         mobileMenuButton.classList.toggle('hamburger-active');
         mobileMenu?.classList.toggle('hidden');
     });
+    // update cart count 
+    function updateCartCounts() {
+        const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
+        if (cart && cartMobile) {
+            cart.textContent = cartItems.length.toString();
+            cartMobile.textContent = cartItems.length.toString();
+        }
+    }
+    updateCartCounts();
     // ===== 3. PRODUCT DATA =====
     const products = [
         {
@@ -135,11 +145,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         updateCartCounts();
     }
-    function updateCartCounts() {
-        const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
-        if (cart)
-            cart.textContent = cartItems.length.toString();
-    }
     // ===== 8. MORE DROPDOWN FUNCTIONS =====
     function setupMoreDropdown() {
         if (!moreBtn || !moreDropdown)
@@ -214,67 +219,30 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
     // ===== 10. CATEGORIES ELEMENTS =====
     const categoryContainer = document.getElementById("categoryContainer");
-    const prevPageBtn = document.getElementById("prevPage");
-    const nextPageBtn = document.getElementById("nextPage");
-    // ===== 11. CATEGORIES STATE =====
-    const itemsPerPage = 8;
-    let currentPage = 1;
-    const totalPages = Math.ceil(categories.length / itemsPerPage);
-    // ===== 12. CATEGORIES FUNCTIONS =====
+    // ===== 11. RENDER ALL CATEGORIES IN A SCROLL ROW =====
     function renderCategories() {
         if (!categoryContainer)
             return;
         categoryContainer.innerHTML = "";
-        const start = (currentPage - 1) * itemsPerPage;
-        const end = start + itemsPerPage;
-        categories.slice(start, end).forEach(cat => {
+        categories.forEach(cat => {
             const card = document.createElement("div");
-            card.className = `flex items-center justify-center bg-white rounded-2xl shadow-md hover:shadow-lg transition cursor-pointer py-2 pl-2 transform hover:scale-105 hover:shadow-pink-200 min-w-[200px] h-22 sm:h-23 md:h-25 relative overflow-hidden bg-cover bg-center`;
+            card.className = `flex items-center justify-center rounded-2xl shadow-md hover:shadow-lg transition cursor-pointer min-w-[180px] h-24 relative overflow-hidden bg-cover bg-center transform hover:scale-105 hover:shadow-pink-200`;
             card.style.backgroundImage = `url('${cat.image}')`;
+            const overlay = document.createElement("div");
+            overlay.className = "absolute inset-0 bg-black/50";
             const text = document.createElement("h3");
-            text.className = `text-xl font-bold text-white z-10 px-4 text-center`;
+            text.className = `text-lg font-bold text-white z-10 px-2 text-center relative`;
             text.textContent = cat.name;
+            card.appendChild(overlay);
             card.appendChild(text);
             card.onclick = () => alert('You selected: ' + cat.name);
             categoryContainer.appendChild(card);
         });
-        if (prevPageBtn)
-            prevPageBtn.disabled = currentPage === 1;
-        if (nextPageBtn)
-            nextPageBtn.disabled = currentPage === totalPages;
     }
-    // ===== 13. EVENT LISTENERS =====
-    function setupEventListeners() {
-        // Product navigation
-        nextBtn?.addEventListener("click", () => {
-            goToNext();
-            resetAutoSlide();
-        });
-        prevBtn?.addEventListener("click", () => {
-            goToPrev();
-            resetAutoSlide();
-        });
-        // Add to cart
-        addToCart?.addEventListener('click', addCurrentToCart);
-        // Category pagination
-        prevPageBtn?.addEventListener("click", () => {
-            if (currentPage > 1) {
-                currentPage--;
-                renderCategories();
-            }
-        });
-        nextPageBtn?.addEventListener("click", () => {
-            if (currentPage < totalPages) {
-                currentPage++;
-                renderCategories();
-            }
-        });
-        // More dropdown
-        setupMoreDropdown();
-    }
+    // ===== 12. INITIAL CALL =====
+    renderCategories();
     // ===== 14. INITIALIZATION =====
     function initialize() {
-        setupEventListeners();
         updateCartCounts();
         showProduct();
         renderCategories();

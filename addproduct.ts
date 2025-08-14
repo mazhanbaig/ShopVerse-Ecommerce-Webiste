@@ -2,6 +2,8 @@
 const mobileMenuButton = document.getElementById('mobileMenuButton');
 const mobileMenu = document.getElementById('mobileMenu');
 const cart = document.getElementById("cart");
+const cartMobile = document.getElementById("cartMobile");
+
 
 // Mobile menu toggle
 mobileMenuButton?.addEventListener('click', () => {
@@ -9,13 +11,17 @@ mobileMenuButton?.addEventListener('click', () => {
   mobileMenu?.classList.toggle('hidden');
 });
 
+// Update cart count globally
 document.addEventListener("DOMContentLoaded",()=>{
-  // add to cart count 
+   // update cart count 
   function updateCartCounts() {
     const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
-    if (cart) cart.textContent = cartItems.length.toString();
+    if (cart && cartMobile) {
+      cart.textContent = cartItems.length.toString();
+      cartMobile.textContent=cartItems.length.toString();
+    }
   }
-  updateCartCounts()
+  updateCartCounts();
 })
 
 // Product type definition

@@ -18,12 +18,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const mobileMenuButton = document.getElementById('mobileMenuButton');
   const mobileMenu = document.getElementById('mobileMenu');
   const cart = document.getElementById("cart");
+  let cartMobile = document.getElementById("cartMobile");
 
   // Mobile menu toggle
   mobileMenuButton?.addEventListener('click', () => {
     mobileMenuButton.classList.toggle('hamburger-active');
     mobileMenu?.classList.toggle('hidden');
   });
+
+  // update cart count 
+  function updateCartCounts() {
+    const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
+    if (cart && cartMobile) {
+      cart.textContent = cartItems.length.toString();
+      cartMobile.textContent=cartItems.length.toString();
+    }
+  }
+
+  updateCartCounts();
 
   // ===== 3. PRODUCT DATA =====
   const products: Product[] = [
@@ -157,11 +169,6 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCartCounts();
   }
 
-  function updateCartCounts() {
-    const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
-    if (cart) cart.textContent = cartItems.length.toString();
-  }
-
   // ===== 8. MORE DROPDOWN FUNCTIONS =====
   function setupMoreDropdown() {
     if (!moreBtn || !moreDropdown) return;
@@ -221,97 +228,58 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ===== 9. CATEGORIES DATA =====
-  const categories: Category[] = [
-    { id: 1, name: "Electronics & Gadgets", image: "https://t3.ftcdn.net/jpg/02/57/16/84/360_F_257168460_AwhicdEIavp7bdCbHXyTaBTHnBoBcZad.jpg" },
-    { id: 2, name: "Fashion & Clothing", image: "https://as1.ftcdn.net/v2/jpg/03/34/79/68/1000_F_334796865_VVTjg49nbLgQPG6rgKDjVqSb5XUhBVsW.jpg" },
-    { id: 3, name: "Beauty & Personal Care", image: "https://halanoor.pk/wp-content/uploads/2024/04/Rotating-Makeup-Organizer-500x500.jpg" },
-    { id: 4, name: "Home & Living", image: "https://arysahulatbazar.pk/wp-content/uploads/2024/01/Amb-4.jpg" },
-    { id: 5, name: "Appliances", image: "https://ahmadsfinekitchen.com/wp-content/uploads/2014/09/1.jpg" },
-    { id: 6, name: "Sports & Outdoor", image: "https://kinnaird.edu.pk/wp-content/uploads/2024/07/1.png" },
-    { id: 7, name: "Toys, Kids & Baby Products", image: "https://thumbs.dreamstime.com/b/heap-toys-eps-vector-illustration-48098461.jpg" },
-    { id: 8, name: "Books & Stationery", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Books.by.women.photographers.jpeg/1200px-Books.by.women.photographers.jpeg" },
-    { id: 9, name: "Food & Beverages", image: "https://industrialoutlook.in/wp-content/uploads/2023/01/Food.webp" },
-    { id: 10, name: "Jewelry & Watches", image: "https://www.lalueur.pk/cdn/shop/files/Secondary24.jpg?v=1749582909" },
-    { id: 11, name: "Health & Wellness", image: "https://www.nwths.com/sites/nwths.com/files/protein-sources-800x600.png" },
-    { id: 12, name: "Automotive", image: "https://media.istockphoto.com/id/478107962/photo/auto-parts.jpg?s=612x612&w=0&k=20&c=C31mE-cVYFlLqJp9smDKUczPoBEtoYl5gaGxdvH0lmM=" },
-    { id: 13, name: "Pet Supplies", image: "https://petsone.pk/wp-content/uploads/2024/02/Pet-Snacks-Raw-Hide-Bones-for-Dogs-03.jpg" },
-    { id: 14, name: "Gifts & Occasions", image: "https://images.squarespace-cdn.com/content/v1/5a35a8d129f187ac01aa178a/1543453387890-QI9CL0KC7TQXRL2PUEDL/IMG_1708+%281%29.JPG" }
-  ];
-  // ===== 10. CATEGORIES ELEMENTS =====
-  const categoryContainer = document.getElementById("categoryContainer");
-  const prevPageBtn = document.getElementById("prevPage");
-  const nextPageBtn = document.getElementById("nextPage");
+// ===== 9. CATEGORIES DATA =====
+const categories: Category[] = [
+  { id: 1, name: "Electronics & Gadgets", image: "https://t3.ftcdn.net/jpg/02/57/16/84/360_F_257168460_AwhicdEIavp7bdCbHXyTaBTHnBoBcZad.jpg" },
+  { id: 2, name: "Fashion & Clothing", image: "https://as1.ftcdn.net/v2/jpg/03/34/79/68/1000_F_334796865_VVTjg49nbLgQPG6rgKDjVqSb5XUhBVsW.jpg" },
+  { id: 3, name: "Beauty & Personal Care", image: "https://halanoor.pk/wp-content/uploads/2024/04/Rotating-Makeup-Organizer-500x500.jpg" },
+  { id: 4, name: "Home & Living", image: "https://arysahulatbazar.pk/wp-content/uploads/2024/01/Amb-4.jpg" },
+  { id: 5, name: "Appliances", image: "https://ahmadsfinekitchen.com/wp-content/uploads/2014/09/1.jpg" },
+  { id: 6, name: "Sports & Outdoor", image: "https://kinnaird.edu.pk/wp-content/uploads/2024/07/1.png" },
+  { id: 7, name: "Toys, Kids & Baby Products", image: "https://thumbs.dreamstime.com/b/heap-toys-eps-vector-illustration-48098461.jpg" },
+  { id: 8, name: "Books & Stationery", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Books.by.women.photographers.jpeg/1200px-Books.by.women.photographers.jpeg" },
+  { id: 9, name: "Food & Beverages", image: "https://industrialoutlook.in/wp-content/uploads/2023/01/Food.webp" },
+  { id: 10, name: "Jewelry & Watches", image: "https://www.lalueur.pk/cdn/shop/files/Secondary24.jpg?v=1749582909" },
+  { id: 11, name: "Health & Wellness", image: "https://www.nwths.com/sites/nwths.com/files/protein-sources-800x600.png" },
+  { id: 12, name: "Automotive", image: "https://media.istockphoto.com/id/478107962/photo/auto-parts.jpg?s=612x612&w=0&k=20&c=C31mE-cVYFlLqJp9smDKUczPoBEtoYl5gaGxdvH0lmM=" },
+  { id: 13, name: "Pet Supplies", image: "https://petsone.pk/wp-content/uploads/2024/02/Pet-Snacks-Raw-Hide-Bones-for-Dogs-03.jpg" },
+  { id: 14, name: "Gifts & Occasions", image: "https://images.squarespace-cdn.com/content/v1/5a35a8d129f187ac01aa178a/1543453387890-QI9CL0KC7TQXRL2PUEDL/IMG_1708+%281%29.JPG" }
+];
 
-  // ===== 11. CATEGORIES STATE =====
-  const itemsPerPage = 8;
-  let currentPage = 1;
-  const totalPages = Math.ceil(categories.length / itemsPerPage);
+// ===== 10. CATEGORIES ELEMENTS =====
+const categoryContainer = document.getElementById("categoryContainer");
 
-  // ===== 12. CATEGORIES FUNCTIONS =====
-  function renderCategories() {
-    if (!categoryContainer) return;
+// ===== 11. RENDER ALL CATEGORIES IN A SCROLL ROW =====
+function renderCategories() {
+  if (!categoryContainer) return;
 
-    categoryContainer.innerHTML = "";
-    const start = (currentPage - 1) * itemsPerPage;
-    const end = start + itemsPerPage;
+  categoryContainer.innerHTML = "";
 
-    categories.slice(start, end).forEach(cat => {
-      const card = document.createElement("div");
-      card.className = `flex items-center justify-center bg-white rounded-2xl shadow-md hover:shadow-lg transition cursor-pointer py-2 pl-2 transform hover:scale-105 hover:shadow-pink-200 min-w-[200px] h-22 sm:h-23 md:h-25 relative overflow-hidden bg-cover bg-center`;
-      card.style.backgroundImage = `url('${cat.image}')`;
+  categories.forEach(cat => {
+    const card = document.createElement("div");
+    card.className = `flex items-center justify-center rounded-2xl shadow-md hover:shadow-lg transition cursor-pointer min-w-[180px] h-24 relative overflow-hidden bg-cover bg-center transform hover:scale-105 hover:shadow-pink-200`;
+    card.style.backgroundImage = `url('${cat.image}')`;
 
-      const text = document.createElement("h3");
-      text.className = `text-xl font-bold text-white z-10 px-4 text-center`;
-      text.textContent = cat.name;
+    const overlay = document.createElement("div");
+    overlay.className = "absolute inset-0 bg-black/50";
 
-      card.appendChild(text);
-      card.onclick = () => alert('You selected: ' + cat.name);
-      categoryContainer.appendChild(card);
-    });
+    const text = document.createElement("h3");
+    text.className = `text-lg font-bold text-white z-10 px-2 text-center relative`;
+    text.textContent = cat.name;
 
-    if (prevPageBtn) prevPageBtn.disabled = currentPage === 1;
-    if (nextPageBtn) nextPageBtn.disabled = currentPage === totalPages;
-  }
+    card.appendChild(overlay);
+    card.appendChild(text);
+    card.onclick = () => alert('You selected: ' + cat.name);
 
-  // ===== 13. EVENT LISTENERS =====
-  function setupEventListeners() {
-    // Product navigation
-    nextBtn?.addEventListener("click", () => {
-      goToNext();
-      resetAutoSlide();
-    });
+    categoryContainer.appendChild(card);
+  });
+}
 
-    prevBtn?.addEventListener("click", () => {
-      goToPrev();
-      resetAutoSlide();
-    });
-
-    // Add to cart
-    addToCart?.addEventListener('click', addCurrentToCart);
-
-    // Category pagination
-    prevPageBtn?.addEventListener("click", () => {
-      if (currentPage > 1) {
-        currentPage--;
-        renderCategories();
-      }
-    });
-
-    nextPageBtn?.addEventListener("click", () => {
-      if (currentPage < totalPages) {
-        currentPage++;
-        renderCategories();
-      }
-    });
-
-    // More dropdown
-    setupMoreDropdown();
-  }
+// ===== 12. INITIAL CALL =====
+renderCategories();
 
   // ===== 14. INITIALIZATION =====
   function initialize() {
-    setupEventListeners();
     updateCartCounts();
     showProduct();
     renderCategories();
