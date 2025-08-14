@@ -10,122 +10,178 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
         integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Hide scrollbar for WebKit browsers */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Dropdown styles */
+        .dropdown-option {
+            display: block;
+            padding: 10px 15px;
+            color: #4a5568;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .dropdown-option:hover {
+            background-color: #fce7f3;
+            color: #831843;
+        }
+
+        .dropdown-option i {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Bottom nav transition */
+        .bottom-nav-transition {
+            transition: all 0.3s ease;
+        }
+
+        /* Ensure content isn't hidden behind bottom nav */
+        .content-area {
+            padding-bottom: 120px;
+        }
+
+        @media (min-width: 768px) {
+            .content-area {
+                padding-bottom: 0;
+            }
+        }
+
+        /* Smooth transitions */
+        .transition-smooth {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Glass morphism effect */
+        .navbar-glass {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.85);
+        }
+
+        /* Modern hamburger animation */
+        .hamburger-line {
+            transition: all 0.3s;
+        }
+
+        .hamburger-active .hamburger-line:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger-active .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-active .hamburger-line:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        /* Floating dropdown */
+        .dropdown-floating {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 
 <body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
 
-    <!-- Navbar -->
-    <nav class="bg-white shadow-lg border-b border-gray-200 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4">
+    <!-- Modern Navbar -->
+    <nav class="navbar-glass sticky top-0 z-50 border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-                <!-- Logo -->
-                <div class="flex items-center space-x-3">
-                    <img src="images/logo.png" alt="BazarioVerse Logo" class="h-10 w-auto object-contain" />
-                </div>
-    
-                <!-- Search (desktop only) -->
-                <div class="hidden md:flex flex-1 mx-6">
-                    <input type="text" placeholder="Search products..."
-                        class="w-full px-4 py-2 rounded-full bg-gray-100 border border-gray-300 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-400" />
-                </div>
-    
-                <!-- Desktop Icons -->
-                <div class="hidden md:flex items-center space-x-4">
-                    <!-- Seller -->
-                    <a href="#" class="flex items-center p-2 hover:text-pink-500 transition">
-                        <i class="fa-solid fa-store mr-1"></i>
-                        <span class="text-sm">Become a Seller</span>
-                    </a>
-                    <!-- Sign IN -->
-                    <a href="#" class="flex items-center p-2 hover:text-pink-500 transition">
-                        <i class="fa-solid fa-lock mr-1"></i>
-                        <span class="text-sm">Sign In</span>
-                    </a>
-                    <!-- Cart -->
-                    <a href="cart.html" class="relative flex items-center p-2 hover:text-blue-500 transition">
-                        <i class="fas fa-shopping-bag"></i>
-                        <span
-                            class="absolute -top-1 -right-1 bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
-                    </a>
-                    <!-- User Account -->
-                    <a href="#" class="p-2 hover:text-green-500 transition">
-                        <i class="far fa-user"></i>
+                <!-- Logo with gradient text -->
+                <div class="flex items-center">
+                    <a href="#" class="text-2xl font-bold text-pink-700">
+                        BazarioVerse
                     </a>
                 </div>
-    
-                <!-- Mobile menu button -->
-                <button id="mainMenuBtn" class="md:hidden p-2 rounded-full hover:bg-gray-100 transition"
-                    aria-label="Toggle Menu">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <!-- Search with modern icon -->
+                    <div class="relative w-64">
+                        <input type="text" placeholder="Search products..."
+                            class="w-full pl-10 pr-4 py-2 rounded-full bg-gray-100 border-none focus:ring-2 focus:ring-pink-400 transition-smooth">
+                        <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    </div>
+
+                    <!-- Navigation Links -->
+                    <div class="flex items-center space-x-6">
+                        <a href="#"
+                            class="group flex items-center space-x-1 text-gray-600 hover:text-pink-500 transition-smooth">
+                            <i class="fas fa-store text-lg"></i>
+                            <span class="text-sm font-medium">Sell</span>
+                        </a>
+
+                        <!-- Cart with badge -->
+                        <a href="#"
+                            class="relative group flex items-center space-x-1 text-gray-600 hover:text-pink-500 transition-smooth">
+                            <i class="fas fa-shopping-bag text-lg"></i>
+                            <span class="text-sm font-medium">Cart</span>
+                            <span
+                                class="absolute -top-2 -right-2 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center group-hover:bg-pink-600 transition-smooth"></span>
+                        </a>
+
+                        <a href="#"
+                            class="group flex items-center space-x-1 text-gray-600 hover:text-pink-500 transition-smooth">
+                            <i class="fas fa-user text-lg"></i>
+                            <span class="text-sm font-medium">Account</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button - animated hamburger -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobileMenuButton" class="p-2 rounded-md focus:outline-none" aria-label="Toggle menu">
+                        <div class="space-y-1.5 w-6">
+                            <span class="hamburger-line block h-0.5 w-6 bg-gray-600 rounded-full"></span>
+                            <span class="hamburger-line block h-0.5 w-6 bg-gray-600 rounded-full"></span>
+                            <span class="hamburger-line block h-0.5 w-4 bg-gray-600 rounded-full ml-auto"></span>
+                        </div>
+                    </button>
+                </div>
             </div>
-    
-            <!-- Desktop categories -->
-            <div class="hidden md:flex items-center justify-center space-x-8 py-3 border-t border-gray-200">
-                <a href="index.html" class="text-gray-600 hover:text-pink-500 transition font-medium">Home</a>
-                <a href="addproduct.html" class="text-gray-600 hover:text-pink-500 transition font-medium">Add Product</a>
-                <a href="deals.html" class="text-gray-600 hover:text-pink-500 transition font-medium">Deals</a>
-                <a href="categories.html" class="text-gray-600 hover:text-pink-500 transition font-medium">Categories</a>
-                <a href="contact.html" class="text-gray-600 hover:text-pink-500 transition font-medium">Contact</a>
+            <div class="hidden md:flex justify-center items-center gap-10 border-t-[1px] border-gray-300 px-2 py-3">
+                <a class="font-semibold hover:text-pink-600 " href="index.html">Home</a>
+                <a class="font-semibold hover:text-pink-600 " href="addproduct.html">Add Product</a>
+                <a class="font-semibold hover:text-pink-600 " href="#">Deals</a>
+                <a class="font-semibold hover:text-pink-600 " href="#">Contact</a>
             </div>
         </div>
-    
-        <!-- Mobile Main Menu (Top) -->
-        <div id="mobileMainMenu" class="md:hidden hidden bg-white border-t border-gray-200 shadow-lg">
-            <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="index.html"
-                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-pink-500 hover:bg-pink-50">Home</a>
-                <a href="addproduct.html"
-                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-pink-500 hover:bg-pink-50">Add
-                    Product</a>
-                <a href="deals.html"
-                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-pink-500 hover:bg-pink-50">Deals</a>
-                <a href="categories.html"
-                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-pink-500 hover:bg-pink-50">Categories</a>
-                <a href="contact.html"
-                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-pink-500 hover:bg-pink-50">Contact</a>
+
+        <!-- Mobile Search -->
+        <div class="relative md:hidden mb-4 px-4">
+            <input type="text" placeholder="Search products..."
+                class="w-full pl-10 pr-4 py-2 rounded-full bg-gray-100 border-none focus:ring-2 focus:ring-pink-400">
+            <i class="fas fa-search absolute left-6 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+        </div>
+
+        <!-- Mobile Menu (hidden by default) -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white shadow-lg">
+            <div class="px-4 pt-2 pb-4 space-y-3">
+
+                <!-- Mobile Links -->
+                <a href="#"
+                    class="block px-4 py-3 rounded-lg hover:bg-pink-50 text-gray-700 hover:text-pink-600 transition-smooth">
+                    <i class="fas fa-store mr-3"></i> Become a Seller
+                </a>
+                <a href="#"
+                    class="block px-4 py-3 rounded-lg hover:bg-pink-50 text-gray-700 hover:text-pink-600 transition-smooth">
+                    <span class=""><i class="fa-solid fa-lock mr-3"></i>Sign In/Up</span>
+                </a>
             </div>
         </div>
     </nav>
-    
-    <!-- Mobile Bottom Navigation Bar (Always visible on mobile) -->
-    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-200 z-50">
-        <!-- Bottom Bar Toggle -->
-        <button id="bottomMenuBtn" class="w-full py-3 px-4 flex items-center justify-center text-gray-700 bg-white">
-            <i class="fas fa-chevron-up text-sm mr-2 bottom-menu-transition" id="bottomMenuIcon"></i>
-            <span class="font-medium">Quick Actions</span>
-        </button>
-    
-        <!-- Bottom Menu Content (Hidden by default) -->
-        <div id="bottomMenuContent" class="hidden bg-white px-4 py-3 border-t border-gray-100 bottom-menu-transition">
-            <div class="grid grid-cols-3 gap-4">
-                <!-- Seller -->
-                <a href="#"
-                    class="flex flex-col items-center p-2 hover:text-pink-500 transition text-center rounded-lg hover:bg-pink-50">
-                    <i class="fa-solid fa-store text-xl mb-1"></i>
-                    <span class="text-xs font-medium">Become Seller</span>
-                </a>
-                <!-- Sign IN -->
-                <a href="#"
-                    class="flex flex-col items-center p-2 hover:text-pink-500 transition text-center rounded-lg hover:bg-pink-50">
-                    <i class="fa-solid fa-lock text-xl mb-1"></i>
-                    <span class="text-xs font-medium">Sign In</span>
-                </a>
-                <!-- Cart -->
-                <a href="cart.html"
-                    class="relative flex flex-col items-center p-2 hover:text-blue-500 transition text-center rounded-lg hover:bg-blue-50">
-                    <i class="fas fa-shopping-bag text-xl mb-1"></i>
-                    <span class="text-xs font-medium">Cart</span>
-                    <span
-                        class="absolute top-0 right-2 bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
-                </a>
-            </div>
-        </div>
-    </div>
-
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-6 py-12 flex-grow">
 
