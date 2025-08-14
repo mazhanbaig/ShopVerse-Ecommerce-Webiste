@@ -15,72 +15,116 @@
 <body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
 
     <!-- Navbar -->
-    <nav class="bg-white shadow-lg border-b border-gray-200">
+    <nav class="bg-white shadow-lg border-b border-gray-200 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex items-center justify-between h-16">
                 <!-- Logo -->
-                <div class="flex items-center overflow-y-hidden space-x-3">
-                    <img src="images/logo.png" alt="ShopVerse Logo"
-                        class="h-20 w-auto w-auto sm:h-22 md:h-23 lg:h-27 object-contain" />
+                <div class="flex items-center space-x-3">
+                    <img src="images/logo.png" alt="BazarioVerse Logo" class="h-10 w-auto object-contain" />
                 </div>
-
+    
+                <!-- Search (desktop only) -->
                 <div class="hidden md:flex flex-1 mx-6">
                     <input type="text" placeholder="Search products..."
                         class="w-full px-4 py-2 rounded-full bg-gray-100 border border-gray-300 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-400" />
                 </div>
-
-                <!-- Icons + mobile menu toggle -->
-                <div class="flex items-center space-x-4">
-                    <!-- Wishlist (Favourite) -->
-                    <a href="favourite.html" id="favourite" class="relative p-2 hover:text-pink-500 transition"
-                        aria-label="Wishlist">
-                        <i class="far fa-heart text-xl"></i>
-                        <span
-                            class="absolute -top-1 -right-1 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+    
+                <!-- Desktop Icons -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <!-- Seller -->
+                    <a href="#" class="flex items-center p-2 hover:text-pink-500 transition">
+                        <i class="fa-solid fa-store mr-1"></i>
+                        <span class="text-sm">Become a Seller</span>
                     </a>
-
+                    <!-- Sign IN -->
+                    <a href="#" class="flex items-center p-2 hover:text-pink-500 transition">
+                        <i class="fa-solid fa-lock mr-1"></i>
+                        <span class="text-sm">Sign In</span>
+                    </a>
                     <!-- Cart -->
-                    <a href="cart.html" id="cart" class="relative p-2 hover:text-blue-500 transition" aria-label="Cart">
-                        <i class="fas fa-shopping-bag text-xl"></i>
+                    <a href="cart.html" class="relative flex items-center p-2 hover:text-blue-500 transition">
+                        <i class="fas fa-shopping-bag"></i>
                         <span
-                            class="absolute -top-1 -right-1 bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
+                            class="absolute -top-1 -right-1 bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
                     </a>
                     <!-- User Account -->
-                    <a id="user" class="p-2 hover:text-green-500 transition" aria-label="User Account">
-                        <i class="far fa-user text-xl"></i>
+                    <a href="#" class="p-2 hover:text-green-500 transition">
+                        <i class="far fa-user"></i>
                     </a>
-
-                    <!-- Mobile menu button -->
-                    <button id="menuBtn" class="md:hidden p-2 hover:text-yellow-500 transition"
-                        aria-label="Toggle Mobile Menu">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor"
-                            stroke-width="2" viewBox="0 0 24 24">
-                            <path d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                    </button>
                 </div>
+    
+                <!-- Mobile menu button -->
+                <button id="mainMenuBtn" class="md:hidden p-2 rounded-full hover:bg-gray-100 transition"
+                    aria-label="Toggle Menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
             </div>
-
+    
             <!-- Desktop categories -->
-            <div id="mobileMenu"
-                class="hidden md:flex items-center justify-center space-x-8 py-3 border-t border-gray-200">
-                <a href="index.html" class="hover:text-pink-500 transition">Home</a>
-                <a href="addproduct.html" class="hover:text-pink-500 transition">Add Product</a>
-                <a href="contact.html" class="hover:text-pink-500 transition">Deals</a>
-                <!-- <a href="#" class="hover:text-pink-500 transition">Categories</a> -->
-                <a href="#" class="hover:text-pink-500 transition">Contact</a>
+            <div class="hidden md:flex items-center justify-center space-x-8 py-3 border-t border-gray-200">
+                <a href="index.html" class="text-gray-600 hover:text-pink-500 transition font-medium">Home</a>
+                <a href="addproduct.html" class="text-gray-600 hover:text-pink-500 transition font-medium">Add Product</a>
+                <a href="deals.html" class="text-gray-600 hover:text-pink-500 transition font-medium">Deals</a>
+                <a href="categories.html" class="text-gray-600 hover:text-pink-500 transition font-medium">Categories</a>
+                <a href="contact.html" class="text-gray-600 hover:text-pink-500 transition font-medium">Contact</a>
             </div>
-
-            <!-- Mobile dropdown menu -->
-            <div id="mobileMenuDropdown" class="md:hidden hidden bg-white border-t border-gray-200 shadow-lg">
-                <a href="index.html" class="block px-6 py-3 hover:bg-pink-100 border-b border-gray-200">Home</a>
-                <a href="addproduct.html" class="block px-6 py-3 hover:bg-pink-100 border-b border-gray-200">My Shop</a>
-                <a href="#" class="block px-6 py-3 hover:bg-pink-100 border-b border-gray-200">Deals</a>
-                <a href="#" class="block px-6 py-3 hover:bg-pink-100 border-b border-gray-200">Categories</a>
-                <a href="#" class="block px-6 py-3 hover:bg-pink-100">Contact</a>
+        </div>
+    
+        <!-- Mobile Main Menu (Top) -->
+        <div id="mobileMainMenu" class="md:hidden hidden bg-white border-t border-gray-200 shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-pink-500 hover:bg-pink-50">Home</a>
+                <a href="addproduct.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-pink-500 hover:bg-pink-50">Add
+                    Product</a>
+                <a href="deals.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-pink-500 hover:bg-pink-50">Deals</a>
+                <a href="categories.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-pink-500 hover:bg-pink-50">Categories</a>
+                <a href="contact.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-pink-500 hover:bg-pink-50">Contact</a>
             </div>
         </div>
     </nav>
+    
+    <!-- Mobile Bottom Navigation Bar (Always visible on mobile) -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-200 z-50">
+        <!-- Bottom Bar Toggle -->
+        <button id="bottomMenuBtn" class="w-full py-3 px-4 flex items-center justify-center text-gray-700 bg-white">
+            <i class="fas fa-chevron-up text-sm mr-2 bottom-menu-transition" id="bottomMenuIcon"></i>
+            <span class="font-medium">Quick Actions</span>
+        </button>
+    
+        <!-- Bottom Menu Content (Hidden by default) -->
+        <div id="bottomMenuContent" class="hidden bg-white px-4 py-3 border-t border-gray-100 bottom-menu-transition">
+            <div class="grid grid-cols-3 gap-4">
+                <!-- Seller -->
+                <a href="#"
+                    class="flex flex-col items-center p-2 hover:text-pink-500 transition text-center rounded-lg hover:bg-pink-50">
+                    <i class="fa-solid fa-store text-xl mb-1"></i>
+                    <span class="text-xs font-medium">Become Seller</span>
+                </a>
+                <!-- Sign IN -->
+                <a href="#"
+                    class="flex flex-col items-center p-2 hover:text-pink-500 transition text-center rounded-lg hover:bg-pink-50">
+                    <i class="fa-solid fa-lock text-xl mb-1"></i>
+                    <span class="text-xs font-medium">Sign In</span>
+                </a>
+                <!-- Cart -->
+                <a href="cart.html"
+                    class="relative flex flex-col items-center p-2 hover:text-blue-500 transition text-center rounded-lg hover:bg-blue-50">
+                    <i class="fas fa-shopping-bag text-xl mb-1"></i>
+                    <span class="text-xs font-medium">Cart</span>
+                    <span
+                        class="absolute top-0 right-2 bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                </a>
+            </div>
+        </div>
+    </div>
 
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-6 py-12 flex-grow">

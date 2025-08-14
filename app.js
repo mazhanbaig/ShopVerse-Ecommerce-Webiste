@@ -1,29 +1,14 @@
-window.addEventListener("DOMContentLoaded", () => {
-    // Function to update cart and favorite counts
-    function updateCartAndFavoriteCounts() {
-        // Update cart count in navbar
-        const cartCount = document.querySelector("#cart span");
-        if (cartCount) {
-            const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            cartCount.textContent = cartItems.length.toString();
-        }
-        // Update favourite count in navbar
-        const favoriteCount = document.querySelector('#favourite span');
-        if (favoriteCount) {
-            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-            favoriteCount.textContent = favorites.length.toString();
-        }
-    }
-    // Initialize counts on page load
-    updateCartAndFavoriteCounts();
-    // ===== NAVBAR TOGGLE =====
-    const menuBtn = document.getElementById("menuBtn");
-    const mobileMenuDropdown = document.getElementById("mobileMenuDropdown");
-    // Toggle mobile menu visibility
-    menuBtn?.addEventListener("click", () => {
-        mobileMenuDropdown?.classList.toggle("hidden");
+document.addEventListener("DOMContentLoaded", () => {
+    // ===== 2. NAVBAR FUNCTIONALITY =====
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const cart = document.getElementById("cart");
+    // Mobile menu toggle
+    mobileMenuButton?.addEventListener('click', () => {
+        mobileMenuButton.classList.toggle('hamburger-active');
+        mobileMenu?.classList.toggle('hidden');
     });
-    //  Sample product data
+    // ===== 3. PRODUCT DATA =====
     const products = [
         {
             id: 1,
@@ -96,27 +81,51 @@ window.addEventListener("DOMContentLoaded", () => {
             description: "Nintendo Switch OLED model with vibrant 7-inch display and enhanced audio.",
         },
     ];
-    // Get DOM elements for product slider
+    // ===== 4. PRODUCT SLIDER ELEMENTS =====
     const productImage = document.getElementById("product-image");
     const productName = document.getElementById("product-name");
     const productDesc = document.getElementById("product-desc");
     const productPrice = document.getElementById("product-price");
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
-    const addToCart = document.querySelector("#addtocart");
-    const favoriteBtn = document.getElementById('favoriteBtn');
-    // Validate all required elements exist
-    if (!productImage || !productName || !productDesc || !productPrice || !prevBtn || !nextBtn || !addToCart) {
-        console.error("Missing required elements for product slider");
-        return;
+    const addToCart = document.getElementById("addtocart");
+    const moreBtn = document.getElementById('moreBtn');
+    const moreDropdown = document.getElementById('moreDropdown');
+    // ===== 5. PRODUCT SLIDER STATE =====
+    let currentIndex = 0;
+    let slideInterval;
+    // ===== 6. PRODUCT SLIDER FUNCTIONS =====
+    function showProduct() {
+        const product = products[currentIndex];
+        if (productName)
+            productName.textContent = product.name;
+        if (productImage)
+            productImage.src = product.image;
+        if (productDesc)
+            productDesc.textContent = product.description;
+        if (productPrice)
+            productPrice.textContent = `Rs ${product.price.toFixed(2)}`;
     }
-    let currentIndex = 0; // Track current product index
-    // Add product to cart
-    addToCart.addEventListener('click', () => {
-        let product = products[currentIndex];
+    function goToNext() {
+        currentIndex = (currentIndex + 1) % products.length;
+        showProduct();
+    }
+    function goToPrev() {
+        currentIndex = (currentIndex - 1 + products.length) % products.length;
+        showProduct();
+    }
+    function startAutoSlide() {
+        slideInterval = setInterval(goToNext, 3000);
+    }
+    function resetAutoSlide() {
+        clearInterval(slideInterval);
+        startAutoSlide();
+    }
+    // ===== 7. CART FUNCTIONS =====
+    function addCurrentToCart() {
+        const product = products[currentIndex];
         let cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
-        let isExist = cartItems.some(cartItem => cartItem.id === product?.id);
-        if (!isExist) {
+        if (!cartItems.some((item) => item.id === product.id)) {
             cartItems.push(product);
             localStorage.setItem("cartItems", JSON.stringify(cartItems));
             alert(`${product.name} added to cart!`);
@@ -124,52 +133,50 @@ window.addEventListener("DOMContentLoaded", () => {
         else {
             alert(`${product.name} is already in your cart.`);
         }
-        // Update cart count
-        updateCartAndFavoriteCounts();
-    });
-    // ===== MORE BUTTON DROPDOWN =====
-    const moreBtn = document.getElementById('moreBtn');
-    const moreDropdown = document.getElementById('moreDropdown');
-    if (moreBtn && moreDropdown) {
-        // Toggle dropdown visibility
-        moreBtn.addEventListener('click', function (e) {
+        updateCartCounts();
+    }
+    function updateCartCounts() {
+        const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
+        if (cart)
+            cart.textContent = cartItems.length.toString();
+    }
+    // ===== 8. MORE DROPDOWN FUNCTIONS =====
+    function setupMoreDropdown() {
+        if (!moreBtn || !moreDropdown)
+            return;
+        moreBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             moreDropdown.classList.toggle('hidden');
         });
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function () {
+        document.addEventListener('click', () => {
             moreDropdown.classList.add('hidden');
         });
-        // Keep dropdown open when clicking inside
-        moreDropdown.addEventListener('click', function (e) {
+        moreDropdown.addEventListener('click', (e) => {
             e.stopPropagation();
         });
-        // Handle dropdown option clicks
         const options = moreDropdown.querySelectorAll('.dropdown-option');
         options.forEach(option => {
-            option.addEventListener('click', function (e) {
+            option.addEventListener('click', (e) => {
                 e.preventDefault();
                 const product = products[currentIndex];
-                const icon = this.querySelector('i');
-                // Determine which option was clicked
+                const icon = option.querySelector('i');
+                if (!icon || !product)
+                    return;
                 if (icon.classList.contains('fa-shopping-cart')) {
                     alert(`Buy Now: ${product.name} for Rs ${product.price.toFixed(2)}`);
                 }
                 else if (icon.classList.contains('fa-heart')) {
-                    // Add to favorites
                     let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
                     if (!favorites.some((fav) => fav.id === product.id)) {
                         favorites.push(product);
                         localStorage.setItem('favorites', JSON.stringify(favorites));
                         alert(`${product.name} added to favorites!`);
-                        updateCartAndFavoriteCounts();
                     }
                     else {
                         alert(`${product.name} is already in favorites!`);
                     }
                 }
                 else if (icon.classList.contains('fa-share-alt')) {
-                    // Share product
                     if (navigator.share) {
                         navigator.share({
                             title: product.name,
@@ -182,47 +189,13 @@ window.addEventListener("DOMContentLoaded", () => {
                     }
                 }
                 else if (icon.classList.contains('fa-info-circle')) {
-                    // Show product details
                     alert(`Product Details:\n\nName: ${product.name}\n\nDescription: ${product.description}\n\nPrice: Rs ${product.price.toFixed(2)}`);
                 }
-                moreDropdown.classList.add('hidden'); // Close dropdown after selection
+                moreDropdown.classList.add('hidden');
             });
         });
     }
-    // Display current product
-    function showProduct() {
-        const product = products[currentIndex];
-        productName.textContent = product.name;
-        productImage.src = product.image;
-        productDesc.textContent = product.description;
-        productPrice.textContent = `Rs ${product.price.toFixed(2)}`;
-    }
-    // Navigate to next product
-    function goToNext() {
-        currentIndex = (currentIndex + 1) % products.length;
-        showProduct();
-    }
-    // Navigate to previous product
-    function goToPrev() {
-        currentIndex = (currentIndex - 1 + products.length) % products.length;
-        showProduct();
-    }
-    // Auto-advance slides
-    let slideInterval = setInterval(goToNext, 3000);
-    // Reset auto-slide timer
-    function resetAutoSlide() {
-        clearInterval(slideInterval);
-        slideInterval = setInterval(goToNext, 3000);
-    }
-    // Set up navigation buttons
-    nextBtn.addEventListener("click", () => {
-        goToNext();
-        resetAutoSlide();
-    });
-    prevBtn.addEventListener("click", () => {
-        goToPrev();
-        resetAutoSlide();
-    });
+    // ===== 9. CATEGORIES DATA =====
     const categories = [
         { id: 1, name: "Electronics & Gadgets", image: "https://t3.ftcdn.net/jpg/02/57/16/84/360_F_257168460_AwhicdEIavp7bdCbHXyTaBTHnBoBcZad.jpg" },
         { id: 2, name: "Fashion & Clothing", image: "https://as1.ftcdn.net/v2/jpg/03/34/79/68/1000_F_334796865_VVTjg49nbLgQPG6rgKDjVqSb5XUhBVsW.jpg" },
@@ -239,19 +212,22 @@ window.addEventListener("DOMContentLoaded", () => {
         { id: 13, name: "Pet Supplies", image: "https://petsone.pk/wp-content/uploads/2024/02/Pet-Snacks-Raw-Hide-Bones-for-Dogs-03.jpg" },
         { id: 14, name: "Gifts & Occasions", image: "https://images.squarespace-cdn.com/content/v1/5a35a8d129f187ac01aa178a/1543453387890-QI9CL0KC7TQXRL2PUEDL/IMG_1708+%281%29.JPG" }
     ];
+    // ===== 10. CATEGORIES ELEMENTS =====
     const categoryContainer = document.getElementById("categoryContainer");
     const prevPageBtn = document.getElementById("prevPage");
     const nextPageBtn = document.getElementById("nextPage");
+    // ===== 11. CATEGORIES STATE =====
     const itemsPerPage = 8;
     let currentPage = 1;
     const totalPages = Math.ceil(categories.length / itemsPerPage);
-    // Render categories for current page
+    // ===== 12. CATEGORIES FUNCTIONS =====
     function renderCategories() {
+        if (!categoryContainer)
+            return;
         categoryContainer.innerHTML = "";
         const start = (currentPage - 1) * itemsPerPage;
         const end = start + itemsPerPage;
-        const pageItems = categories.slice(start, end);
-        pageItems.forEach(cat => {
+        categories.slice(start, end).forEach(cat => {
             const card = document.createElement("div");
             card.className = `flex items-center justify-center bg-white rounded-2xl shadow-md hover:shadow-lg transition cursor-pointer py-2 pl-2 transform hover:scale-105 hover:shadow-pink-200 min-w-[200px] h-22 sm:h-23 md:h-25 relative overflow-hidden bg-cover bg-center`;
             card.style.backgroundImage = `url('${cat.image}')`;
@@ -262,33 +238,48 @@ window.addEventListener("DOMContentLoaded", () => {
             card.onclick = () => alert('You selected: ' + cat.name);
             categoryContainer.appendChild(card);
         });
-        prevPageBtn.disabled = currentPage === 1;
-        nextPageBtn.disabled = currentPage === totalPages;
+        if (prevPageBtn)
+            prevPageBtn.disabled = currentPage === 1;
+        if (nextPageBtn)
+            nextPageBtn.disabled = currentPage === totalPages;
     }
-    // Set up pagination buttons
-    prevPageBtn.addEventListener("click", () => {
-        if (currentPage > 1) {
-            currentPage--;
-            renderCategories();
-        }
-    });
-    nextPageBtn.addEventListener("click", () => {
-        if (currentPage < totalPages) {
-            currentPage++;
-            renderCategories();
-        }
-    });
-    // ===== NAVIGATION BUTTONS =====
-    const cartbtn = document.getElementById("cart");
-    const favouritebtn = document.getElementById("favourite");
-    cartbtn.addEventListener("click", () => {
-        window.location.href = "cart.html";
-    });
-    favouritebtn.addEventListener("click", () => {
-        window.location.href = "favourite.html";
-    });
-    // Initialize the page
-    showProduct();
-    renderCategories();
+    // ===== 13. EVENT LISTENERS =====
+    function setupEventListeners() {
+        // Product navigation
+        nextBtn?.addEventListener("click", () => {
+            goToNext();
+            resetAutoSlide();
+        });
+        prevBtn?.addEventListener("click", () => {
+            goToPrev();
+            resetAutoSlide();
+        });
+        // Add to cart
+        addToCart?.addEventListener('click', addCurrentToCart);
+        // Category pagination
+        prevPageBtn?.addEventListener("click", () => {
+            if (currentPage > 1) {
+                currentPage--;
+                renderCategories();
+            }
+        });
+        nextPageBtn?.addEventListener("click", () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderCategories();
+            }
+        });
+        // More dropdown
+        setupMoreDropdown();
+    }
+    // ===== 14. INITIALIZATION =====
+    function initialize() {
+        setupEventListeners();
+        updateCartCounts();
+        showProduct();
+        renderCategories();
+        startAutoSlide();
+    }
+    initialize();
 });
 export {};

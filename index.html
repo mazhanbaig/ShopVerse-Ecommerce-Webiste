@@ -18,9 +18,7 @@
         /* Hide scrollbar for IE, Edge and Firefox */
         .no-scrollbar {
             -ms-overflow-style: none;
-            /* IE and Edge */
             scrollbar-width: none;
-            /* Firefox */
         }
 
         /* Dropdown styles */
@@ -28,201 +26,281 @@
             display: block;
             padding: 10px 15px;
             color: #4a5568;
-            /* gray-700 */
             text-decoration: none;
             transition: all 0.2s;
         }
 
         .dropdown-option:hover {
             background-color: #fce7f3;
-            /* pink-100 */
             color: #831843;
-            /* pink-800 */
         }
 
         .dropdown-option i {
             width: 20px;
             text-align: center;
         }
-    </style>
 
+        /* Bottom nav transition */
+        .bottom-nav-transition {
+            transition: all 0.3s ease;
+        }
+
+        /* Ensure content isn't hidden behind bottom nav */
+        .content-area {
+            padding-bottom: 120px;
+        }
+
+        @media (min-width: 768px) {
+            .content-area {
+                padding-bottom: 0;
+            }
+        }
+
+        /* Smooth transitions */
+        .transition-smooth {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Glass morphism effect */
+        .navbar-glass {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.85);
+        }
+
+        /* Modern hamburger animation */
+        .hamburger-line {
+            transition: all 0.3s;
+        }
+
+        .hamburger-active .hamburger-line:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger-active .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-active .hamburger-line:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        /* Floating dropdown */
+        .dropdown-floating {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 
 <body class="bg-gray-50 text-gray-800">
-    <!-- Navbar -->
-    <nav class="bg-white shadow-lg border-b border-gray-200">
-        <div class="max-w-7xl mx-auto px-4">
+    <!-- Modern Navbar -->
+    <nav class="navbar-glass sticky top-0 z-50 border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-                <!-- Logo -->
-                <div class="flex items-center space-x-3">
-                    <img src="images/logo.png" alt="ShopVerse Logo"
-                        class="h-20 w-auto sm:h-22 md:h-23 lg:h-27 object-contain" />
+                <!-- Logo with gradient text -->
+                <div class="flex items-center">
+                    <a href="#" class="text-2xl font-bold text-pink-700">
+                        BazarioVerse
+                    </a>
                 </div>
 
-                <!-- Search (desktop only) -->
-                <div class="hidden md:flex flex-1 mx-6">
-                    <input type="text" placeholder="Search products..."
-                        class="w-full px-4 py-2 rounded-full bg-gray-100 border border-gray-300 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-400" />
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <!-- Search with modern icon -->
+                    <div class="relative w-64">
+                        <input type="text" placeholder="Search products..."
+                            class="w-full pl-10 pr-4 py-2 rounded-full bg-gray-100 border-none focus:ring-2 focus:ring-pink-400 transition-smooth">
+                        <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    </div>
+
+                    <!-- Navigation Links -->
+                    <div class="flex items-center space-x-6">
+                        <a href="#"
+                            class="group flex items-center space-x-1 text-gray-600 hover:text-pink-500 transition-smooth">
+                            <i class="fas fa-store text-lg"></i>
+                            <span class="text-sm font-medium">Sell</span>
+                        </a>
+
+                        <!-- Cart with badge -->
+                        <a href="#"
+                            class="relative group flex items-center space-x-1 text-gray-600 hover:text-pink-500 transition-smooth">
+                            <i class="fas fa-shopping-bag text-lg"></i>
+                            <span class="text-sm font-medium">Cart</span>
+                            <span
+                                class="absolute -top-2 -right-2 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center group-hover:bg-pink-600 transition-smooth"></span>
+                        </a>
+
+                        <a href="#"
+                            class="group flex items-center space-x-1 text-gray-600 hover:text-pink-500 transition-smooth">
+                            <i class="fas fa-user text-lg"></i>
+                            <span class="text-sm font-medium">Account</span>
+                        </a>
+                    </div>
                 </div>
 
-                <!-- Icons + mobile menu toggle -->
-                <div class="flex items-center space-x-4">
-                    <!-- Wishlist (Favourite) -->
-                    <a href="favourite.html" id="favourite" class="relative p-2 hover:text-pink-500 transition"
-                        aria-label="Wishlist">
-                        <i class="far fa-heart text-xl"></i>
-                        <span id="favoriteCount"
-                            class="absolute -top-1 -right-1 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                            0
-                        </span>
-                    </a>
-
-                    <!-- Cart -->
-                    <a href="cart.html" id="cart" class="relative p-2 hover:text-blue-500 transition" aria-label="Cart">
-                        <i class="fas fa-shopping-bag text-xl"></i>
-                        <span
-                            class="absolute -top-1 -right-1 bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
-                    </a>
-
-                    <!-- User Account -->
-                    <a id="user" class="p-2 hover:text-green-500 transition" aria-label="User Account">
-                        <i class="far fa-user text-xl"></i>
-                    </a>
-
-                    <!-- Mobile menu button -->
-                    <button id="menuBtn" class="md:hidden p-2 hover:text-yellow-500 transition"
-                        aria-label="Toggle Mobile Menu">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor"
-                            stroke-width="2" viewBox="0 0 24 24">
-                            <path d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
+                <!-- Mobile menu button - animated hamburger -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobileMenuButton" class="p-2 rounded-md focus:outline-none" aria-label="Toggle menu">
+                        <div class="space-y-1.5 w-6">
+                            <span class="hamburger-line block h-0.5 w-6 bg-gray-600 rounded-full"></span>
+                            <span class="hamburger-line block h-0.5 w-6 bg-gray-600 rounded-full"></span>
+                            <span class="hamburger-line block h-0.5 w-4 bg-gray-600 rounded-full ml-auto"></span>
+                        </div>
                     </button>
                 </div>
             </div>
-
-            <!-- Desktop categories -->
-            <div id="mobileMenu"
-                class="hidden md:flex items-center justify-center space-x-8 py-3 border-t border-gray-200">
-                <a href="index.html" class="hover:text-pink-500 transition">Home</a>
-                <a href="addproduct.html" class="hover:text-pink-500 transition">Add Product</a>
-                <a href="contact.html" class="hover:text-pink-500 transition">Deals</a>
-                <!-- <a href="#" class="hover:text-pink-500 transition">Categories</a> -->
-                <a href="#" class="hover:text-pink-500 transition">Contact</a>
+            <div class="hidden md:flex justify-center items-center gap-10 border-t-[1px] border-gray-300 px-2 py-3">
+                <a class="font-semibold hover:text-pink-600 " href="index.html">Home</a>
+                <a class="font-semibold hover:text-pink-600 " href="addproduct.html">Add Product</a>
+                <a class="font-semibold hover:text-pink-600 " href="#">Deals</a>
+                <a class="font-semibold hover:text-pink-600 " href="#">Contact</a>
             </div>
+        </div>
 
-            <!-- Mobile dropdown menu -->
-            <div id="mobileMenuDropdown" class="md:hidden hidden bg-white border-t border-gray-200 shadow-lg">
-                <a href="index.html" class="block px-6 py-3 hover:bg-pink-100 border-b border-gray-200">Home</a>
-                <a href="addproduct.html" class="block px-6 py-3 hover:bg-pink-100 border-b border-gray-200">Add
-                    Product</a>
-                <a href="#" class="block px-6 py-3 hover:bg-pink-100 border-b border-gray-200">Deals</a>
-                <a href="#" class="block px-6 py-3 hover:bg-pink-100 border-b border-gray-200">Categories</a>
-                <a href="#" class="block px-6 py-3 hover:bg-pink-100">Contact</a>
+        <!-- Mobile Search -->
+        <div class="relative md:hidden mb-4 px-4">
+            <input type="text" placeholder="Search products..."
+                class="w-full pl-10 pr-4 py-2 rounded-full bg-gray-100 border-none focus:ring-2 focus:ring-pink-400">
+            <i class="fas fa-search absolute left-6 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+        </div>
+
+        <!-- Mobile Menu (hidden by default) -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white shadow-lg">
+            <div class="px-4 pt-2 pb-4 space-y-3">
+
+                <!-- Mobile Links -->
+                <a href="#"
+                    class="block px-4 py-3 rounded-lg hover:bg-pink-50 text-gray-700 hover:text-pink-600 transition-smooth">
+                    <i class="fas fa-store mr-3"></i> Become a Seller
+                </a>
+                <a href="#"
+                    class="block px-4 py-3 rounded-lg hover:bg-pink-50 text-gray-700 hover:text-pink-600 transition-smooth">
+                    <span class=""><i class="fa-solid fa-lock mr-3"></i>Sign In/Up</span>
+                </a>
             </div>
         </div>
     </nav>
 
-
-    <!-- Featured product section -->
-    <!-- Featured product section -->
-    <section class="max-w-full mx-auto p-6 bg-white shadow-lg">
-
-        <h1 class="text-center text-pink-600 text-3xl font-extrabold mb-5">Glance of Products at our Store</h1>
-
-        <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
-
-            <!-- Product image -->
-            <div class="relative w-full md:w-1/2 rounded-xl overflow-hidden shadow-xl">
-                <img id="product-image" src="" alt="Product Image"
-                    class="w-full h-96 object-fill object-center transition-transform duration-700 rounded-xl" />
-
-                <button id="prevBtn" aria-label="Previous"
-                    class="absolute top-1/2 left-4 -translate-y-1/2 bg-pink-500 text-white p-3 rounded-full shadow-lg hover:bg-pink-600 transition">
-                    &#10094;
-                </button>
-                <button id="nextBtn" aria-label="Next"
-                    class="absolute top-1/2 right-4 -translate-y-1/2 bg-pink-500 text-white p-3 rounded-full shadow-lg hover:bg-pink-600 transition">
-                    &#10095;
-                </button>
-            </div>
-
-            <!-- Product info -->
-            <div class="w-full md:w-1/2 flex flex-col justify-center relative"> <!-- Added relative positioning -->
-                <div class="flex justify-between items-start"> <!-- New wrapper for title and favorite button -->
-                    <h2 id="product-name" class="text-4xl font-extrabold text-gray-900 mb-4 tracking-wide"></h2>
-                </div>
-                <p id="product-desc" class="text-gray-700 text-lg leading-relaxed mb-6"></p>
-                <p id="product-price" class="text-pink-600 font-extrabold text-3xl tracking-tight"></p>
-                <div class="relative flex gap-2 sm:gap-3">
-
-                    <button id="addtocart" type="button"
-                        class="mt-8 w-4/5 bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-8 rounded-full  sm:rounded-full shadow-lg transition">
-                        Add to Cart
+    <!-- Main Content Area -->
+    <div class="content-area">
+        <!-- Featured product section -->
+        <section class="max-w-full mx-auto p-6 bg-white shadow-lg">
+            <h1 class="text-center text-pink-600 text-3xl font-extrabold mb-5">Glance of Products at our Store</h1>
+            <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
+                <!-- Product image -->
+                <div class="relative w-full md:w-1/2 rounded-xl overflow-hidden shadow-xl">
+                    <img id="product-image" src="" alt="Product Image"
+                        class="w-full h-96 object-fill object-center transition-transform duration-700 rounded-xl" />
+                    <button id="prevBtn" aria-label="Previous"
+                        class="absolute top-1/2 left-4 -translate-y-1/2 bg-pink-500 text-white p-3 rounded-full shadow-lg hover:bg-pink-600 transition">
+                        &#10094;
                     </button>
-                    <!-- More Button with Dropdown -->
-                    <div class="relative inline-block">
-                        <!-- Dropdown Content -->
-                        <div id="moreDropdown"
-                            class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
-                            <div class="py-1">
-                                <a href="#" class="dropdown-option">
-                                    <i class="fas fa-shopping-cart mr-2"></i> Buy Now
-                                </a>
-                                <a href="#" class="dropdown-option">
-                                    <i class="far fa-heart mr-2"></i> Add to Favorites
-                                </a>
-                                <a href="#" class="dropdown-option">
-                                    <i class="fas fa-share-alt mr-2"></i> Share
-                                </a>
-                                <a href="#" class="dropdown-option">
-                                    <i class="fas fa-info-circle mr-2"></i> Details
-                                </a>
-                            </div>
-                        </div>
-                        <button id="moreBtn"
-                            class="mt-8 bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-4 rounded-full shadow-lg transition">
-                            More
-                        </button>
+                    <button id="nextBtn" aria-label="Next"
+                        class="absolute top-1/2 right-4 -translate-y-1/2 bg-pink-500 text-white p-3 rounded-full shadow-lg hover:bg-pink-600 transition">
+                        &#10095;
+                    </button>
+                </div>
 
+                <!-- Product info -->
+                <div class="w-full md:w-1/2 flex flex-col justify-center relative">
+                    <div class="flex justify-between items-start">
+                        <h2 id="product-name" class="text-4xl font-extrabold text-gray-900 mb-4 tracking-wide"></h2>
+                    </div>
+                    <p id="product-desc" class="text-gray-700 text-lg leading-relaxed mb-6"></p>
+                    <p id="product-price" class="text-pink-600 font-extrabold text-3xl tracking-tight"></p>
+                    <div class="relative flex gap-2 sm:gap-3">
+                        <button id="addtocart" type="button"
+                            class="mt-8 w-4/5 bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-8 rounded-full sm:rounded-full shadow-lg transition">
+                            Add to Cart
+                        </button>
+                        <!-- More Button with Dropdown -->
+                        <div class="relative inline-block">
+                            <div id="moreDropdown"
+                                class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
+                                <div class="py-1">
+                                    <a href="#" class="dropdown-option">
+                                        <i class="fas fa-shopping-cart mr-2"></i> Buy Now
+                                    </a>
+                                    <a href="#" class="dropdown-option">
+                                        <i class="far fa-heart mr-2"></i> Add to Favorites
+                                    </a>
+                                    <a href="#" class="dropdown-option">
+                                        <i class="fas fa-share-alt mr-2"></i> Share
+                                    </a>
+                                    <a href="#" class="dropdown-option">
+                                        <i class="fas fa-info-circle mr-2"></i> Details
+                                    </a>
+                                </div>
+                            </div>
+                            <button id="moreBtn"
+                                class="mt-8 bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-4 rounded-full shadow-lg transition">
+                                More
+                            </button>
+                        </div>
                     </div>
                 </div>
-
             </div>
+        </section>
+
+        <!-- Categories Buttons -->
+        <section class="max-w-7xl mx-auto p-8 bg-white rounded-xl shadow-lg">
+            <h2 class="text-3xl font-extrabold text-pink-600 mb-8 text-center tracking-wide">Search by Category</h2>
+            <!-- Categories grid -->
+            <div id="categoryContainer"
+                class="flex overflow-x-auto py-5 no-scrollbar space-x-4 md:grid md:grid-cols-4 md:gap-3 mb-8">
+                <!-- Categories will be dynamically inserted here -->
+            </div>
+            <!-- Pagination controls -->
+            <div class="flex justify-center space-x-6">
+                <button id="prevPage"
+                    class="px-6 py-3 bg-pink-500 text-white rounded-full shadow-lg hover:bg-pink-600 disabled:bg-pink-300 transition"
+                    disabled>
+                    &#8592; Previous
+                </button>
+                <button id="nextPage"
+                    class="px-6 py-3 bg-pink-500 text-white rounded-full shadow-lg hover:bg-pink-600 disabled:bg-pink-300 transition">
+                    Next &#8594;
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Mobile Bottom Navigation Bar -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-200 z-50">
+        <!-- Main Navigation Icons -->
+        <div class="flex justify-around items-center py-2">
+            <!-- Home -->
+            <a href="index.html" class="flex flex-col items-center p-2 text-gray-700 hover:text-pink-500 transition">
+                <i class="fas fa-home text-xl"></i>
+                <span class="text-xs mt-1">Home</span>
+            </a>
+
+            <!-- Products -->
+            <a href="products.html" class="flex flex-col items-center p-2 text-gray-700 hover:text-pink-500 transition">
+                <i class="fas fa-box-open text-xl"></i>
+                <span class="text-xs mt-1">Products</span>
+            </a>
+
+            <!-- Cart -->
+            <a href="cart.html"
+                class="relative flex flex-col items-center p-2 text-gray-700 hover:text-blue-500 transition">
+                <i class="fas fa-shopping-cart text-xl"></i>
+                <span class="text-xs mt-1">Cart</span>
+                <span id="cart"
+                    class="absolute top-0 right-2 bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"></span>
+            </a>
+
+            <!-- Profile -->
+            <a href="profile.html" class="flex flex-col items-center p-2 text-gray-700 hover:text-green-500 transition">
+                <i class="fas fa-user text-xl"></i>
+                <span class="text-xs mt-1">Profile</span>
+            </a>
         </div>
-    </section>
-
-
-    <!-- Categories Buttons  -->
-    <!-- Categories Buttons  -->
-    <section class="max-w-7xl mx-auto p-8 bg-white rounded-xl shadow-lg">
-
-        <h2 class="text-3xl font-extrabold text-pink-600 mb-8 text-center tracking-wide">Search by Category</h2>
-
-        <!-- Categories grid -->
-        <div  id="categoryContainer"
-            class="flex overflow-x-auto py-5 no-scrollbar space-x-4 md:grid md:grid-cols-4 md:gap-3 mb-8">
-            <!-- Categories will be dynamically inserted here -->
-        </div>
-
-        <!-- Pagination controls -->
-        <div class="flex justify-center space-x-6">
-            <button id="prevPage"
-                class="px-6 py-3 bg-pink-500 text-white rounded-full shadow-lg hover:bg-pink-600 disabled:bg-pink-300 transition"
-                disabled>
-                &#8592; Previous
-            </button>
-            <button id="nextPage"
-                class="px-6 py-3 bg-pink-500 text-white rounded-full shadow-lg hover:bg-pink-600 disabled:bg-pink-300 transition">
-                Next &#8594;
-            </button>
-        </div>
-
-    </section>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-white border-t border-gray-200">
         <div class="max-w-7xl mx-auto px-6 py-10 md:flex md:justify-between md:space-x-10">
-
             <div class="mb-8 md:mb-0 md:w-1/3">
                 <h3 class="text-2xl font-bold text-pink-500 mb-4">BazarioVerse</h3>
                 <p class="text-gray-600 leading-relaxed">
@@ -230,18 +308,16 @@
                     place.
                 </p>
             </div>
-
             <div class="mb-8 md:mb-0 md:w-1/5">
                 <h4 class="text-lg font-semibold mb-4 text-gray-900">Quick Links</h4>
                 <ul class="space-y-2 text-gray-600">
-                    <li><a href="index.html" class="hover:text-pink-500 transition text-pink-600">Home</a></li>
-                    <li><a href="addproduct.html" class="hover:text-pink-500 transition">My Shop</a></li>
+                    <li><a href="index.html" class="hover:text-pink-500 transition">Home</a></li>
+                    <li><a href="addproduct.html" class="hover:text-pink-500 transition">Add Product</a></li>
                     <li><a href="#" class="hover:text-pink-500 transition">Deals</a></li>
                     <li><a href="#" class="hover:text-pink-500 transition">Categories</a></li>
                     <li><a href="#" class="hover:text-pink-500 transition">Contact</a></li>
                 </ul>
             </div>
-
             <div class="mb-8 md:mb-0 md:w-1/5">
                 <h4 class="text-lg font-semibold mb-4 text-gray-900">Customer Service</h4>
                 <ul class="space-y-2 text-gray-600">
@@ -251,7 +327,6 @@
                     <li><a href="#" class="hover:text-pink-500 transition">Order Tracking</a></li>
                 </ul>
             </div>
-
             <div class="md:w-1/4">
                 <h4 class="text-lg font-semibold mb-4 text-gray-900">Subscribe to our Newsletter</h4>
                 <form class="flex mb-6">
@@ -263,7 +338,6 @@
                     </button>
                 </form>
                 <div class="flex space-x-4 text-gray-500">
-                    <!-- Social icons -->
                     <a href="#" aria-label="Facebook" class="hover:text-pink-500 transition">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                             <path
@@ -285,15 +359,11 @@
                 </div>
             </div>
         </div>
-
         <div class="border-t border-gray-200 py-4 text-center text-gray-500 text-sm">
             &copy; 2025 ShopVerse. All rights reserved.
         </div>
     </footer>
-
-
     <script type="module" src="app.js"></script>
-
 </body>
 
 </html>
