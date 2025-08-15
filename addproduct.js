@@ -33,6 +33,9 @@ function saveProductsToStorage(products) {
 function renderProduct(product) {
     if (!productList)
         return;
+    const discountedPrice = product.discount
+        ? (product.price - (product.price * (product.discount / 100))).toFixed(2)
+        : product.price;
     const productCard = document.createElement("div");
     productCard.className =
         "bg-white rounded-lg shadow-md overflow-hidden mb-4 transition-all duration-300 hover:shadow-lg group";
@@ -40,19 +43,26 @@ function renderProduct(product) {
     <div class="relative overflow-hidden">
       <img src="${product.imageUrl}" alt="${product.name}" 
            class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+      <!-- Category & Discount Tags -->
       <span class="absolute top-2 left-2 bg-pink-500 text-white text-xs font-bold px-2 py-1 rounded-full">
         ${product.category}
       </span>
+        <span class="absolute top-2 right-2 bg-pink-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+          ${product.discount}% OFF
+        </span>
     </div>
     
-    <div class="p-4">
-      <div class="flex justify-between items-start mb-2">
-        <h3 class="text-lg font-bold text-gray-800 truncate">${product.name}</h3>
-        <span class="text-pink-600 font-bold">
-          $${product.price.toFixed(2)}
-          ${product.discount ? `<span class="text-xs text-gray-500 ml-1">(-${product.discount}%)</span>` : ""}
-        </span>
-      </div>
+    <div class="px-4 py-2">
+      <!-- Name & Price -->
+        <div class="flex justify-between items-start mb-2">
+          <h3 class="text-lg font-bold text-gray-800 truncate">${product.name}</h3>
+          <div class="text-right">
+            ${discountedPrice
+        ? `<div class="font-bold text-pink-500 line-through">$${product.price.toFixed(2)}</div>
+                 <div class="text-md text-green-600 font-semibold">$${discountedPrice}</div>`
+        : ""}
+          </div>
+        </div>
       
       <p class="text-gray-600 text-sm mb-3 line-clamp-2">${product.description}</p>
       
@@ -67,7 +77,9 @@ function renderProduct(product) {
           <span class="text-gray-400">${"★".repeat(5 - Math.floor(product.rating || 0))}</span>
           ${product.rating ? `<span class="ml-1 text-xs">(${product.rating})</span>` : ""}
         </div>
-        
+        <button onclick="alert("Edit option is coming soon")" class="edit-btn bg-blue-500 hover:bg-red-600 text-white text-xs font-semibold px-4 py-1 rounded-full">
+          Edit
+        </button>
         <button class="delete-btn bg-red-500 hover:bg-red-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
           Delete
         </button>
@@ -108,7 +120,7 @@ if (productForm) {
             id: Date.now(),
             name,
             price,
-            discount: discount || undefined,
+            discount: discount || 0,
             stock: stock || undefined,
             rating: rating || undefined,
             sku: sku || undefined,

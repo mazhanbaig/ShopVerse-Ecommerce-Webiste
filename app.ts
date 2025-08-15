@@ -546,94 +546,74 @@ document.addEventListener("DOMContentLoaded", () => {
   const bigSavingContainer = document.getElementById("bigSavingProducts");
 
   function renderBigSavingProducts(): void {
-    if (!bigSavingContainer) return;
+  if (!bigSavingContainer) return;
 
-    const storedProducts = getStoredProducts();
-    let discountedProducts = storedProducts.filter(product => (product.discount ?? 0) > 7);
+  const storedProducts: Product[] = getStoredProducts();
+  let discountedProducts = storedProducts.filter(
+    product => (product.discount ?? 0) > 0
+  );
 
-    bigSavingContainer.innerHTML = "";
+  bigSavingContainer.innerHTML = "";
 
-    if (discountedProducts.length === 0) {
-      bigSavingContainer.innerHTML = `<p class="text-gray-500 text-center col-span-full">No big saving products found</p>`;
-      return;
-    }
-    discountedProducts=discountedProducts.slice(0,10);
-    discountedProducts.forEach(product => {
+  if (discountedProducts.length === 0) {
+    bigSavingContainer.innerHTML = `<p class="text-gray-500 text-center col-span-full">No big saving products found</p>`;
+    return;
+  }
+
+  discountedProducts = discountedProducts.slice(0, 10);
+
+  discountedProducts.forEach(product => {
     const discountedPrice = product.discount
-      ? (product.price - (product.price * (product.discount / 100))).toFixed(2)
-      : null;
-
-    const rating = Math.min(5, Math.max(0, Math.floor(product.rating || 0)));
+      ? Math.round(product.price - (product.price * (product.discount / 100)))
+      : product.price;
 
     const card = document.createElement("div");
     card.className =
-      "bg-white rounded-lg shadow-md mb-4 transition-all duration-300 hover:shadow-lg group";
+      "bg-white rounded-xl shadow hover:shadow-lg overflow-hidden transition group";
 
     card.innerHTML = `
-      <!-- Image Section -->
       <div class="relative overflow-hidden">
         <img src="${product.imageUrl}" alt="${product.name}"
-             class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
-        
-        <!-- Category & Discount Tags -->
-        <span class="absolute top-2 left-2 bg-pink-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-          ${product.category}
-        </span>
-        <span class="absolute top-2 right-2 bg-pink-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-          ${product.discount}% OFF
-        </span>
+          class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
 
-        <!-- Add to Cart Button (Hidden by default) -->
-        <button 
-          onclick='addProductToCart(${JSON.stringify(product)})'
-          class="absolute bottom-2 left-3 right-3 bg-pink-200 text-black border-[1px] border-gray-200 rounded-xl py-2 flex items-center justify-center space-x-2 transform translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-               viewBox="0 0 24 24" stroke="currentColor">
+        <!-- Discount Badge -->
+        ${
+          product.discount
+            ? `<span class="absolute top-2 right-2 bg-pink-600 text-white text-xs font-semibold px-2 py-1 rounded-md">
+                 ${product.discount}% OFF
+               </span>`
+            : "0% OFF"
+        }
+
+        <!-- Add to Cart Button -->
+        <button onclick='addCurrentToCart(${product})'
+          class="absolute bottom-2 rounded-2xl left-3 right-3 bg-pink-500 text-white py-2 text-sm font-medium opacity-0 translate-y-full group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center space-x-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.3 5.2a1 1 0 00.97 1.3h12.66a1 1 0 00.97-1.3L17 13M9 21h.01M15 21h.01"/>
+              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.3 5.2a1 1 0 00.97 1.3h12.66a1 1 0 00.97-1.3L17 13M9 21h.01M15 21h.01"/>
           </svg>
           <span>Add to Cart</span>
         </button>
       </div>
 
-      <!-- Content Section -->
-      <div class="p-4">
-        <!-- Name & Price -->
-        <div class="flex justify-between items-start mb-2">
-          <h3 class="text-lg font-bold text-gray-800 truncate">${product.name}</h3>
-          <div class="text-right">
-            ${discountedPrice
-              ? `<div class="font-bold text-pink-500 line-through">$${product.price.toFixed(2)}</div>
-                 <div class="text-md text-green-600 font-semibold">$${discountedPrice}</div>`
-              : ""}
-          </div>
-        </div>
-
-        <!-- Description -->
-        <p class="text-gray-600 text-sm mb-3 line-clamp-2">${product.description}</p>
-
-        <!-- SKU & Stock -->
-        <div class="flex justify-between items-center text-sm text-gray-500 mb-3">
-          ${product.sku ? `<span>SKU: ${product.sku}</span>` : ""}
-          ${product.stock !== undefined ? `<span>Stock: ${product.stock}</span>` : ""}
-        </div>
-
-        <!-- Ratings -->
-        <div class="flex items-center">
-          <span class="text-yellow-400">${"★".repeat(rating)}</span>
-          <span class="text-gray-300">${"★".repeat(5 - rating)}</span>
-          ${product.rating
-            ? `<span class="ml-1 text-xs text-gray-500">(${product.rating})</span>`
-            : ""}
+      <div class="p-3">
+        <h3 class="text-sm font-semibold text-gray-800 truncate">${product.name}</h3>
+        <div class="mt-1">
+          ${
+            product.discount
+              ? `<p class="text-gray-500 text-xs line-through">Rs.${product.price.toLocaleString()}</p>
+                 <p class="text-lg font-bold text-gray-900">Rs.${discountedPrice.toLocaleString()}</p>`
+              : `<span class="text-lg font-bold text-gray-900">Rs.${product.price.toLocaleString()}</span>`
+          }
         </div>
       </div>
     `;
 
+    bigSavingContainer?.appendChild(card);
+  });
+}
 
-
-      bigSavingContainer?.appendChild(card);
-    });
-  }
 
   function getStoredProducts(): Product[] {
     try {
