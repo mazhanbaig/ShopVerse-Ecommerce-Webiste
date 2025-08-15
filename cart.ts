@@ -17,8 +17,13 @@ interface CartItem {
   id: number;
   name: string;
   price: number;
-  image: string;
+  discount?: number;
+  stock?: number;
+  rating?: number;
+  sku?: string;
+  imageUrl: string;
   description: string;
+  category?: string;
 }
 
 // Extend the Window interface to include our removeItem function
