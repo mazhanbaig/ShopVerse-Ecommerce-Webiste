@@ -85,33 +85,44 @@
         .dropdown-floating {
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
         }
+
+        .animate-fade-in-up {
+            animation: fade-in-up 0.3s ease-out forwards;
+        }
+
+        .animate-fade-out {
+            animation: fade-out 0.3s ease-out forwards;
+        }
+
         @keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
 
-@keyframes fade-out {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-.animate-fade-in-up {
-  animation: fade-in-up 0.3s ease-out forwards;
-}
+        @keyframes fade-out {
+            from {
+                opacity: 1;
+            }
 
-.animate-fade-out {
-  animation: fade-out 0.3s ease-out forwards;
-}
+            to {
+                opacity: 0;
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fade-in-up 0.3s ease-out forwards;
+        }
+
+        .animate-fade-out {
+            animation: fade-out 0.3s ease-out forwards;
+        }
     </style>
 </head>
 
@@ -308,11 +319,12 @@
         </section>
 
         <!-- Big Saving Products Section -->
-        <section class="w-full mx-auto p-8 bg-white rounded-xl shadow-lg">
+        <section class="w-full mx-auto px-2 bg-white rounded-xl shadow-lg">
             <h2 class="text-3xl sm:text-4xl font-extrabold text-center text-pink-600 tracking-wide mb-8">Big Saving</h2>
 
             <!-- Products Grid -->
-            <div id="bigSavingProducts" class="grid grid-cols-2 max-[500px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+            <div id="bigSavingProducts"
+                class="grid grid-cols-2 max-[500px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 <!-- Products will be dynamically inserted here -->
             </div>
 
