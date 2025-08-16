@@ -261,9 +261,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const discountedPrice = product.discount
         ? Math.round(product.price - (product.price * (product.discount / 100)))
         : product.price;
-      const discountedPriceSaved = product.discount
-        ? product.price - discountedPrice
-        : "0"
       const card = document.createElement("div");
       card.className = "bg-white rounded-xl shadow hover:shadow-lg overflow-hidden transition group";
 
@@ -296,16 +293,17 @@ document.addEventListener("DOMContentLoaded", () => {
         <h3 class="text-sm font-bold text-pink-600 truncate">${product.name}</h3>
         <div class="mt-1 flex gap-3 items-center">
           ${product.discount
-          ? `<span class="text-gray-500 text-sm line-through">Rs.${product.price.toLocaleString()}</span>
-             <span class="text-lg font-bold text-gray-900">Rs.${discountedPrice.toLocaleString()}</span>             `
+          ? `<span class="text-black font-bold text-[16px]">Rs.${discountedPrice.toLocaleString()}</span>
+             <span class="text-[10px] bg-pink-300 rounded-full px-1 py-1 font-bold text-gray-900">-${product.discount}%</span>`
           : `<span class="text-lg font-bold text-gray-900">Rs.${product.price.toLocaleString()}</span>`
         }
         </div>
         <div class="flex items-center justify-between">
           <div>
-            <span class="text-yellow-400">${"★".repeat(Math.floor(product.rating || 0))}</span>
-            <span class="text-gray-400">${"★".repeat(5 - Math.floor(product.rating || 0))}</span>
+            <span class="text-yellow-400 text-[15px] sm:text-[16px]">${"★".repeat(Math.floor(product.rating || 0))}</span>
+            <span class="text-gray-400 text-[15px] sm:text-[16px]">${"★".repeat(5 - Math.floor(product.rating || 0))}</span>
             ${product.rating ? `<span class="ml-1 text-xs">(${product.rating})</span>` : ""}
+            <span class="text-[11px] sm:text-sm text-gray-600">sold(~)</span>
           </div>  
       </div>
     `;
@@ -393,16 +391,17 @@ document.addEventListener("DOMContentLoaded", () => {
         <h3 class="text-sm font-bold text-pink-600 truncate">${product.name}</h3>
         <div class="mt-1 flex gap-1 items-center">
           ${product.discount
-          ? `<span class="text-gray-500 text-sm line-through">Rs.${product.price.toLocaleString()}</span>
-             <span class="text-md sm:text-lg font-bold text-gray-900">Rs.${discountedPrice.toLocaleString()}</span>             `
+          ? `<span class="text-black font-bold text-[16px]">Rs.${discountedPrice.toLocaleString()}</span>
+             <span class="text-[10px] bg-pink-300 rounded-full px-1 py-1 font-bold text-gray-900">-${product.discount}%</span>`
           : `<span class="text-lg font-bold text-gray-900">Rs.${product.price.toLocaleString()}</span>`
         }
         </div>
         <div class="flex items-center justify-between">
           <div>
-            <span class="text-yellow-400">${"★".repeat(Math.floor(product.rating || 0))}</span>
-            <span class="text-gray-400">${"★".repeat(5 - Math.floor(product.rating || 0))}</span>
+            <span class="text-yellow-400 text-[15px] sm:text-[16px]">${"★".repeat(Math.floor(product.rating || 0))}</span>
+            <span class="text-gray-400 text-[15px] sm:text-[16px]">${"★".repeat(5 - Math.floor(product.rating || 0))}</span>
             ${product.rating ? `<span class="ml-1 text-xs">(${product.rating})</span>` : ""}
+            <span class="text-[11px] sm:text-sm text-gray-600">sold(~)</span>
           </div>  
       </div>
     `;
