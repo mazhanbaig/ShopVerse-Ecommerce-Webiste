@@ -21,6 +21,9 @@ type CartItem = {
   imageUrl: string;
   description: string;
   category: string;
+  isFreeDelivery: boolean;
+  iscashOnDelivery: boolean;
+  isReturnable: boolean
 };
 
 // When page loads

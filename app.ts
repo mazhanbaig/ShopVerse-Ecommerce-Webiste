@@ -1,17 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
   // ===== 1. TYPE DEFINITIONS =====
-  type Product = {
-    id: number;
-    name: string;
-    price: number;
-    discount?: number;
-    stock?: number;
-    rating?: number;
-    sku?: string;
-    imageUrl: string;
-    description: string;
-    category?: string;
-  };
+ type Product = {
+  id: number;
+  name: string;
+  price: number;
+  discount?: number;
+  stock?: number;
+  rating?: number;
+  sku?: string;
+  imageUrl: string;
+  description: string;
+  category: string;
+  isFreeDelivery: boolean;
+  iscashOnDelivery: boolean;
+  isReturnable: boolean
+};
 
   interface Category {
     id: number;
