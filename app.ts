@@ -313,15 +313,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let freeDeliveryProductsContainer = document.getElementById("freeDeliveryProducts") as HTMLDivElement;
   function renderFreeDeliveryProducts(): void {
-    
+
     if (!freeDeliveryProductsContainer) return;
 
     let storedProducts = getStoredProducts();
     let freeDeliveryProducts = storedProducts.filter((p: Product) => {
-      return  p.isFreeDelivery === true
+      return p.isFreeDelivery === true
     });
 
-    freeDeliveryProductsContainer.innerHTML="";
+    freeDeliveryProductsContainer.innerHTML = "";
 
     if (freeDeliveryProducts.length == 0) {
       freeDeliveryProductsContainer.innerHTML = `<p class="text-gray-500 text-center col-span-full">No Free Delivery Products found</p>`;
@@ -350,12 +350,18 @@ document.addEventListener("DOMContentLoaded", () => {
                </span>`
           : ""
         }
-        <button class="add-to-cart-btn absolute bottom-2 rounded-2xl left-3 right-3 bg-pink-500 text-white py-2 text-sm font-medium opacity-0 translate-y-full group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center space-x-2">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.3 5.2a1 1 0 00.97 1.3h12.66a1 1 0 00.97-1.3L17 13M9 21h.01M15 21h.01"/>
-          </svg>
-          <span>Add to Cart</span>
-        </button>
+        <button class="add-to-cart-btn absolute bottom-2 rounded-2xl left-3 right-3 bg-pink-500 text-white py-2 text-sm font-medium 
+  opacity-100 translate-y-0 
+  md:opacity-0 md:translate-y-full md:group-hover:translate-y-0 md:group-hover:opacity-100 
+  transition-all duration-300 flex items-center justify-center space-x-2">
+  
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.3 5.2a1 1 0 00.97 1.3h12.66a1 1 0 00.97-1.3L17 13M9 21h.01M15 21h.01"/>
+  </svg>
+  <span>Add to Cart</span>
+</button>
+
       </div>
       <div class="p-3">
         <h3 class="text-sm font-bold text-pink-600 truncate">${product.name}</h3>
@@ -375,7 +381,7 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     `;
 
-console.log("Rendering product:", product);
+      console.log("Rendering product:", product);
 
       // Add event listener to the button
       const addToCartBtn = card.querySelector('.add-to-cart-btn');
