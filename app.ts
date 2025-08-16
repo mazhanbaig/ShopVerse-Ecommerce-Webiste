@@ -272,17 +272,25 @@ document.addEventListener("DOMContentLoaded", () => {
         <img src="${product.imageUrl}" alt="${product.name}"
           class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
         ${product.discount
-          ? `<span class="absolute top-2 right-2 bg-pink-600 text-white text-xs font-semibold px-2 py-1 rounded-md">
+          ? `<span class="absolute top-2 left-2 bg-pink-600 text-white text-xs font-semibold px-2 py-1 rounded-md">
                  ${product.discount}% OFF
                </span>`
           : ""
         }
-        <button class="add-to-cart-btn absolute bottom-2 rounded-2xl left-3 right-3 bg-pink-500 text-white py-2 text-sm font-medium opacity-0 translate-y-full group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center space-x-2">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.3 5.2a1 1 0 00.97 1.3h12.66a1 1 0 00.97-1.3L17 13M9 21h.01M15 21h.01"/>
-          </svg>
-          <span>Add to Cart</span>
-        </button>
+        <div class="absolute top-2 right-2">
+          <button class="menu-btn p-1 rounded-full bg-white shadow hover:bg-gray-100">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 cursor-pointer" fill="currentColor" viewBox="0 0 24 24">
+              <circle cx="12" cy="5" r="2" />
+              <circle cx="12" cy="12" r="2" />
+              <circle cx="12" cy="19" r="2" />
+            </svg>
+          </button>
+         <div class="menu hidden absolute right-0 mt-2 w-32 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+           <button class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-pink-100 add-to-cart">
+           Add to Cart
+           </button>
+         </div>
+        </div>
       </div>
       <div class="p-3">
         <h3 class="text-sm font-bold text-pink-600 truncate">${product.name}</h3>
@@ -302,9 +310,24 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     `;
 
-      // Add event listener to the button
-      const addToCartBtn = card.querySelector('.add-to-cart-btn');
-      addToCartBtn?.addEventListener('click', () => addProductToCart(product));
+      // Toggle menu open/close
+      const menuBtn = card.querySelector('.menu-btn') as HTMLButtonElement;
+      const menu = card.querySelector('.menu') as HTMLDivElement;
+      const addToCartBtnCard = card.querySelector('.add-to-cart') as HTMLButtonElement;
+
+      menuBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        document.querySelectorAll('.menu').forEach((m) => m.classList.add('hidden')); // close others
+        menu.classList.toggle('hidden');
+      });
+
+      // Add to cart action
+      addToCartBtnCard?.addEventListener('click', () => addProductToCart(product));
+
+      // Close menu when clicking outside
+      document.addEventListener('click', () => {
+        menu.classList.add('hidden');
+      });
 
       bigSavingContainer.appendChild(card);
     });
@@ -344,33 +367,31 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="relative overflow-hidden">
         <img src="${product.imageUrl}" alt="${product.name}"
           class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
-        ${product.discount
-          ? `<span class="absolute top-2 right-2 bg-pink-600 text-white text-xs font-semibold px-2 py-1 rounded-md">
-                 ${product.discount}% OFF
+        ${product.isFreeDelivery
+          ? `<span class="absolute top-2 left-2 bg-pink-600 text-white text-xs font-semibold px-2 py-1 rounded-md">
+                 Free Delivery
                </span>`
           : ""
         }
-        <button 
-  class="add-to-cart-btn absolute bottom-[-1px] rounded-2xl left-3 right-3 bg-pink-500 text-white py-2 text-sm font-medium 
-  opacity-0 translate-y-full 
-  group-hover:translate-y-[-4px] group-hover:opacity-100 
-  md:opacity-0 md:translate-y-full 
-  md:group-hover:translate-y-0 md:group-hover:opacity-100 
-  opacity-100 translate-y-0
-  transition-all duration-300 flex items-center justify-center space-x-2">
-  
-  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.3 5.2a1 1 0 00.97 1.3h12.66a1 1 0 00.97-1.3L17 13M9 21h.01M15 21h.01"/>
-  </svg>
-  <span>Add to Cart</span>
-</button>
-
+        <div class="absolute top-2 right-2">
+          <button class="menu-btn p-1 rounded-full bg-white shadow hover:bg-gray-100">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 cursor-pointer" fill="currentColor" viewBox="0 0 24 24">
+              <circle cx="12" cy="5" r="2" />
+              <circle cx="12" cy="12" r="2" />
+              <circle cx="12" cy="19" r="2" />
+            </svg>
+          </button>
+         <div class="menu hidden absolute right-0 mt-2 w-32 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+           <button class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-pink-100 add-to-cart">
+           Add to Cart
+           </button>
+         </div>
+        </div>
 
       </div>
       <div class="p-3">
         <h3 class="text-sm font-bold text-pink-600 truncate">${product.name}</h3>
-        <div class="mt-1 flex gap-3 items-center">
+        <div class="mt-1 flex gap-1 items-center">
           ${product.discount
           ? `<span class="text-gray-500 text-sm line-through">Rs.${product.price.toLocaleString()}</span>
              <span class="text-md sm:text-lg font-bold text-gray-900">Rs.${discountedPrice.toLocaleString()}</span>             `
@@ -385,10 +406,24 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>  
       </div>
     `;
+      // Toggle menu open/close
+      const menuBtn = card.querySelector('.menu-btn') as HTMLButtonElement;
+      const menu = card.querySelector('.menu') as HTMLDivElement;
+      const addToCartBtnCard = card.querySelector('.add-to-cart') as HTMLButtonElement;
 
-      // Add event listener to the button
-      const addToCartBtn = card.querySelector('.add-to-cart-btn');
-      addToCartBtn?.addEventListener('click', () => addProductToCart(product));
+      menuBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        document.querySelectorAll('.menu').forEach((m) => m.classList.add('hidden')); // close others
+        menu.classList.toggle('hidden');
+      });
+
+      // Add to cart action
+      addToCartBtnCard?.addEventListener('click', () => addProductToCart(product));
+
+      // Close menu when clicking outside
+      document.addEventListener('click', () => {
+        menu.classList.add('hidden');
+      });
 
       freeDeliveryProductsContainer.appendChild(card);
     });
