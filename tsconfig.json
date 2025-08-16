@@ -41,7 +41,8 @@
 //     "moduleDetection": "force",
 //     "skipLibCheck": true,
 //   }
-// }{
+// }
+{
   "compilerOptions": {
     "module": "es6",
     "target": "esnext",

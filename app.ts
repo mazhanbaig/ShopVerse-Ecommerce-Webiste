@@ -1,20 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
   // ===== 1. TYPE DEFINITIONS =====
- type Product = {
-  id: number;
-  name: string;
-  price: number;
-  discount?: number;
-  stock?: number;
-  rating?: number;
-  sku?: string;
-  imageUrl: string;
-  description: string;
-  category: string;
-  isFreeDelivery: boolean;
-  iscashOnDelivery: boolean;
-  isReturnable: boolean
-};
+  type Product = {
+    id: number;
+    name: string;
+    price: number;
+    discount?: number;
+    stock?: number;
+    rating?: number;
+    sku?: string;
+    imageUrl: string;
+    description: string;
+    category: string;
+    isFreeDelivery: boolean;
+    isCashOnDelivery: boolean;
+    isReturnable: boolean
+  };
 
   interface Category {
     id: number;
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ===== 3. SLIDER PRODUCTS DATA =====
-  const sliderProducts: Product[] = [
+  const sliderProducts: <Partial>Product[] = [
     { id: 1, name: "Apple iPhone 16 Pro Max", price: 11990, imageUrl: "https://www.apple.com/newsroom/images/2024/09/apple-debuts-iphone-16-pro-and-iphone-16-pro-max/article/Apple-iPhone-16-Pro-hero-geo-240909_inline.jpg.large.jpg", description: "Apple iPhone 16 Pro Max with A17 Pro chip and titanium frame." },
     { id: 2, name: "Samsung Galaxy S24 Ultra", price: 13990, imageUrl: "https://images.samsung.com/is/image/samsung/p6pim/pk/feature/165525818/pk-feature-galaxy-s24-ultra-543035573?$FB_TYPE_A_MO_JPG$", description: "Samsung Galaxy S24 Ultra with 200MP camera and Snapdragon 8 Gen 3." },
     { id: 3, name: "Sony WH-1000XM5 Headphones", price: 3989, imageUrl: "https://static.webx.pk/files/19643/Images/sony-wh-1000xm5-silver-headphones-price-in-pakistan-19643-2088078-220524100332877.jpg", description: "Noise-canceling wireless over-ear headphones." },
@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
-
+  // ===== END OF Slide Bar =====
   // ===== 5. UTILITY FUNCTIONS =====
   function getCartItems(): Product[] {
     try {
@@ -235,8 +235,9 @@ document.addEventListener("DOMContentLoaded", () => {
       categoryContainer.appendChild(card);
     });
   }
+  // ===== END OF CATEGORY BUTTONS ======
 
-  // ===== 7. FEATURED PRODUCTS =====
+  // ===== 7. BIG SAVING DEALS SECTION  =====
   const bigSavingContainer = document.getElementById("bigSavingProducts");
 
   function renderBigSavingProducts(): void {
@@ -260,9 +261,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const discountedPrice = product.discount
         ? Math.round(product.price - (product.price * (product.discount / 100)))
         : product.price;
-      const discountedPriceSaved=product.discount 
-      ? product.price-discountedPrice
-      : "0"
+      const discountedPriceSaved = product.discount
+        ? product.price - discountedPrice
+        : "0"
       const card = document.createElement("div");
       card.className = "bg-white rounded-xl shadow hover:shadow-lg overflow-hidden transition group";
 
@@ -308,7 +309,81 @@ document.addEventListener("DOMContentLoaded", () => {
       bigSavingContainer.appendChild(card);
     });
   }
+  //  FREE DELIVERY SECTION FUNCTIONALITY   
 
+  let freeDeliveryProductsContainer = document.getElementById("freeDeliveryProducts") as HTMLDivElement;
+  function renderFreeDeliveryProducts(): void {
+    
+    if (!freeDeliveryProductsContainer) return;
+
+    let storedProducts = getStoredProducts();
+    let freeDeliveryProducts = storedProducts.filter((p: Product) => {
+      return  p.isFreeDelivery === true
+    });
+
+    freeDeliveryProductsContainer.innerHTML="";
+
+    if (freeDeliveryProducts.length == 0) {
+      freeDeliveryProductsContainer.innerHTML = `<p class="text-gray-500 text-center col-span-full">No Free Delivery Products found</p>`;
+      return;
+    }
+
+    freeDeliveryProducts = freeDeliveryProducts.slice(0, 10);
+
+    freeDeliveryProducts.forEach((product) => {
+      const discountedPrice = product.discount
+        ? Math.round(product.price - (product.price * (product.discount / 100)))
+        : product.price;
+      const discountedPriceSaved = product.discount
+        ? product.price - discountedPrice
+        : "0"
+      const card = document.createElement("div");
+      card.className = "bg-white rounded-xl shadow hover:shadow-lg overflow-hidden transition group";
+
+      card.innerHTML = `
+      <div class="relative overflow-hidden">
+        <img src="${product.imageUrl}" alt="${product.name}"
+          class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
+        ${product.discount
+          ? `<span class="absolute top-2 right-2 bg-pink-600 text-white text-xs font-semibold px-2 py-1 rounded-md">
+                 ${product.discount}% OFF
+               </span>`
+          : ""
+        }
+        <button class="add-to-cart-btn absolute bottom-2 rounded-2xl left-3 right-3 bg-pink-500 text-white py-2 text-sm font-medium opacity-0 translate-y-full group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center space-x-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.3 5.2a1 1 0 00.97 1.3h12.66a1 1 0 00.97-1.3L17 13M9 21h.01M15 21h.01"/>
+          </svg>
+          <span>Add to Cart</span>
+        </button>
+      </div>
+      <div class="p-3">
+        <h3 class="text-sm font-bold text-pink-600 truncate">${product.name}</h3>
+        <div class="mt-1 flex gap-3 items-center">
+          ${product.discount
+          ? `<span class="text-gray-500 text-sm line-through">Rs.${product.price.toLocaleString()}</span>
+             <span class="text-lg font-bold text-gray-900">Rs.${discountedPrice.toLocaleString()}</span>             `
+          : `<span class="text-lg font-bold text-gray-900">Rs.${product.price.toLocaleString()}</span>`
+        }
+        </div>
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-yellow-400">${"★".repeat(Math.floor(product.rating || 0))}</span>
+            <span class="text-gray-400">${"★".repeat(5 - Math.floor(product.rating || 0))}</span>
+            ${product.rating ? `<span class="ml-1 text-xs">(${product.rating})</span>` : ""}
+          </div>  
+      </div>
+    `;
+
+console.log("Rendering product:", product);
+
+      // Add event listener to the button
+      const addToCartBtn = card.querySelector('.add-to-cart-btn');
+      addToCartBtn?.addEventListener('click', () => addProductToCart(product));
+
+      freeDeliveryProductsContainer.appendChild(card);
+    });
+  }
 
   function getStoredProducts(): Product[] {
     try {
@@ -368,6 +443,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupMoreDropdown();
   renderCategories();
   renderBigSavingProducts();
+  renderFreeDeliveryProducts();
 
   // Event listeners
   prevBtn?.addEventListener('click', goToPrev);

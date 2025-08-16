@@ -45,7 +45,7 @@ function renderProduct(product) {
            class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
       <!-- Category & Discount Tags -->
       <span class="absolute top-2 left-2 bg-pink-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-        ${product.isFreeDelivery ? "Free delivery" : product.iscashOnDelivery ? "COD" : product.isReturnable ? "Returnable" : product.category}
+        ${product.isFreeDelivery ? "Free delivery" : product.isCashOnDelivery ? "COD" : product.isReturnable ? "Returnable" : product.category}
       </span>
         <span class="absolute top-2 right-2 bg-pink-500 text-white text-xs font-bold px-2 py-1 rounded-full">
           ${product.discount}% OFF
@@ -113,7 +113,7 @@ if (productForm) {
         const description = document.getElementById("description").value.trim();
         const category = document.getElementById("category").value;
         const isFreeDelivery = document.getElementById("freeDelivery").checked;
-        const iscashOnDelivery = document.getElementById("COD").checked;
+        const isCashOnDelivery = document.getElementById("COD").checked;
         const isReturnable = document.getElementById("returnable").checked;
         if (!name || isNaN(price) || price <= 0 || !imageUrl || !description) {
             alert("Please fill all fields correctly");
@@ -131,7 +131,7 @@ if (productForm) {
             description,
             category,
             isFreeDelivery,
-            iscashOnDelivery,
+            isCashOnDelivery,
             isReturnable
         };
         const products = getProductsFromStorage();
