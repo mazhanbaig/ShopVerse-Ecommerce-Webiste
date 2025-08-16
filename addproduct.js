@@ -120,7 +120,7 @@ if (productForm) {
             id: Date.now(),
             name,
             price,
-            discount: discount || 0,
+            discount: discount || undefined,
             stock: stock || undefined,
             rating: rating || undefined,
             sku: sku || undefined,
