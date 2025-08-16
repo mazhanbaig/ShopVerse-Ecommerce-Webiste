@@ -283,7 +283,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </svg>
           </button>
          <div class="menu hidden absolute right-0 mt-2 w-32 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
-           <button class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-pink-100 add-to-cart">
+           <button class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:rounded-lg add-to-cart">
            Add to Cart
            </button>
          </div>
