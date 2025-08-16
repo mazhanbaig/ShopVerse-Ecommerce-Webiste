@@ -350,17 +350,22 @@ document.addEventListener("DOMContentLoaded", () => {
                </span>`
           : ""
         }
-        <button class="add-to-cart-btn absolute bottom-2 rounded-2xl left-3 right-3 bg-pink-500 text-white py-2 text-sm font-medium 
-  opacity-100 translate-y-0 
-  md:opacity-0 md:translate-y-full md:group-hover:translate-y-0 md:group-hover:opacity-100 
+        <button 
+  class="add-to-cart-btn absolute bottom-[-1px] rounded-2xl left-3 right-3 bg-pink-500 text-white py-2 text-sm font-medium 
+  opacity-0 translate-y-full 
+  group-hover:translate-y-[-4px] group-hover:opacity-100 
+  md:opacity-0 md:translate-y-full 
+  md:group-hover:translate-y-0 md:group-hover:opacity-100 
+  opacity-100 translate-y-0
   transition-all duration-300 flex items-center justify-center space-x-2">
   
   <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
       d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.3 5.2a1 1 0 00.97 1.3h12.66a1 1 0 00.97-1.3L17 13M9 21h.01M15 21h.01"/>
   </svg>
   <span>Add to Cart</span>
 </button>
+
 
       </div>
       <div class="p-3">
@@ -368,7 +373,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="mt-1 flex gap-3 items-center">
           ${product.discount
           ? `<span class="text-gray-500 text-sm line-through">Rs.${product.price.toLocaleString()}</span>
-             <span class="text-lg font-bold text-gray-900">Rs.${discountedPrice.toLocaleString()}</span>             `
+             <span class="text-md sm:text-lg font-bold text-gray-900">Rs.${discountedPrice.toLocaleString()}</span>             `
           : `<span class="text-lg font-bold text-gray-900">Rs.${product.price.toLocaleString()}</span>`
         }
         </div>
@@ -380,8 +385,6 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>  
       </div>
     `;
-
-      console.log("Rendering product:", product);
 
       // Add event listener to the button
       const addToCartBtn = card.querySelector('.add-to-cart-btn');
