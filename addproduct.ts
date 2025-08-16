@@ -34,6 +34,9 @@ type Product = {
   imageUrl: string;
   description: string;
   category: string;
+  isFreeDelivery: boolean;
+  iscashOnDelivery: boolean;
+  isReturnable: boolean
 };
 
 // Get DOM elements
@@ -53,8 +56,8 @@ function saveProductsToStorage(products: Product[]): void {
 function renderProduct(product: Product): void {
   if (!productList) return;
   const discountedPrice = product.discount
-      ? (product.price - (product.price * (product.discount / 100))).toFixed(2)
-      : product.price;
+    ? (product.price - (product.price * (product.discount / 100))).toFixed(2)
+    : product.price;
 
   const productCard = document.createElement("div");
   productCard.className =
@@ -66,7 +69,7 @@ function renderProduct(product: Product): void {
            class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
       <!-- Category & Discount Tags -->
       <span class="absolute top-2 left-2 bg-pink-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-        ${product.category}
+        ${product.isFreeDelivery? "Free delivery" : product.iscashOnDelivery? "COD" : product.isReturnable? "Returnable" : product.category }
       </span>
         <span class="absolute top-2 right-2 bg-pink-500 text-white text-xs font-bold px-2 py-1 rounded-full">
           ${product.discount}% OFF
@@ -79,9 +82,9 @@ function renderProduct(product: Product): void {
           <h3 class="text-lg font-bold text-gray-800 truncate">${product.name}</h3>
           <div class="text-right">
             ${discountedPrice
-              ? `<div class="font-bold text-pink-500 line-through">$${product.price.toFixed(2)}</div>
+      ? `<div class="font-bold text-pink-500 line-through">$${product.price.toFixed(2)}</div>
                  <div class="text-md text-green-600 font-semibold">$${discountedPrice}</div>`
-              : ""}
+      : ""}
           </div>
         </div>
       
@@ -138,6 +141,10 @@ if (productForm) {
     const imageUrl = (document.getElementById("imageUrl") as HTMLInputElement).value.trim();
     const description = (document.getElementById("description") as HTMLInputElement).value.trim();
     const category = (document.getElementById("category") as HTMLSelectElement).value;
+    const isFreeDelivery=(document.getElementById("freeDelivery") as HTMLInputElement).checked;
+    const iscashOnDelivery=(document.getElementById("COD") as HTMLInputElement).checked;
+    const isReturnable=(document.getElementById("returnable") as HTMLInputElement).checked;
+
 
     if (!name || isNaN(price) || price <= 0 || !imageUrl || !description) {
       alert("Please fill all fields correctly");
@@ -148,13 +155,16 @@ if (productForm) {
       id: Date.now(),
       name,
       price,
-      discount: discount || undefined,
-      stock: stock || undefined,
-      rating: rating || undefined,
-      sku: sku || undefined,
+      discount: discount || 0,
+      stock: stock,
+      rating: rating,
+      sku: sku,
       imageUrl,
       description,
-      category
+      category,
+      isFreeDelivery,
+      iscashOnDelivery,
+      isReturnable
     };
 
     const products = getProductsFromStorage();

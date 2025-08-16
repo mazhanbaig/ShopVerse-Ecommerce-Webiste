@@ -290,13 +290,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         </div>
         <div class="flex items-center justify-between">
-        <div>
-        <span class="text-yellow-400">${"★".repeat(Math.floor(product.rating || 0))}</span>
-        <span class="text-gray-400">${"★".repeat(5 - Math.floor(product.rating || 0))}</span>
-        ${product.rating ? `<span class="ml-1 text-xs">(${product.rating})</span>` : ""}
-        </div>
-          <p class="text-xs text-green-600 font-semibold">You save Rs.${discountedPriceSaved.toLocaleString()}</p>
-        </div>
+          <div>
+            <span class="text-yellow-400">${"★".repeat(Math.floor(product.rating || 0))}</span>
+            <span class="text-gray-400">${"★".repeat(5 - Math.floor(product.rating || 0))}</span>
+            ${product.rating ? `<span class="ml-1 text-xs">(${product.rating})</span>` : ""}
+          </div>  
       </div>
     `;
 

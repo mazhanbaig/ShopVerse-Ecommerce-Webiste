@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>My Shop - Add Products | ShopVerse</title>
+    <title>BazarioVerse | Add Product Page</title>
     <link href="./output.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
@@ -278,6 +278,26 @@
                     <option value="Gifts & Occasions">Gifts & Occasions</option>
                 </select>
         
+                <!-- Small Options (Eye Pleasing) -->
+                <div class="flex flex-wrap gap-3 w-full justify-center mt-2 text-sm">
+                    <label class="flex items-center gap-2">
+                        <input id="freeDelivery" type="checkbox" class="h-4 w-4 text-pink-600 border-gray-300 rounded" />
+                        Free Delivery
+                    </label>
+                    <label class="flex items-center gap-2">
+                        <input id="COD" type="checkbox" class="h-4 w-4 text-pink-600 border-gray-300 rounded" />
+                        COD Available
+                    </label>
+                    <label class="flex items-center gap-2">
+                        <input id="returnable" type="checkbox" class="h-4 w-4 text-pink-600 border-gray-300 rounded" />
+                        Returnable
+                    </label>
+                    <!-- <label class="flex items-center gap-2">
+                        <input type="checkbox" class="h-4 w-4 text-pink-600 border-gray-300 rounded" />
+                        Featured
+                    </label> -->
+                </div>
+        
                 <!-- Submit Button -->
                 <button type="submit"
                     class="bg-pink-600 hover:bg-pink-700 text-white font-extrabold py-3 px-8 rounded-full shadow-lg transition duration-300 whitespace-nowrap">
@@ -285,6 +305,7 @@
                 </button>
             </form>
         </section>
+
 
 
         <section class="mt-16 max-w-full mx-auto">

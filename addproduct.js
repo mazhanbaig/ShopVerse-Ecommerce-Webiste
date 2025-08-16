@@ -45,7 +45,7 @@ function renderProduct(product) {
            class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
       <!-- Category & Discount Tags -->
       <span class="absolute top-2 left-2 bg-pink-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-        ${product.category}
+        ${product.isFreeDelivery ? "Free delivery" : product.iscashOnDelivery ? "COD" : product.isReturnable ? "Returnable" : product.category}
       </span>
         <span class="absolute top-2 right-2 bg-pink-500 text-white text-xs font-bold px-2 py-1 rounded-full">
           ${product.discount}% OFF
@@ -112,6 +112,9 @@ if (productForm) {
         const imageUrl = document.getElementById("imageUrl").value.trim();
         const description = document.getElementById("description").value.trim();
         const category = document.getElementById("category").value;
+        const isFreeDelivery = document.getElementById("freeDelivery").checked;
+        const iscashOnDelivery = document.getElementById("COD").checked;
+        const isReturnable = document.getElementById("returnable").checked;
         if (!name || isNaN(price) || price <= 0 || !imageUrl || !description) {
             alert("Please fill all fields correctly");
             return;
@@ -120,13 +123,16 @@ if (productForm) {
             id: Date.now(),
             name,
             price,
-            discount: discount || undefined,
-            stock: stock || undefined,
-            rating: rating || undefined,
-            sku: sku || undefined,
+            discount: discount || 0,
+            stock: stock,
+            rating: rating,
+            sku: sku,
             imageUrl,
             description,
-            category
+            category,
+            isFreeDelivery,
+            iscashOnDelivery,
+            isReturnable
         };
         const products = getProductsFromStorage();
         products.push(newProduct);

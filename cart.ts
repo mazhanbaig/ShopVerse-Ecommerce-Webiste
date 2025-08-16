@@ -14,8 +14,13 @@ type CartItem = {
   id: number;
   name: string;
   price: number;
+  discount?: number;
+  stock?: number;
+  rating?: number;
+  sku?: string;
   imageUrl: string;
   description: string;
+  category: string;
 };
 
 // When page loads
