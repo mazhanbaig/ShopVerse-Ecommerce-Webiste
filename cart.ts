@@ -1,162 +1,155 @@
-// Mobile menu toggle
-const mobileMenuButton = document.getElementById('mobileMenuButton');
+// Mobile menu toggle - simple version
+const menuButton = document.getElementById('mobileMenuButton');
 const mobileMenu = document.getElementById('mobileMenu');
-const cart = document.getElementById("cart");
-const cartMobile = document.getElementById("cartMobile");
 
+if (menuButton && mobileMenu) {
+  menuButton.addEventListener('click', () => {
+    menuButton.classList.toggle('hamburger-active');
+    mobileMenu.classList.toggle('hidden');
+  });
+}
 
-// Mobile menu toggle
-mobileMenuButton?.addEventListener('click', () => {
-  mobileMenuButton.classList.toggle('hamburger-active');
-  mobileMenu?.classList.toggle('hidden');
-});
-
-
-// Define interfaces for our data structures
-interface CartItem {
+// Cart item structure
+type CartItem = {
   id: number;
   name: string;
   price: number;
-  discount?: number;
-  stock?: number;
-  rating?: number;
-  sku?: string;
   imageUrl: string;
   description: string;
-  category?: string;
-}
-
-// Extend the Window interface to include our removeItem function
-declare global {
-  interface Window {
-    removeItem: (index: number) => void;
-    updateCartCount: () => void;
-    updateFavoriteCount: () => void;
-  }
-}
-
-// ========== GLOBAL COUNT FUNCTIONS ==========
-// Update cart count globally
-document.addEventListener("DOMContentLoaded",()=>{
-   const updateCartCounts = () => {
-    const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
-    if (cart && cartMobile) {
-      cart.textContent = cartItems.length.toString();
-      cartMobile.textContent=cartItems.length.toString();
-    }
-  };
-  updateCartCounts();
-})
-  
-// Update favorite count globally
-window.updateFavoriteCount = () => {
-  const favoriteCountElements = document.querySelectorAll("#favourite span, #mobileFavourite span");
-  const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
-  
-  favoriteCountElements.forEach(element => {
-    element.textContent = favorites.length.toString();
-  });
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-  // ========== INITIALIZE COUNTS ON LOAD ==========
-  if (typeof window.updateCartCount === 'function') window.updateCartCount();
-  if (typeof window.updateFavoriteCount === 'function') window.updateFavoriteCount();
-
-  // ========== CART PAGE FUNCTIONALITY ==========
-  // Load cart items from localStorage with proper type assertion
-  const cartItems: CartItem[] = JSON.parse(localStorage.getItem("cartItems") || "[]");
+// When page loads
+document.addEventListener("DOMContentLoaded", function() {
   
-  // Get DOM elements with type assertions
-  const cartItemsContainer = document.getElementById("cartItems") as HTMLElement | null;
-  const subtotalElement = document.getElementById("subtotal") as HTMLElement | null;
-  const totalElement = document.getElementById("total") as HTMLElement | null;
-  const checkoutBtn = document.getElementById("checkoutBtn") as HTMLButtonElement | null;
-  
-  // Render cart items function
-  const renderCartItems = (): void => {
-    if (!cartItemsContainer || !subtotalElement || !totalElement || !checkoutBtn) {
-      console.error("Required DOM elements not found");
-      return;
-    }
-
-    if (cartItems.length === 0) {
-      cartItemsContainer.innerHTML = `
-        <div class="text-center py-12">
-          <i class="fas fa-shopping-cart text-5xl text-gray-300 mb-4"></i>
-          <p class="text-gray-500">Your cart is empty</p>
-          <a href="index.html" class="mt-4 inline-block bg-pink-600 hover:bg-pink-500 text-white py-2 px-4 rounded-lg font-medium transition">
-            Continue Shopping
-          </a>
-        </div>
-      `;
-      subtotalElement.textContent = "Rs 0.00";
-      totalElement.textContent = "Rs 0.00";
-      checkoutBtn.disabled = true;
-      checkoutBtn.classList.add("opacity-50", "cursor-not-allowed");
-      return;
-    }
+  // Update cart counts everywhere
+  function updateCartCounts() {
+    const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
+    const cartElements = [
+      document.getElementById("cart"),
+      document.getElementById("cartMobile")
+    ];
     
-    let subtotal = 0;
-    cartItemsContainer.innerHTML = "";
-    
-    cartItems.forEach((item: CartItem, index: number) => {
-      subtotal += item.price;
-      
-      const cartItem = document.createElement("div");
-      cartItem.className = "flex items-start py-4 border-b border-gray-200";
-      cartItem.innerHTML = `
-        <div class="flex-shrink-0 w-20 h-20 bg-gray-200 rounded-lg overflow-hidden">
-          <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover">
-        </div>
-        <div class="ml-4 flex-1">
-          <div class="flex justify-between">
-            <h3 class="text-lg font-medium text-gray-800">${item.name}</h3>
-            <p class="text-lg font-medium">Rs ${item.price}</p>
-          </div>
-          <p class="text-sm text-gray-500 mt-1">${item.description}</p>
-          <div class="flex items-center mt-3">
-            <button class="text-gray-500 hover:text-gray-700" onclick="removeItem(${index})">
-              <i class="fas fa-trash"></i> Remove
-            </button>
-          </div>
-        </div>
-      `;
-      cartItemsContainer.appendChild(cartItem);
-    });
-    
-    subtotalElement.textContent = `Rs ${subtotal}`;
-    totalElement.textContent = `Rs ${subtotal}`;
-    checkoutBtn.disabled = false;
-    checkoutBtn.classList.remove("opacity-50", "cursor-not-allowed");
-  };
-  
-  // Remove item from cart function
-  window.removeItem = (index: number): void => {
-    cartItems.splice(index, 1);
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    renderCartItems();
-    window.updateCartCount(); // Update count globally
-  };
-  
-  // Checkout button event listener
-  if (checkoutBtn) {
-    checkoutBtn.addEventListener("click", () => {
-      alert(`Proceeding to checkout with ${cartItems.length} items`);
-      // In a real app, you would redirect to a checkout page
+    cartElements.forEach(element => {
+      if (element) element.textContent = cartItems.length.toString();
     });
   }
   
-  // Mobile menu toggle
-  const menuBtn = document.getElementById("menuBtn") as HTMLButtonElement | null;
-  const mobileMenuDropdown = document.getElementById("mobileMenuDropdown") as HTMLDivElement | null;
+  // Update favorite counts everywhere
+  function updateFavoriteCounts() {
+    const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+    const favElements = document.querySelectorAll("#favourite span, #mobileFavourite span");
+    
+    favElements.forEach(element => {
+      element.textContent = favorites.length.toString();
+    });
+  }
   
-  if (menuBtn && mobileMenuDropdown) {
-    menuBtn.addEventListener("click", () => {
+  // Run these when page loads
+  updateCartCounts();
+  updateFavoriteCounts();
+  
+  // Cart page specific code
+  const cartPage = document.getElementById("cartItems");
+  if (cartPage) {
+    // Get cart items from storage
+    const cartItems: CartItem[] = JSON.parse(localStorage.getItem("cartItems") || "[]");
+    const subtotalElement = document.getElementById("subtotal");
+    const totalElement = document.getElementById("total");
+    const checkoutBtn = document.getElementById("checkoutBtn");
+    
+    // Show all cart items
+    function showCartItems() {
+      if (!cartPage || !subtotalElement || !totalElement || !checkoutBtn) return;
+      
+      // If cart is empty
+      if (cartItems.length === 0) {
+        cartPage.innerHTML = `
+          <div class="text-center py-12">
+            <i class="fas fa-shopping-cart text-5xl text-gray-300 mb-4"></i>
+            <p class="text-gray-500">Your cart is empty</p>
+            <a href="index.html" class="mt-4 inline-block bg-pink-600 hover:bg-pink-500 text-white py-2 px-4 rounded-lg font-medium transition">
+              Continue Shopping
+            </a>
+          </div>
+        `;
+        subtotalElement.textContent = "Rs 0.00";
+        totalElement.textContent = "Rs 0.00";
+        checkoutBtn.disabled = true;
+        checkoutBtn.classList.add("opacity-50", "cursor-not-allowed");
+        return;
+      }
+      
+      // Calculate total price
+      let total = 0;
+      cartPage.innerHTML = "";
+      
+      // Add each item to the page
+      cartItems.forEach((item, index) => {
+        total += item.price;
+        
+        const itemHTML = `
+          <div class="flex items-start py-4 border-b border-gray-200">
+            <div class="flex-shrink-0 w-20 h-20 bg-gray-200 rounded-lg overflow-hidden">
+              <img src="${item.imageUrl}" alt="${item.name}" class="w-full h-full object-cover">
+            </div>
+            <div class="ml-4 flex-1">
+              <div class="flex justify-between">
+                <h3 class="text-lg font-medium text-gray-800">${item.name}</h3>
+                <p class="text-lg font-medium">Rs ${item.price}</p>
+              </div>
+              <p class="text-sm text-gray-500 mt-1">${item.description}</p>
+              <div class="flex items-center mt-3">
+                <button class="text-gray-500 hover:text-gray-700 remove-btn" data-index="${index}">
+                  <i class="fas fa-trash"></i> Remove
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+        cartPage.innerHTML += itemHTML;
+      });
+      
+      // Update totals
+      subtotalElement.textContent = `Rs ${total}`;
+      totalElement.textContent = `Rs ${total}`;
+      checkoutBtn.disabled = false;
+      checkoutBtn.classList.remove("opacity-50", "cursor-not-allowed");
+      
+      // Add event listeners to remove buttons
+      document.querySelectorAll('.remove-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          const index = parseInt(this.getAttribute('data-index') || "0");
+          removeItem(index);
+        });
+      });
+    }
+    
+    // Remove item from cart
+    function removeItem(index: number) {
+      cartItems.splice(index, 1);
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+      showCartItems();
+      updateCartCounts();
+    }
+    
+    // Checkout button
+    if (checkoutBtn) {
+      checkoutBtn.addEventListener("click", () => {
+        alert(`Proceeding to checkout with ${cartItems.length} items`);
+      });
+    }
+    
+    // Show items when page loads
+    showCartItems();
+  }
+  
+  // Mobile menu dropdown toggle
+  const mobileMenuBtn = document.getElementById("menuBtn");
+  const mobileMenuDropdown = document.getElementById("mobileMenuDropdown");
+  
+  if (mobileMenuBtn && mobileMenuDropdown) {
+    mobileMenuBtn.addEventListener("click", () => {
       mobileMenuDropdown.classList.toggle("hidden");
     });
   }
-  
-  // Initial render
-  renderCartItems();
 });
