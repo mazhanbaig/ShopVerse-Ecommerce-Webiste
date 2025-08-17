@@ -79,11 +79,11 @@ function renderProduct(product: Product): void {
     <div class="px-4 py-2">
       <!-- Name & Price -->
         <div class="flex justify-between items-start mb-2">
-          <h3 class="text-lg font-bold text-gray-800 truncate">${product.name}</h3>
+          <h3 class="text-lg font-bold text-pink-600 truncate">${product.name}</h3>
           <div class="text-right">
             ${discountedPrice
-      ? `<div class="font-bold text-pink-500 line-through">$${product.price.toFixed(2)}</div>
-                 <div class="text-md text-green-600 font-semibold">$${discountedPrice}</div>`
+      ? `<div class="font-bold text-gray-500 line-through">Rs.${product.price.toFixed(2)}</div>
+                 <div class="text-md text-green-600 font-semibold">Rs.${discountedPrice}</div>`
       : ""}
           </div>
         </div>

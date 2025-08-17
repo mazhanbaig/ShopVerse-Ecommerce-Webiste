@@ -255,7 +255,10 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    discountedProducts = discountedProducts.slice(0, 10);
+    // Simple row control
+    const isMobile = window.innerWidth < 640; // <640px = mobile
+    const maxProducts = isMobile ? 8 : 10;    // 4 rows on mobile, 2 rows on desktop
+    discountedProducts = storedProducts.slice(0, maxProducts);
 
     discountedProducts.forEach(product => {
       const discountedPrice = product.discount
@@ -294,7 +297,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="mt-1 flex gap-3 items-center">
           ${product.discount
           ? `<span class="text-black font-bold text-[16px]">Rs.${discountedPrice.toLocaleString()}</span>
-             <span class="text-[10px] bg-pink-300 rounded-full px-1 py-1 font-bold text-gray-900">-${product.discount}%</span>`
+             <span class="text-[10px] bg-pink-300 rounded-md px-1 py-1 font-bold text-gray-900">-${product.discount}%</span>`
           : `<span class="text-lg font-bold text-gray-900">Rs.${product.price.toLocaleString()}</span>`
         }
         </div>
@@ -349,7 +352,11 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    freeDeliveryProducts = freeDeliveryProducts.slice(0, 10);
+    // Simple row control
+    const isMobile = window.innerWidth < 640; // <640px = mobile
+    const maxProducts = isMobile ? 8 : 10;    // 4 rows on mobile, 2 rows on desktop
+    freeDeliveryProducts = storedProducts.slice(0, maxProducts);
+
 
     freeDeliveryProducts.forEach((product) => {
       const discountedPrice = product.discount
@@ -392,7 +399,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="mt-1 flex gap-1 items-center">
           ${product.discount
           ? `<span class="text-black font-bold text-[16px]">Rs.${discountedPrice.toLocaleString()}</span>
-             <span class="text-[10px] bg-pink-300 rounded-full px-1 py-1 font-bold text-gray-900">-${product.discount}%</span>`
+             <span class="text-[10px] bg-pink-300 rounded-md px-1 py-1 font-bold text-gray-900">-${product.discount}%</span>`
           : `<span class="text-lg font-bold text-gray-900">Rs.${product.price.toLocaleString()}</span>`
         }
         </div>
@@ -443,7 +450,11 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    storedProducts = storedProducts.slice(0, 10);
+    // Simple row control
+    const isMobile = window.innerWidth < 640; // <640px = mobile
+    const maxProducts = isMobile ? 8 : 10;    // 4 rows on mobile, 2 rows on desktop
+    storedProducts = storedProducts.slice(0, maxProducts);
+
 
     storedProducts.forEach(product => {
       const discountedPrice = product.discount
@@ -456,12 +467,9 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="relative overflow-hidden">
         <img src="${product.imageUrl}" alt="${product.name}"
           class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
-        ${product.discount
-          ? `<span class="absolute top-2 left-2 bg-pink-600 text-white text-xs font-semibold px-2 py-1 rounded-md">
-                 ${product.discount}% OFF
-               </span>`
-          : ""
-        }
+        <span class="absolute top-2 left-2 bg-pink-600 text-white text-xs font-bold px-2 py-1 rounded-md">
+        ${product.isFreeDelivery ? "Free delivery" : product.isCashOnDelivery ? "COD" : product.isReturnable ? "Returnable" : product.category}
+      </span>
         <div class="absolute top-2 right-2">
           <button class="menu-btn p-1 rounded-full bg-white shadow hover:bg-gray-100">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 cursor-pointer" fill="currentColor" viewBox="0 0 24 24">
@@ -482,7 +490,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="mt-1 flex gap-3 items-center">
           ${product.discount
           ? `<span class="text-black font-bold text-[16px]">Rs.${discountedPrice.toLocaleString()}</span>
-             <span class="text-[10px] bg-pink-300 rounded-full px-1 py-1 font-bold text-gray-900">-${product.discount}%</span>`
+             <span class="text-[10px] bg-pink-300 rounded-md px-1 py-1 font-bold text-gray-900">-${product.discount}%</span>`
           : `<span class="text-lg font-bold text-gray-900">Rs.${product.price.toLocaleString()}</span>`
         }
         </div>
