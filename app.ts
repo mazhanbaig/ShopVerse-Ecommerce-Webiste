@@ -366,7 +366,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <img src="${product.imageUrl}" alt="${product.name}"
           class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
         ${product.isFreeDelivery
-          ? `<span class="absolute top-2 left-2 bg-pink-600 text-white text-xs font-semibold px-2 py-1 rounded-md">
+          ? `<span class="absolute top-2 left-2 bg-pink-600 text-white text-[11px] sm:text-xs font-semibold px-2 py-1 rounded-md">
                  Free Delivery
                </span>`
           : ""
@@ -428,6 +428,98 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // ===== 9. FOR YOU DEALS SECTION  =====
+  const forYouProductsContainer = document.getElementById("forYouProducts");
+
+  function renderforYouProducts(): void {
+    if (!forYouProductsContainer) return;
+
+    let storedProducts: Product[] = getStoredProducts();
+
+    forYouProductsContainer.innerHTML = "";
+
+    if (storedProducts.length === 0) {
+      forYouProductsContainer.innerHTML = `<p class="text-gray-500 text-center col-span-full">Soory no products found</p>`;
+      return;
+    }
+
+    storedProducts = storedProducts.slice(0, 10);
+
+    storedProducts.forEach(product => {
+      const discountedPrice = product.discount
+        ? Math.round(product.price - (product.price * (product.discount / 100)))
+        : product.price;
+      const card = document.createElement("div");
+      card.className = "bg-white rounded-xl shadow hover:shadow-lg overflow-hidden transition group";
+
+      card.innerHTML = `
+      <div class="relative overflow-hidden">
+        <img src="${product.imageUrl}" alt="${product.name}"
+          class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
+        ${product.discount
+          ? `<span class="absolute top-2 left-2 bg-pink-600 text-white text-xs font-semibold px-2 py-1 rounded-md">
+                 ${product.discount}% OFF
+               </span>`
+          : ""
+        }
+        <div class="absolute top-2 right-2">
+          <button class="menu-btn p-1 rounded-full bg-white shadow hover:bg-gray-100">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 cursor-pointer" fill="currentColor" viewBox="0 0 24 24">
+              <circle cx="12" cy="5" r="2" />
+              <circle cx="12" cy="12" r="2" />
+              <circle cx="12" cy="19" r="2" />
+            </svg>
+          </button>
+         <div class="menu hidden absolute right-0 mt-2 w-32 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+           <button class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:rounded-lg add-to-cart">
+           Add to Cart
+           </button>
+         </div>
+        </div>
+      </div>
+      <div class="p-3">
+        <h3 class="text-sm font-bold text-pink-600 truncate">${product.name}</h3>
+        <div class="mt-1 flex gap-3 items-center">
+          ${product.discount
+          ? `<span class="text-black font-bold text-[16px]">Rs.${discountedPrice.toLocaleString()}</span>
+             <span class="text-[10px] bg-pink-300 rounded-full px-1 py-1 font-bold text-gray-900">-${product.discount}%</span>`
+          : `<span class="text-lg font-bold text-gray-900">Rs.${product.price.toLocaleString()}</span>`
+        }
+        </div>
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-yellow-400 text-[15px] sm:text-[16px]">${"★".repeat(Math.floor(product.rating || 0))}</span>
+            <span class="text-gray-400 text-[15px] sm:text-[16px]">${"★".repeat(5 - Math.floor(product.rating || 0))}</span>
+            ${product.rating ? `<span class="ml-1 text-xs">(${product.rating})</span>` : ""}
+            <span class="text-[11px] sm:text-sm text-gray-600">sold(~)</span>
+          </div>  
+      </div>
+    `;
+
+      // Toggle menu open/close
+      const menuBtn = card.querySelector('.menu-btn') as HTMLButtonElement;
+      const menu = card.querySelector('.menu') as HTMLDivElement;
+      const addToCartBtnCard = card.querySelector('.add-to-cart') as HTMLButtonElement;
+
+      menuBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        document.querySelectorAll('.menu').forEach((m) => m.classList.add('hidden')); // close others
+        menu.classList.toggle('hidden');
+      });
+
+      // Add to cart action
+      addToCartBtnCard?.addEventListener('click', () => addProductToCart(product));
+
+      // Close menu when clicking outside
+      document.addEventListener('click', () => {
+        menu.classList.add('hidden');
+      });
+
+      forYouProductsContainer.appendChild(card);
+    });
+  }
+
+  // ====  END OF FOR YOU SECTION  =======
   function getStoredProducts(): Product[] {
     try {
       return JSON.parse(localStorage.getItem("products") || "[]");
@@ -449,7 +541,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Show success notification
       const notification = document.createElement('div');
-      notification.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg animate-fade-in-up';
+      notification.className = 'fixed bottom-40 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg animate-fade-in-up';
       notification.textContent = `${product.name} added to cart!`;
       document.body.appendChild(notification);
 
@@ -462,7 +554,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       // Show already in cart notification
       const notification = document.createElement('div');
-      notification.className = 'fixed bottom-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg animate-fade-in-up';
+      notification.className = 'fixed bottom-40 right-4 bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg animate-fade-in-up';
       notification.textContent = `${product.name} is already in your cart`;
       document.body.appendChild(notification);
 
@@ -487,6 +579,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderCategories();
   renderBigSavingProducts();
   renderFreeDeliveryProducts();
+  renderforYouProducts();
 
   // Event listeners
   prevBtn?.addEventListener('click', goToPrev);
