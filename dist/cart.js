@@ -1,3 +1,4 @@
+"use strict";
 // Mobile menu toggle - simple version
 const menuButton = document.getElementById('mobileMenuButton');
 const mobileMenu = document.getElementById('mobileMenu');
@@ -68,26 +69,64 @@ document.addEventListener("DOMContentLoaded", function () {
             cartItems.forEach((item, index) => {
                 total += item.price;
                 const itemHTML = `
-          <div class="flex items-start py-4 border-b border-gray-200">
-            <div class="flex-shrink-0 w-20 h-20 bg-gray-200 rounded-lg overflow-hidden">
-              <img src="${item.imageUrl}" alt="${item.name}" class="w-full h-full object-cover">
-            </div>
-            <div class="ml-4 flex-1">
-              <div class="flex justify-between">
-                <h3 class="text-lg font-medium text-gray-800">${item.name}</h3>
-                <p class="text-lg font-medium">Rs ${item.price}</p>
-              </div>
-              <p class="text-sm text-gray-500 mt-1">${item.description}</p>
-              <div class="flex items-center mt-3">
-                <button class="text-gray-500 hover:text-gray-700 remove-btn" data-index="${index}">
-                  <i class="fas fa-trash"></i> Remove
-                </button>
-              </div>
-            </div>
-          </div>
-        `;
+  <div class="group flex items-start gap-4 py-4 border-b border-gray-200 transition-all duration-300 hover:bg-gray-50 hover:shadow-md rounded-lg p-3">
+    <!-- Product Image -->
+    <div class="flex-shrink-0 w-20 h-20 bg-gray-200 rounded-lg overflow-hidden">
+      <img src="${item.imageUrl}" alt="${item.name}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+    </div>
+
+    <!-- Product Details -->
+    <div class="flex-1">
+      <div class="flex justify-between items-start">
+        <h3 class="text-lg font-semibold text-gray-800 group-hover:text-pink-600 transition-colors">${item.name}</h3>
+        <p class="text-lg font-semibold text-gray-700">Rs ${item.price}</p>
+      </div>
+      <p class="text-sm text-gray-500 mt-1 line-clamp-2">${item.description}</p>
+
+      <!-- Remove -->
+      <button class="text-gray-400 hover:text-red-500 transition-colors remove-btn" data-index="${index}">
+        <i class="fas fa-trash"></i> <span class="text-gray-700">Remove</span>
+      </button>
+
+      <!-- Actions -->
+      <div class="group-hover:flex items-center justify-end gap-3 mt-3 hidden">
+        <!-- Quantity Selector -->
+        <div class="flex items-center border rounded-lg px-2 py-1 bg-white shadow-sm hover:shadow-md transition duration-200">
+        <button onclick="decreaseQuantity(this)" class="px-2 text-gray-500 hover:text-pink-600 font-bold text-lg">−</button>
+        <span class="px-3 font-medium text-gray-800 select-none">1</span>
+        <button onclick="increaseQuantity(this)" class="px-2 text-gray-500 hover:text-pink-600 font-bold text-lg">+</button>
+      </div>
+
+        <!-- Buy button -->
+        <button class="bg-pink-500 text-white text-sm font-medium px-4 py-2 rounded-lg shadow hover:bg-pink-600 hover:scale-105 transition-all duration-300">
+          Buy Now
+        </button>
+      </div>
+    </div>
+  </div>
+`;
                 cartPage.innerHTML += itemHTML;
             });
+            // Increase Quantity
+            const increaseQuantity = (button) => {
+                var _a;
+                const span = (_a = button.parentElement) === null || _a === void 0 ? void 0 : _a.querySelector("span");
+                if (!span)
+                    return;
+                let val = parseInt(span.textContent || "0");
+                span.textContent = (val + 1).toString();
+            };
+            // Decrease Quantity
+            const decreaseQuantity = (button) => {
+                var _a;
+                const span = (_a = button.parentElement) === null || _a === void 0 ? void 0 : _a.querySelector("span");
+                if (!span)
+                    return;
+                let val = parseInt(span.textContent || "0");
+                if (val > 1) {
+                    span.textContent = (val - 1).toString();
+                }
+            };
             // Update totals
             subtotalElement.textContent = `Rs ${total}`;
             totalElement.textContent = `Rs ${total}`;
@@ -126,4 +165,4 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
-export {};
+//# sourceMappingURL=cart.js.map

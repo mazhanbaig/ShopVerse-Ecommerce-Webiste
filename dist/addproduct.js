@@ -1,12 +1,13 @@
+"use strict";
 // Mobile menu toggle
 const mobileMenuButton = document.getElementById('mobileMenuButton');
 const mobileMenu = document.getElementById('mobileMenu');
 const cart = document.getElementById("cart");
 const cartMobile = document.getElementById("cartMobile");
 // Mobile menu toggle
-mobileMenuButton?.addEventListener('click', () => {
+mobileMenuButton === null || mobileMenuButton === void 0 ? void 0 : mobileMenuButton.addEventListener('click', () => {
     mobileMenuButton.classList.toggle('hamburger-active');
-    mobileMenu?.classList.toggle('hidden');
+    mobileMenu === null || mobileMenu === void 0 ? void 0 : mobileMenu.classList.toggle('hidden');
 });
 // Update cart count globally
 document.addEventListener("DOMContentLoaded", () => {
@@ -87,12 +88,12 @@ function renderProduct(product) {
     </div>
   `;
     const deleteBtn = productCard.querySelector(".delete-btn");
-    deleteBtn?.addEventListener("click", () => {
+    deleteBtn === null || deleteBtn === void 0 ? void 0 : deleteBtn.addEventListener("click", () => {
         productCard.remove();
         const products = getProductsFromStorage().filter(p => p.id !== product.id);
         saveProductsToStorage(products);
     });
-    productList?.appendChild(productCard);
+    productList === null || productList === void 0 ? void 0 : productList.appendChild(productCard);
 }
 // Load products on page load
 window.addEventListener("DOMContentLoaded", () => {
@@ -102,13 +103,14 @@ window.addEventListener("DOMContentLoaded", () => {
 // Form submission
 if (productForm) {
     productForm.addEventListener("submit", (e) => {
+        var _a, _b, _c, _d;
         e.preventDefault();
         const name = document.getElementById("name").value.trim();
         const price = parseFloat(document.getElementById("price").value);
-        const discount = parseFloat(document.getElementById("discount")?.value || "0");
-        const stock = parseInt(document.getElementById("stock")?.value || "0");
-        const rating = parseFloat(document.getElementById("rating")?.value || "0");
-        const sku = document.getElementById("sku")?.value.trim() || "";
+        const discount = parseFloat(((_a = document.getElementById("discount")) === null || _a === void 0 ? void 0 : _a.value) || "0");
+        const stock = parseInt(((_b = document.getElementById("stock")) === null || _b === void 0 ? void 0 : _b.value) || "0");
+        const rating = parseFloat(((_c = document.getElementById("rating")) === null || _c === void 0 ? void 0 : _c.value) || "0");
+        const sku = ((_d = document.getElementById("sku")) === null || _d === void 0 ? void 0 : _d.value.trim()) || "";
         const imageUrl = document.getElementById("imageUrl").value.trim();
         const description = document.getElementById("description").value.trim();
         const category = document.getElementById("category").value;
@@ -141,4 +143,4 @@ if (productForm) {
         productForm.reset();
     });
 }
-export {};
+//# sourceMappingURL=addproduct.js.map

@@ -1,12 +1,14 @@
+"use strict";
 document.addEventListener("DOMContentLoaded", () => {
+    var _a;
     // ===== 2. NAVBAR FUNCTIONALITY =====
     const mobileMenuButton = document.getElementById('mobileMenuButton');
     const mobileMenu = document.getElementById('mobileMenu');
     const cart = document.getElementById("cart");
     const cartMobile = document.getElementById("cartMobile");
-    mobileMenuButton?.addEventListener('click', () => {
+    mobileMenuButton === null || mobileMenuButton === void 0 ? void 0 : mobileMenuButton.addEventListener('click', () => {
         mobileMenuButton.classList.toggle('hamburger-active');
-        mobileMenu?.classList.toggle('hidden');
+        mobileMenu === null || mobileMenu === void 0 ? void 0 : mobileMenu.classList.toggle('hidden');
     });
     function updateCartCounts() {
         const cartItems = getCartItems();
@@ -142,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             return JSON.parse(localStorage.getItem("cartItems") || "[]");
         }
-        catch {
+        catch (_a) {
             return [];
         }
     }
@@ -203,7 +205,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!bigSavingContainer)
             return;
         const storedProducts = getStoredProducts();
-        let discountedProducts = storedProducts.filter(product => (product.discount ?? 0) > 5);
+        let discountedProducts = storedProducts.filter(product => { var _a; return ((_a = product.discount) !== null && _a !== void 0 ? _a : 0) > 5; });
         bigSavingContainer.innerHTML = "";
         if (discountedProducts.length === 0) {
             bigSavingContainer.innerHTML = `<p class="text-gray-500 text-center col-span-full">No big saving products found</p>`;
@@ -264,13 +266,13 @@ document.addEventListener("DOMContentLoaded", () => {
             const menuBtn = card.querySelector('.menu-btn');
             const menu = card.querySelector('.menu');
             const addToCartBtnCard = card.querySelector('.add-to-cart');
-            menuBtn?.addEventListener('click', (e) => {
+            menuBtn === null || menuBtn === void 0 ? void 0 : menuBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 document.querySelectorAll('.menu').forEach((m) => m.classList.add('hidden')); // close others
                 menu.classList.toggle('hidden');
             });
             // Add to cart action
-            addToCartBtnCard?.addEventListener('click', () => addProductToCart(product));
+            addToCartBtnCard === null || addToCartBtnCard === void 0 ? void 0 : addToCartBtnCard.addEventListener('click', () => addProductToCart(product));
             // Close menu when clicking outside
             document.addEventListener('click', () => {
                 menu.classList.add('hidden');
@@ -351,13 +353,13 @@ document.addEventListener("DOMContentLoaded", () => {
             const menuBtn = card.querySelector('.menu-btn');
             const menu = card.querySelector('.menu');
             const addToCartBtnCard = card.querySelector('.add-to-cart');
-            menuBtn?.addEventListener('click', (e) => {
+            menuBtn === null || menuBtn === void 0 ? void 0 : menuBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 document.querySelectorAll('.menu').forEach((m) => m.classList.add('hidden')); // close others
                 menu.classList.toggle('hidden');
             });
             // Add to cart action
-            addToCartBtnCard?.addEventListener('click', () => addProductToCart(product));
+            addToCartBtnCard === null || addToCartBtnCard === void 0 ? void 0 : addToCartBtnCard.addEventListener('click', () => addProductToCart(product));
             // Close menu when clicking outside
             document.addEventListener('click', () => {
                 menu.classList.add('hidden');
@@ -429,13 +431,13 @@ document.addEventListener("DOMContentLoaded", () => {
             const menuBtn = card.querySelector('.menu-btn');
             const menu = card.querySelector('.menu');
             const addToCartBtnCard = card.querySelector('.add-to-cart');
-            menuBtn?.addEventListener('click', (e) => {
+            menuBtn === null || menuBtn === void 0 ? void 0 : menuBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 document.querySelectorAll('.menu').forEach((m) => m.classList.add('hidden')); // close others
                 menu.classList.toggle('hidden');
             });
             // Add to cart action
-            addToCartBtnCard?.addEventListener('click', () => addProductToCart(product));
+            addToCartBtnCard === null || addToCartBtnCard === void 0 ? void 0 : addToCartBtnCard.addEventListener('click', () => addProductToCart(product));
             // Close menu when clicking outside
             document.addEventListener('click', () => {
                 menu.classList.add('hidden');
@@ -448,7 +450,7 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             return JSON.parse(localStorage.getItem("products") || "[]");
         }
-        catch {
+        catch (_a) {
             return [];
         }
     }
@@ -486,7 +488,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
     // ===== 8. INITIALIZATION =====
-    document.getElementById("viewAllProducts")?.addEventListener("click", () => {
+    (_a = document.getElementById("viewAllProducts")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
         window.location.href = "/products.html";
     });
     // Initialize all components
@@ -499,8 +501,8 @@ document.addEventListener("DOMContentLoaded", () => {
     renderFreeDeliveryProducts();
     renderforYouProducts();
     // Event listeners
-    prevBtn?.addEventListener('click', goToPrev);
-    nextBtn?.addEventListener('click', goToNext);
-    addToCart?.addEventListener('click', addCurrentToCart);
+    prevBtn === null || prevBtn === void 0 ? void 0 : prevBtn.addEventListener('click', goToPrev);
+    nextBtn === null || nextBtn === void 0 ? void 0 : nextBtn.addEventListener('click', goToNext);
+    addToCart === null || addToCart === void 0 ? void 0 : addToCart.addEventListener('click', addCurrentToCart);
 });
-export {};
+//# sourceMappingURL=app.js.map

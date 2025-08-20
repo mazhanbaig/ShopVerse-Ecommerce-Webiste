@@ -1,63 +1,94 @@
+// // {
+// //   // Visit https://aka.ms/tsconfig to read more about this file
+// //   "compilerOptions": {
+// //     // File Layout
+// //     // "rootDir": "./src",
+// //     // "outDir": "./dist",
+
+// //     // Environment Settings
+// //     // See also https://aka.ms/tsconfig/module
+// //     "module": "nodenext",
+// //     "target": "esnext",
+// //     "types": [],
+// //     // For nodejs:
+// //     // "lib": ["esnext"],
+// //     // "types": ["node"],
+// //     // and npm install -D @types/node
+
+// //     // Other Outputs
+// //     "sourceMap": true,
+// //     "declaration": true,
+// //     "declarationMap": true,
+
+// //     // Stricter Typechecking Options
+// //     "noUncheckedIndexedAccess": true,
+// //     "exactOptionalPropertyTypes": true,
+
+// //     // Style Options
+// //     // "noImplicitReturns": true,
+// //     // "noImplicitOverride": true,
+// //     // "noUnusedLocals": true,
+// //     // "noUnusedParameters": true,
+// //     // "noFallthroughCasesInSwitch": true,
+// //     // "noPropertyAccessFromIndexSignature": true,
+
+// //     // Recommended Options
+// //     "strict": true,
+// //     "jsx": "react-jsx",
+// //     "verbatimModuleSyntax": true,
+// //     "isolatedModules": true,
+// //     "noUncheckedSideEffectImports": true,
+// //     "moduleDetection": "force",
+// //     "skipLibCheck": true,
+// //   }
+// // }
 // {
-//   // Visit https://aka.ms/tsconfig to read more about this file
 //   "compilerOptions": {
-//     // File Layout
-//     // "rootDir": "./src",
-//     // "outDir": "./dist",
-
-//     // Environment Settings
-//     // See also https://aka.ms/tsconfig/module
-//     "module": "nodenext",
+//     "module": "es6",
 //     "target": "esnext",
-//     "types": [],
-//     // For nodejs:
-//     // "lib": ["esnext"],
-//     // "types": ["node"],
-//     // and npm install -D @types/node
-
-//     // Other Outputs
-//     "sourceMap": true,
-//     "declaration": true,
-//     "declarationMap": true,
-
-//     // Stricter Typechecking Options
-//     "noUncheckedIndexedAccess": true,
-//     "exactOptionalPropertyTypes": true,
-
-//     // Style Options
-//     // "noImplicitReturns": true,
-//     // "noImplicitOverride": true,
-//     // "noUnusedLocals": true,
-//     // "noUnusedParameters": true,
-//     // "noFallthroughCasesInSwitch": true,
-//     // "noPropertyAccessFromIndexSignature": true,
-
-//     // Recommended Options
 //     "strict": true,
 //     "jsx": "react-jsx",
-//     "verbatimModuleSyntax": true,
 //     "isolatedModules": true,
+//     "skipLibCheck": true,
+//     "noUncheckedIndexedAccess": true,
+//     "exactOptionalPropertyTypes": true,
+//     "verbatimModuleSyntax": true,
 //     "noUncheckedSideEffectImports": true,
 //     "moduleDetection": "force",
-//     "skipLibCheck": true,
+//     "declaration": false,
+//     "declarationMap": false,
+//     "sourceMap": false,
+//     "types": []
 //   }
 // }
+
+
 {
   "compilerOptions": {
-    "module": "es6",
-    "target": "esnext",
-    "strict": true,
-    "jsx": "react-jsx",
-    "isolatedModules": true,
-    "skipLibCheck": true,
-    "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
-    "verbatimModuleSyntax": true,
-    "noUncheckedSideEffectImports": true,
-    "moduleDetection": "force",
+    // Input folder where your TS files are
+    "rootDir": "./src",
+
+    // Output folder for compiled JS
+    "outDir": "./dist",
+
+    // Set target JS version (ES6 works for browsers)
+    "target": "ES6",
+
+    // Use standard modules
+    "module": "commonjs",
+
+    // Generate source maps for debugging
+    "sourceMap": true,
+
+    // Generate declaration files (optional)
     "declaration": false,
-    "declarationMap": false,
-    "sourceMap": false,
-    "types": []
-  }
+
+    // Enable strict mode
+    "strict": true,
+
+    // Skip library type checks for speed
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }
