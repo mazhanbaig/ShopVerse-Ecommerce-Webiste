@@ -149,7 +149,7 @@
                     </div>
 
                     <!-- Navigation Links -->
-                    <div class="flex items-center space-x-6">
+                    <div class="flex items-center space-x-4 lg:space-x-6">
                         <a href="#"
                             class="group flex items-center space-x-1 text-gray-600 hover:text-pink-500 transition-smooth">
                             <i class="fas fa-store text-lg"></i>
@@ -165,11 +165,13 @@
                                 class="absolute -top-2 -right-2 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center group-hover:bg-pink-600 transition-smooth"></span>
                         </a>
 
-                        <a href="profile.html"
+                        <a href="auth.html"
                             class="group flex items-center space-x-1 text-gray-600 hover:text-pink-500 transition-smooth">
-                            <i class="fas fa-user text-lg"></i>
-                            <span class="text-sm font-medium">Account</span>
+                            <i class="fas fa-sign-in-alt"></i>
+
+                            <span class="text-sm font-medium">Sign In</span>
                         </a>
+
                     </div>
                 </div>
 
@@ -186,8 +188,9 @@
             </div>
             <div class="hidden md:flex justify-center items-center gap-10 border-t-[1px] border-gray-300 px-2 py-3">
                 <a class="font-semibold hover:text-pink-600 " href="index.html">Home</a>
-                <a class="font-semibold hover:text-pink-600 " href="addproduct.html">Add Product</a>
                 <a class="font-semibold hover:text-pink-600 " href="deals.html">Deals</a>
+                <a class="font-semibold hover:text-pink-600 " href="addproduct.html">Add Product</a>
+                <a href="account.html" class="font-semibold hover:text-pink-600 ">Account</a>
                 <a class="font-semibold hover:text-pink-600 " href="#">Contact</a>
             </div>
         </div>
@@ -208,7 +211,7 @@
                     class="block px-4 py-3 rounded-lg hover:bg-pink-50 text-gray-700 hover:text-pink-600 transition-smooth">
                     <i class="fas fa-store mr-3"></i> Become a Seller
                 </a>
-                <a href="#"
+                <a href="auth.html"
                     class="block px-4 py-3 rounded-lg hover:bg-pink-50 text-gray-700 hover:text-pink-600 transition-smooth">
                     <span class=""><i class="fa-solid fa-lock mr-3"></i>Sign In/Up</span>
                 </a>
@@ -238,13 +241,13 @@
             <a href="addproduct.html"
                 class="flex flex-col items-center p-2 text-gray-700 hover:text-pink-500 transition">
                 <i class="fas fa-box-open text-xl"></i>
-                <span class="text-xs mt-1">Products</span>
+                <span class="text-xs mt-1">Add Products</span>
             </a>
 
             <!-- Profile -->
-            <a href="profile.html" class="flex flex-col items-center p-2 text-gray-700 hover:text-green-500 transition">
+            <a href="account.html" class="flex flex-col items-center p-2 text-gray-700 hover:text-green-500 transition">
                 <i class="fas fa-user text-xl"></i>
-                <span class="text-xs mt-1">Profile</span>
+                <span class="text-xs mt-1">Account/span>
             </a>
         </div>
     </div>
@@ -342,13 +345,13 @@
             <h2 class="text-2xl sm:text-4xl font-extrabold text-center text-pink-600 tracking-wide mb-8">
                 Free Delivery
             </h2>
-        
+
             <!-- Products Grid -->
             <div id="freeDeliveryProducts"
                 class="grid grid-cols-2 max-[500px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 <!-- Products will be dynamically inserted here -->
             </div>
-        
+
             <!-- View All Button -->
             <div class="text-center mt-10">
                 <button id="viewAllFreeDelivery"
@@ -360,13 +363,13 @@
         <!-- FOR YOU Products Section -->
         <section class="w-full mx-auto px-2 bg-white rounded-xl shadow-lg p-8">
             <h2 class="text-2xl sm:text-4xl font-extrabold text-center text-pink-600 tracking-wide mb-8">For You</h2>
-        
+
             <!-- Products Grid -->
             <div id="forYouProducts"
                 class="grid grid-cols-2 max-[500px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 <!-- Products will be dynamically inserted here -->
             </div>
-        
+
             <!-- View All Button -->
             <div class="text-center mt-10">
                 <button id="viewAllProducts"

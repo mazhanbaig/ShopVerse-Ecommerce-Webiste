@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BazarioVerse | Profile</title>
-    <link href="./output.css" rel="stylesheet">
+    <link href="./src/output.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
         integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
@@ -43,7 +43,7 @@
                     </div>
 
                     <!-- Navigation Links -->
-                    <div class="flex items-center space-x-6">
+                    <div class="flex items-center space-x-4 lg:space-x-6">
                         <a href="#"
                             class="group flex items-center space-x-1 text-gray-600 hover:text-pink-500 transition-smooth">
                             <i class="fas fa-store text-lg"></i>
@@ -59,11 +59,13 @@
                                 class="absolute -top-2 -right-2 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center group-hover:bg-pink-600 transition-smooth"></span>
                         </a>
 
-                        <a href="profile.html"
+                        <a href="auth.html"
                             class="group flex items-center space-x-1 text-gray-600 hover:text-pink-500 transition-smooth">
-                            <i class="fas fa-user text-lg"></i>
-                            <span class="text-sm font-medium">Account</span>
+                            <i class="fas fa-sign-in-alt"></i>
+
+                            <span class="text-sm font-medium">Sign In</span>
                         </a>
+
                     </div>
                 </div>
 
@@ -80,8 +82,9 @@
             </div>
             <div class="hidden md:flex justify-center items-center gap-10 border-t-[1px] border-gray-300 px-2 py-3">
                 <a class="font-semibold hover:text-pink-600 " href="index.html">Home</a>
-                <a class="font-semibold hover:text-pink-600 " href="addproduct.html">Add Product</a>
                 <a class="font-semibold hover:text-pink-600 " href="deals.html">Deals</a>
+                <a class="font-semibold hover:text-pink-600 " href="addproduct.html">Add Product</a>
+                <a href="account.html" class="font-semibold hover:text-pink-600 ">Account</a>
                 <a class="font-semibold hover:text-pink-600 " href="#">Contact</a>
             </div>
         </div>
@@ -102,7 +105,7 @@
                     class="block px-4 py-3 rounded-lg hover:bg-pink-50 text-gray-700 hover:text-pink-600 transition-smooth">
                     <i class="fas fa-store mr-3"></i> Become a Seller
                 </a>
-                <a href="#"
+                <a href="auth.html"
                     class="block px-4 py-3 rounded-lg hover:bg-pink-50 text-gray-700 hover:text-pink-600 transition-smooth">
                     <span class=""><i class="fa-solid fa-lock mr-3"></i>Sign In/Up</span>
                 </a>
@@ -132,139 +135,103 @@
             <a href="addproduct.html"
                 class="flex flex-col items-center p-2 text-gray-700 hover:text-pink-500 transition">
                 <i class="fas fa-box-open text-xl"></i>
-                <span class="text-xs mt-1">Products</span>
+                <span class="text-xs mt-1">Add Products</span>
             </a>
 
             <!-- Profile -->
-            <a href="profile.html" class="flex flex-col items-center p-2 text-gray-700 hover:text-green-500 transition">
+            <a href="account.html" class="flex flex-col items-center p-2 text-gray-700 hover:text-green-500 transition">
                 <i class="fas fa-user text-xl"></i>
-                <span class="text-xs mt-1">Profile</span>
+                <span class="text-xs mt-1">Account/span>
             </a>
         </div>
     </div>
 
     <!-- Profile Header -->
-    <section class="max-w-5xl mx-auto mt-8 bg-white shadow-lg rounded-xl p-6">
-        <div class="flex flex-col md:flex-row items-center md:justify-between">
+    <section
+        class="max-w-5xl mx-auto mt-10 bg-white/30 backdrop-blur-md shadow-xl rounded-2xl p-6 border border-gray-200">
+        <div id="profile-container" class="flex flex-col md:flex-row items-center md:justify-between gap-6">
+
             <!-- User Info -->
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-5">
                 <img src="https://i.pravatar.cc/150?img=12" alt="Profile Picture"
-                    class="w-20 h-20 rounded-full border-4 border-pink-200 shadow-md">
+                    class="w-24 h-24 rounded-full border-4 border-pink-400 shadow-lg hover:scale-105 transition">
                 <div>
-                    <h2 class="text-2xl font-bold text-gray-900">Azhan</h2>
-                    <p class="text-gray-600 text-sm">azhan@example.com</p>
+                    <h2 id="name" class="text-2xl font-bold text-gray-900 flex items-center gap-2">
+                        <i class="fas fa-check-circle text-pink-500 text-lg"></i>
+                    </h2>
+                    <p id="email" class="text-gray-600 text-sm"></p>
                     <span
-                        class="inline-block mt-1 text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Verified</span>
+                        class="inline-block mt-2 text-xs bg-gradient-to-r from-pink-500 to-purple-500 text-white px-3 py-1 rounded-full shadow-md">
+                        Verified Account
+                    </span>
                 </div>
             </div>
-            <!-- Settings -->
-            <button class="mt-4 md:mt-0 px-4 py-2 bg-pink-100 text-pink-600 rounded-lg hover:bg-pink-200 transition">
-                <i class="fas fa-cog"></i> Settings
-            </button>
+
+            <!-- Actions -->
+            <div class="flex gap-3">
+                <button
+                    class="px-4 py-2 bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-xl hover:shadow-lg transition flex items-center gap-2">
+                    <i class="fas fa-user-edit"></i> Edit Profile
+                </button>
+                <button
+                    class="px-4 py-2 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition flex items-center gap-2">
+                    <i class="fas fa-cog"></i> Settings
+                </button>
+            </div>
+
         </div>
     </section>
 
-    <!-- Quick Actions -->
-    <section class="max-w-5xl mx-auto mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="bg-white p-4 rounded-xl shadow hover:shadow-md transition cursor-pointer text-center">
-            <i class="fas fa-box text-pink-500 text-2xl mb-2"></i>
-            <h4 class="font-semibold">My Orders</h4>
-            <p class="text-sm text-gray-500">Track & manage</p>
-        </div>
-        <div class="bg-white p-4 rounded-xl shadow hover:shadow-md transition cursor-pointer text-center">
-            <i class="fas fa-heart text-red-500 text-2xl mb-2"></i>
-            <h4 class="font-semibold">Wishlist</h4>
-            <p class="text-sm text-gray-500">Your favorites</p>
-        </div>
-        <div class="bg-white p-4 rounded-xl shadow hover:shadow-md transition cursor-pointer text-center">
-            <i class="fas fa-credit-card text-blue-500 text-2xl mb-2"></i>
-            <h4 class="font-semibold">Payments</h4>
-            <p class="text-sm text-gray-500">Saved methods</p>
-        </div>
-        <div class="bg-white p-4 rounded-xl shadow hover:shadow-md transition cursor-pointer text-center">
-            <i class="fas fa-shield-alt text-green-500 text-2xl mb-2"></i>
-            <h4 class="font-semibold">Security</h4>
-            <p class="text-sm text-gray-500">Manage access</p>
-        </div>
-    </section>
-
-    <!-- Main Content -->
+    <!-- Account Page Main Grid -->
     <div class="max-w-5xl mx-auto mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Left Column -->
+    
+        <!-- Left Column: Cart Preview, Orders, Wishlist -->
         <div class="md:col-span-2 space-y-6">
-            <!-- Recent Orders -->
-            <div class="bg-white rounded-xl shadow p-6">
-                <h3 class="text-lg font-semibold mb-4">Recent Orders</h3>
-                <div class="space-y-3">
-                    <div class="flex justify-between items-center border-b pb-3">
-                        <div>
-                            <p class="font-medium">Wireless Headphones</p>
-                            <span class="text-sm text-gray-500">Order #12345</span>
-                        </div>
-                        <span class="text-green-600 text-sm font-semibold">Delivered</span>
-                    </div>
-                    <div class="flex justify-between items-center border-b pb-3">
-                        <div>
-                            <p class="font-medium">Smart Watch</p>
-                            <span class="text-sm text-gray-500">Order #12346</span>
-                        </div>
-                        <span class="text-yellow-600 text-sm font-semibold">Processing</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <p class="font-medium">Gaming Mouse</p>
-                            <span class="text-sm text-gray-500">Order #12347</span>
-                        </div>
-                        <span class="text-red-600 text-sm font-semibold">Cancelled</span>
-                    </div>
-                </div>
+    
+            <!-- Cart Preview will be injected by JS -->
+            <div id="cartPreviewContainer"></div>
+    
+            <!-- Recent Orders Example -->
+            <div class="bg-white/80 backdrop-blur-md rounded-2xl shadow-md p-6 hover:shadow-lg transition-all">
+                <h3 class="text-lg font-semibold mb-4 text-gray-900">Recent Orders</h3>
+                <p class="text-gray-600 text-sm">You have no recent orders.</p>
             </div>
-
-            <!-- Wishlist -->
-            <div class="bg-white rounded-xl shadow p-6">
-                <h3 class="text-lg font-semibold mb-4">Wishlist</h3>
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="border rounded-lg p-3 hover:shadow-md transition">
-                        <img src="https://via.placeholder.com/150" alt="item" class="rounded-lg mb-2">
-                        <h4 class="font-medium">Sneakers</h4>
-                        <p class="text-sm text-gray-500">$59.99</p>
-                    </div>
-                    <div class="border rounded-lg p-3 hover:shadow-md transition">
-                        <img src="https://via.placeholder.com/150" alt="item" class="rounded-lg mb-2">
-                        <h4 class="font-medium">Bluetooth Speaker</h4>
-                        <p class="text-sm text-gray-500">$29.99</p>
-                    </div>
-                </div>
-            </div>
+    
         </div>
-
-        <!-- Right Column -->
+    
+        <!-- Right Column: Account Info + Security -->
         <div class="space-y-6">
+    
             <!-- Account Info -->
-            <div class="bg-white rounded-xl shadow p-6">
-                <h3 class="text-lg font-semibold mb-4">Account Info</h3>
-                <p><span class="font-medium">Name:</span> Azhan</p>
-                <p><span class="font-medium">Email:</span> azhan@example.com</p>
-                <p><span class="font-medium">Phone:</span> +92 300 1234567</p>
-                <p><span class="font-medium">Address:</span> Lahore, Pakistan</p>
+            <div id="accountInfo"
+                class="bg-white/80 backdrop-blur-md rounded-2xl shadow-md p-6 hover:shadow-lg transition-all">
+                <h3 class="text-lg font-semibold mb-4 text-gray-900">Account Info</h3>
+                <p><span class="font-medium">Name:</span> <span id="accountName"></span></p>
+                <p><span class="font-medium">Email:</span> <span id="accountEmail"></span></p>
+                <p><span class="font-medium">Phone:</span> <span id="accountPhone"></span></p>
+                <p><span class="font-medium">Address:</span> <span id="accountAddress"></span></p>
             </div>
-
+    
             <!-- Security -->
-            <div class="bg-white rounded-xl shadow p-6">
-                <h3 class="text-lg font-semibold mb-4">Security Settings</h3>
-                <button class="w-full mb-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg">Change Password</button>
-                <button class="w-full px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">Logout</button>
+            <div
+                class="bg-white/80 backdrop-blur-md rounded-2xl shadow-md p-6 hover:shadow-lg transition-all flex flex-col gap-3">
+                <h3 class="text-lg font-semibold mb-2 text-gray-900">Security Settings</h3>
+                <button class="w-full px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-xl transition">Change
+                    Password</button>
+                <button id="logoutBtn"
+                    class="w-full px-4 py-2 bg-red-500 text-white rounded-xl hover:bg-red-600 transition">Logout</button>
             </div>
+    
         </div>
+    
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-white border-t border-gray-200 mt-10">
-        <div class="max-w-7xl mx-auto py-6 text-center text-gray-500 text-sm">
-            &copy; 2025 BazarioVerse. All rights reserved.
-        </div>
-    </footer>
-<script type="module" defer src="./dist/profile.js"></script>
+
+    <!-- Footer ... same as your code ... -->
+
+    <!-- TypeScript compiled JS -->
+    <script type="module" src="./dist/account.js" defer></script>
+
 </body>
 
 </html>
